@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		043918B31BD54EB0001DD6EC /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 043918B21BD54EB0001DD6EC /* libsqlite3.0.tbd */; };
 		6221439E1B2D3D7A0068FEBB /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 6221439D1B2D3D7A0068FEBB /* NSString+MD5.m */; };
 		626F1F8E1B7225AE005A6BED /* -5.png in Resources */ = {isa = PBXBuildFile; fileRef = 626F1F851B7225AE005A6BED /* -5.png */; };
 		626F1F8F1B7225AE005A6BED /* 0灰.png in Resources */ = {isa = PBXBuildFile; fileRef = 626F1F861B7225AE005A6BED /* 0灰.png */; };
@@ -126,6 +127,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		043918B21BD54EB0001DD6EC /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		6221439C1B2D3D7A0068FEBB /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		6221439D1B2D3D7A0068FEBB /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		626F1F851B7225AE005A6BED /* -5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "-5.png"; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				043918B31BD54EB0001DD6EC /* libsqlite3.0.tbd in Frameworks */,
 				EF47B84A1B282D9000045F0D /* Security.framework in Frameworks */,
 				EF47B8481B282D8600045F0D /* CoreGraphics.framework in Frameworks */,
 				EF47B8461B282D7C00045F0D /* SystemConfiguration.framework in Frameworks */,
@@ -407,6 +410,7 @@
 		EF47B80B1B28281B00045F0D = {
 			isa = PBXGroup;
 			children = (
+				043918B21BD54EB0001DD6EC /* libsqlite3.0.tbd */,
 				62F7A3911B464DAF00BC46C3 /* iamges */,
 				EF459F3B1B32B55900806EA1 /* zxb_area.db */,
 				EF6AD38C1B2E9F6A00847E22 /* FMDB */,
@@ -927,8 +931,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou Netwide IT Co., Ltd (S265FZXSFD)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou Netwide IT Co., Ltd (S265FZXSFD)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/baiduSDK",
@@ -938,8 +942,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiemi.jiemi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "50f4eccc-ddef-406a-9653-de00408423f3";
+				PROVISIONING_PROFILE = "f9c10694-f42a-4e18-b871-9a704e6a1143";
 			};
 			name = Debug;
 		};
@@ -948,8 +953,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou Netwide IT Co., Ltd (S265FZXSFD)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou Netwide IT Co., Ltd (S265FZXSFD)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/baiduSDK",
@@ -959,8 +964,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiemi.jiemi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "50f4eccc-ddef-406a-9653-de00408423f3";
+				PROVISIONING_PROFILE = "f9c10694-f42a-4e18-b871-9a704e6a1143";
 			};
 			name = Release;
 		};
