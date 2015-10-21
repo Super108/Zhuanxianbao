@@ -14,6 +14,9 @@
 
 #import "FMDatabase.h"
 #import "FMDBTools.h"
+
+#import "ZSAppServer.h"
+
 @interface ViewController ()
 
 @end
@@ -30,7 +33,7 @@
     topImgeView.contentMode = UIViewContentModeScaleAspectFit;//设置内容样式,通过保持长宽比缩放内容适应视图的大小,任何剩余的区域的视图的界限是透明的。
     topImgeView.image = [UIImage imageNamed:@"专线宝.png"];
     self.navigationItem.titleView =topImgeView;
-    NSLog(@">>>   %@",[NSString stringWithFormat:@"%@/user/activityList",ZhuanXB_address]);
+    
 //    //广告位
 //    _Topic = [[JCTopic alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 144)];
 //    _Topic.JCdelegate = self;
@@ -49,8 +52,7 @@
 
     //菊花
     _activity = [[Activity alloc] initWithActivity:self.view];
-    
-    
+
     
     /////////////////////////_________________////////////////////////
     
@@ -63,47 +65,51 @@
         [self.view addSubview:btnView];
         //线路运价
         UIButton *topBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn1.backgroundColor =[UIColor redColor];
+        topBtn1.backgroundColor =[UIColor clearColor];
         topBtn1.tag = 111;
-        topBtn1.frame = CGRectMake(0, 0, 298/2, 177/2+20);
+        topBtn1.frame = CGRectMake(0, 0, 298/2, 90);
         [topBtn1 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [btnView addSubview:topBtn1];
         // 运单查询
         UIButton *topBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn2.backgroundColor =[UIColor cyanColor];
+        topBtn2.backgroundColor =[UIColor clearColor];
         topBtn2.tag = 222;
-        topBtn2.frame = CGRectMake(topBtn1.frame.size.width+10/2-2, 0, 296/2, 293/2+20);
+        topBtn2.frame = CGRectMake(topBtn1.frame.size.width+10/2-2, 0, 296/2, 150);
         [topBtn2 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [btnView addSubview:topBtn2];
         //专线宝网点
         UIButton *topBtn3 = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn3.backgroundColor =[UIColor greenColor];
+        topBtn3.backgroundColor =[UIColor clearColor];
         topBtn3.tag = 333;
-        topBtn3.frame = CGRectMake(topBtn1.frame.origin.x, topBtn1.frame.size.height+13/2, topBtn1.frame.size.width, 177/2+22);
+        topBtn3.frame = CGRectMake(topBtn2.frame.origin.x, topBtn2.frame.size.height+13/2, topBtn1.frame.size.width, 90);
         [topBtn3 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [btnView addSubview:topBtn3];
+        //        我要发货
+        UIButton *sendProductBut = [UIButton buttonWithType:UIButtonTypeCustom];
+        sendProductBut.backgroundColor =[UIColor clearColor];
+        sendProductBut.tag = 555;
+        sendProductBut.frame = CGRectMake(topBtn1.frame.origin.x, topBtn1.frame.size.height+13/2, topBtn1.frame.size.width, 150);
+        [sendProductBut addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [btnView addSubview:sendProductBut];
+        
         //客服
         UIButton *topBtn4 = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn4.backgroundColor =[UIColor redColor];
+        topBtn4.backgroundColor =[UIColor clearColor];
         topBtn4.tag = 444;
-        topBtn4.frame = CGRectMake(topBtn1.frame.origin.x, topBtn1.frame.size.height+13/2+topBtn3.frame.size.height+13/2, topBtn1.frame.size.width, 177/2+22);
+        topBtn4.frame = CGRectMake(sendProductBut.frame.origin.x,sendProductBut.frame.origin.y + sendProductBut.frame.size.height + 6, topBtn1.frame.size.width, 90);
         [topBtn4 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [btnView addSubview:topBtn4];
-        //扫描查单
+        
+        //个人中心
         UIButton *topBtn5 = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn5.backgroundColor =[UIColor redColor];
-        topBtn5.tag = 555;
-        topBtn5.frame = CGRectMake(topBtn2.frame.origin.x-2, topBtn2.frame.size.height+13/2, topBtn2.frame.size.width, 197/2+70);
+        topBtn5.backgroundColor =[UIColor clearColor];
+        topBtn5.tag = 666;
+        topBtn5.frame = CGRectMake(topBtn3.frame.origin.x-2, topBtn3.frame.origin.y + topBtn3.frame.size.height + 6, topBtn2.frame.size.width, 90);
         [topBtn5 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [btnView addSubview:topBtn5];
-
-        
-        
         
     }else
     {
-        
-        
         UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(11, adImageView.frame.size.height+11, self.view.frame.size.width-22, self.view.frame.size.height-adImageView.frame.size.height+1)];
         [scrollView setShowsVerticalScrollIndicator:YES];
         scrollView.contentSize = CGSizeMake(self.view.frame.size.width-22, 568-adImageView.frame.size.height);
@@ -111,7 +117,6 @@
         
         
         //下面几个btn 的view
-        
         UIImageView *btnView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, scrollView.frame.size.width, scrollView.frame.size.height)];
         btnView.image = [UIImage imageNamed:@"首页按钮.png"];
         btnView.userInteractionEnabled = YES;
@@ -194,10 +199,17 @@
             [self.view addSubview:callWebview];
         }
             break;
-        case 555://扫描查单
+        case 555://我要发货
         {
-            ScanViewController *scanVC = [[ScanViewController alloc] init];
-            [self.navigationController pushViewController:scanVC animated:YES];
+            NSLog(@"<<<<<<<   我要发货");
+            
+//            ScanViewController *scanVC = [[ScanViewController alloc] init];
+//            [self.navigationController pushViewController:scanVC animated:YES];
+        }
+            break;
+            case 666:
+        {
+            NSLog(@">>>   个人中心   >>>>>>>");
         }
 
             break;
