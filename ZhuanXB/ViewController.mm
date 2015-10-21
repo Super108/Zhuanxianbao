@@ -30,7 +30,7 @@
     topImgeView.contentMode = UIViewContentModeScaleAspectFit;//设置内容样式,通过保持长宽比缩放内容适应视图的大小,任何剩余的区域的视图的界限是透明的。
     topImgeView.image = [UIImage imageNamed:@"专线宝.png"];
     self.navigationItem.titleView =topImgeView;
-    
+    NSLog(@">>>   %@",[NSString stringWithFormat:@"%@/user/activityList",ZhuanXB_address]);
 //    //广告位
 //    _Topic = [[JCTopic alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 144)];
 //    _Topic.JCdelegate = self;
@@ -63,35 +63,35 @@
         [self.view addSubview:btnView];
         //线路运价
         UIButton *topBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn1.backgroundColor =[UIColor clearColor];
+        topBtn1.backgroundColor =[UIColor redColor];
         topBtn1.tag = 111;
         topBtn1.frame = CGRectMake(0, 0, 298/2, 177/2+20);
         [topBtn1 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [btnView addSubview:topBtn1];
         // 运单查询
         UIButton *topBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn2.backgroundColor =[UIColor clearColor];
+        topBtn2.backgroundColor =[UIColor cyanColor];
         topBtn2.tag = 222;
         topBtn2.frame = CGRectMake(topBtn1.frame.size.width+10/2-2, 0, 296/2, 293/2+20);
         [topBtn2 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [btnView addSubview:topBtn2];
         //专线宝网点
         UIButton *topBtn3 = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn3.backgroundColor =[UIColor clearColor];
+        topBtn3.backgroundColor =[UIColor greenColor];
         topBtn3.tag = 333;
         topBtn3.frame = CGRectMake(topBtn1.frame.origin.x, topBtn1.frame.size.height+13/2, topBtn1.frame.size.width, 177/2+22);
         [topBtn3 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [btnView addSubview:topBtn3];
         //客服
         UIButton *topBtn4 = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn4.backgroundColor =[UIColor clearColor];
+        topBtn4.backgroundColor =[UIColor redColor];
         topBtn4.tag = 444;
         topBtn4.frame = CGRectMake(topBtn1.frame.origin.x, topBtn1.frame.size.height+13/2+topBtn3.frame.size.height+13/2, topBtn1.frame.size.width, 177/2+22);
         [topBtn4 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [btnView addSubview:topBtn4];
         //扫描查单
         UIButton *topBtn5 = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn5.backgroundColor =[UIColor clearColor];
+        topBtn5.backgroundColor =[UIColor redColor];
         topBtn5.tag = 555;
         topBtn5.frame = CGRectMake(topBtn2.frame.origin.x-2, topBtn2.frame.size.height+13/2, topBtn2.frame.size.width, 197/2+70);
         [topBtn5 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
