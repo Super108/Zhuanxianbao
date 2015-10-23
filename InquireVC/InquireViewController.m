@@ -8,7 +8,7 @@
 
 #import "InquireViewController.h"
 #import "TrackingViewController.h"
-
+#import "ScanViewController.h"
 
 @interface InquireViewController ()
 
@@ -43,10 +43,6 @@
     else{
         self.navigationItem.rightBarButtonItem = rightItem;
     }
-
-    
-    
-    
     
     //单号iamge
     UIImageView *backImage = [[UIImageView alloc] initWithFrame:CGRectMake(11, 43/2, self.view.frame.size.width-22, 87/2)];
@@ -66,6 +62,13 @@
     [inquireBtn setBackgroundImage:[UIImage imageNamed:@"线路查询按钮.png"] forState:UIControlStateNormal];
     [inquireBtn addTarget:self action:@selector(inquireBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:inquireBtn];
+    
+    //扫描按钮
+    UIButton *scanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    scanBtn.frame = CGRectMake(11, inquireBtn.frame.origin.y+inquireBtn.frame.size.height+45, self.view.frame.size.width-22, 82/2);
+    [scanBtn setBackgroundImage:[UIImage imageNamed:@"线路查询按钮.png"] forState:UIControlStateNormal];
+    [scanBtn addTarget:self action:@selector(goScanVC) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:scanBtn];
     
 }
 
@@ -95,6 +98,13 @@
     
    
 }
+
+-(void)goScanVC
+{
+    ScanViewController *scanVC = [[ScanViewController alloc] init];
+    [self.navigationController pushViewController:scanVC animated:YES];
+}
+
 -(void)setHub:(NSString *)string
 {
     UIWindow *window = [[UIApplication sharedApplication].windows objectAtIndex:[[UIApplication sharedApplication].windows count]-1];

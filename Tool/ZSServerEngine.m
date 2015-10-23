@@ -71,27 +71,12 @@ static ZSServerEngine *serverEngine = nil;
     
     [operation addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         id responseData = completedOperation.responseJSON;
-        NSLog(@">>   %@",completedOperation.responseJSON);
-        if ([responseData isKindOfClass:[NSDictionary class]] && [DPUtil isNotNull:[responseData objectForKey:@"success"]]) {
-            BOOL isSuccess = [[responseData objectForKey:@"success"] boolValue];
-            if (isSuccess) { // 用户操作成功
-                id data = nil;
-                NSString *successMsg = nil;
-                if ([DPUtil isNotNull:[responseData objectForKey:@"data"]]) {
-                    data = [responseData objectForKey:@"data"];
-                }
-                
-                if ([DPUtil isNotNull:[responseData objectForKey:@"successMsg"]]) {
-                    successMsg = [responseData objectForKey:@"successMsg"];
-                }
+        if ([responseData isKindOfClass:[NSDictionary class]]) {
                 if (successBlock != nil) {
-                    successBlock(successMsg, data);
+                    successBlock(@"请求成功，返回数据。", responseData);
                 }
-            } else { // 用户操作失败
-                
-            }
         }
-    } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) { // 网络错误处理 200以外情况在这里处理
+    } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) { 
         if (error != nil) {
             errorBlock(error);
         }

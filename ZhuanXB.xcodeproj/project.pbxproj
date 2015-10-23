@@ -69,19 +69,21 @@
 		62F7A3FA1B464DAF00BC46C3 /* 运单详情运输中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62F7A3C61B464DAF00BC46C3 /* 运单详情运输中@2x.png */; };
 		62F7A3FB1B464DAF00BC46C3 /* 运单详情长条@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62F7A3C71B464DAF00BC46C3 /* 运单详情长条@2x.png */; };
 		62F7A3FC1B464DAF00BC46C3 /* 首页按钮@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62F7A3C81B464DAF00BC46C3 /* 首页按钮@2x.png */; };
+		9846769C1BDA8C9D00F76D6D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9846769B1BDA8C9D00F76D6D /* LoginViewController.m */; };
+		984676A31BDA8D0A00F76D6D /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 984676A21BDA8D0A00F76D6D /* LoginView.m */; };
 		988B157A1BD49EC1003745BD /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 988B15791BD49EC1003745BD /* libsqlite3.0.tbd */; };
-		9898CC1D1BD79CF500651732 /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC0A1BD79CF500651732 /* NSData+MKBase64.m */; settings = {ASSET_TAGS = (); }; };
-		9898CC1E1BD79CF500651732 /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC0C1BD79CF500651732 /* NSDate+RFC1123.m */; settings = {ASSET_TAGS = (); }; };
-		9898CC1F1BD79CF500651732 /* NSDictionary+RequestEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC0E1BD79CF500651732 /* NSDictionary+RequestEncoding.m */; settings = {ASSET_TAGS = (); }; };
-		9898CC201BD79CF500651732 /* NSString+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC101BD79CF500651732 /* NSString+MKNetworkKitAdditions.m */; settings = {ASSET_TAGS = (); }; };
-		9898CC211BD79CF500651732 /* UIAlertView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC121BD79CF500651732 /* UIAlertView+MKNetworkKitAdditions.m */; settings = {ASSET_TAGS = (); }; };
-		9898CC221BD79CF500651732 /* UIImageView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC141BD79CF500651732 /* UIImageView+MKNetworkKitAdditions.m */; settings = {ASSET_TAGS = (); }; };
-		9898CC231BD79CF500651732 /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC161BD79CF500651732 /* MKNetworkEngine.m */; settings = {ASSET_TAGS = (); }; };
-		9898CC241BD79CF500651732 /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC191BD79CF500651732 /* MKNetworkOperation.m */; settings = {ASSET_TAGS = (); }; };
-		9898CC251BD79CF500651732 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC1C1BD79CF500651732 /* Reachability.m */; settings = {ASSET_TAGS = (); }; };
-		9898CC291BD79D4D00651732 /* ZSServerEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC281BD79D4D00651732 /* ZSServerEngine.m */; settings = {ASSET_TAGS = (); }; };
-		9898CC2C1BD79DF400651732 /* DPUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC2B1BD79DF400651732 /* DPUtil.m */; settings = {ASSET_TAGS = (); }; };
-		9898CC2F1BD79F7100651732 /* ZSAppServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC2E1BD79F7100651732 /* ZSAppServer.m */; settings = {ASSET_TAGS = (); }; };
+		9898CC1D1BD79CF500651732 /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC0A1BD79CF500651732 /* NSData+MKBase64.m */; };
+		9898CC1E1BD79CF500651732 /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC0C1BD79CF500651732 /* NSDate+RFC1123.m */; };
+		9898CC1F1BD79CF500651732 /* NSDictionary+RequestEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC0E1BD79CF500651732 /* NSDictionary+RequestEncoding.m */; };
+		9898CC201BD79CF500651732 /* NSString+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC101BD79CF500651732 /* NSString+MKNetworkKitAdditions.m */; };
+		9898CC211BD79CF500651732 /* UIAlertView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC121BD79CF500651732 /* UIAlertView+MKNetworkKitAdditions.m */; };
+		9898CC221BD79CF500651732 /* UIImageView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC141BD79CF500651732 /* UIImageView+MKNetworkKitAdditions.m */; };
+		9898CC231BD79CF500651732 /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC161BD79CF500651732 /* MKNetworkEngine.m */; };
+		9898CC241BD79CF500651732 /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC191BD79CF500651732 /* MKNetworkOperation.m */; };
+		9898CC251BD79CF500651732 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC1C1BD79CF500651732 /* Reachability.m */; };
+		9898CC291BD79D4D00651732 /* ZSServerEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC281BD79D4D00651732 /* ZSServerEngine.m */; };
+		9898CC2C1BD79DF400651732 /* DPUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC2B1BD79DF400651732 /* DPUtil.m */; };
+		9898CC2F1BD79F7100651732 /* ZSAppServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC2E1BD79F7100651732 /* ZSAppServer.m */; };
 		EF459F3C1B32B55900806EA1 /* zxb_area.db in Resources */ = {isa = PBXBuildFile; fileRef = EF459F3B1B32B55900806EA1 /* zxb_area.db */; };
 		EF47B81A1B28281B00045F0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF47B8191B28281B00045F0D /* main.m */; };
 		EF47B81D1B28281B00045F0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF47B81C1B28281B00045F0D /* AppDelegate.m */; };
@@ -202,6 +204,10 @@
 		62F7A3C61B464DAF00BC46C3 /* 运单详情运输中@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "运单详情运输中@2x.png"; sourceTree = "<group>"; };
 		62F7A3C71B464DAF00BC46C3 /* 运单详情长条@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "运单详情长条@2x.png"; sourceTree = "<group>"; };
 		62F7A3C81B464DAF00BC46C3 /* 首页按钮@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页按钮@2x.png"; sourceTree = "<group>"; };
+		9846769A1BDA8C9D00F76D6D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = User/LoginViewController.h; sourceTree = "<group>"; };
+		9846769B1BDA8C9D00F76D6D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = User/LoginViewController.m; sourceTree = "<group>"; };
+		984676A11BDA8D0A00F76D6D /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginView.h; path = User/LoginView.h; sourceTree = "<group>"; };
+		984676A21BDA8D0A00F76D6D /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginView.m; path = User/LoginView.m; sourceTree = "<group>"; };
 		988B15791BD49EC1003745BD /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		9898CC091BD79CF500651732 /* NSData+MKBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MKBase64.h"; sourceTree = "<group>"; };
 		9898CC0A1BD79CF500651732 /* NSData+MKBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MKBase64.m"; sourceTree = "<group>"; };
@@ -444,6 +450,17 @@
 			path = "二维码@2x";
 			sourceTree = "<group>";
 		};
+		9846769D1BDA8CC700F76D6D /* UserCenter */ = {
+			isa = PBXGroup;
+			children = (
+				9846769A1BDA8C9D00F76D6D /* LoginViewController.h */,
+				9846769B1BDA8C9D00F76D6D /* LoginViewController.m */,
+				984676A11BDA8D0A00F76D6D /* LoginView.h */,
+				984676A21BDA8D0A00F76D6D /* LoginView.m */,
+			);
+			name = UserCenter;
+			sourceTree = "<group>";
+		};
 		9898CC071BD79CF500651732 /* MKNetworkKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -534,6 +551,7 @@
 				EF47B81C1B28281B00045F0D /* AppDelegate.m */,
 				EF47B81E1B28281B00045F0D /* ViewController.h */,
 				EF47B81F1B28281B00045F0D /* ViewController.mm */,
+				9846769D1BDA8CC700F76D6D /* UserCenter */,
 				EF47B8211B28281B00045F0D /* Main.storyboard */,
 				EF47B8241B28281B00045F0D /* Images.xcassets */,
 				EF47B8261B28281B00045F0D /* LaunchScreen.xib */,
@@ -894,7 +912,9 @@
 				EF47B87F1B29126100045F0D /* WebsiteViewController.m in Sources */,
 				EF47B8811B29126100045F0D /* SelectAreaViewController.m in Sources */,
 				EF82D9B31B2FFEB20016518D /* ListDetail.m in Sources */,
+				984676A31BDA8D0A00F76D6D /* LoginView.m in Sources */,
 				9898CC2C1BD79DF400651732 /* DPUtil.m in Sources */,
+				9846769C1BDA8C9D00F76D6D /* LoginViewController.m in Sources */,
 				EF6AD39B1B2E9F6A00847E22 /* FMResultSet.m in Sources */,
 				9898CC1E1BD79CF500651732 /* NSDate+RFC1123.m in Sources */,
 				EF47B8631B28357700045F0D /* NavCustom.m in Sources */,
