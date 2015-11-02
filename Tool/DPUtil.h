@@ -2,8 +2,8 @@
 //  DPUtil.h
 //  dripo
 //
-//  Created by 周 华平 on 14-1-14.
-//  Copyright (c) 2014年 xuejili. All rights reserved.
+//  Created by Stenson on 14-1-14.
+//  Copyright (c) 2014年 Stenson. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -15,5 +15,13 @@
 // 检查对象是否为空
 + (BOOL)isNotNull:(id)object;
 
+
+//存入登录的Token
++ (void)setLoginToken:(NSString *)token;
++ (NSString *)getLoginToken;
+
+//存入过期时间
++ (void)setExpireTime:(NSString *)time;
++ (NSString *)getExpireTime;
 
 @end

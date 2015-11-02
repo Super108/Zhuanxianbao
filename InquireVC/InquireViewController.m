@@ -66,7 +66,7 @@
     //扫描按钮
     UIButton *scanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     scanBtn.frame = CGRectMake(11, inquireBtn.frame.origin.y+inquireBtn.frame.size.height+45, self.view.frame.size.width-22, 82/2);
-    [scanBtn setBackgroundImage:[UIImage imageNamed:@"线路查询按钮.png"] forState:UIControlStateNormal];
+    [scanBtn setBackgroundImage:[UIImage imageNamed:@"扫描查单.png"] forState:UIControlStateNormal];
     [scanBtn addTarget:self action:@selector(goScanVC) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:scanBtn];
     

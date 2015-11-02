@@ -9,14 +9,14 @@
 #import "ViewController.h"
 #import "PriceViewController.h"
 #import "WebsiteViewController.h"
-#import "ScanViewController.h"
+#import "SendProductVC.h"
 #import "InquireViewController.h"
 
 #import "FMDatabase.h"
 #import "FMDBTools.h"
 
 #import "LoginViewController.h"
-
+#import "SendProductVC.h"
 #import "ZSAppServer.h"
 
 @interface ViewController ()
@@ -24,6 +24,12 @@
 @end
 
 @implementation ViewController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBarHidden = NO;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,127 +62,90 @@
     _activity = [[Activity alloc] initWithActivity:self.view];
 
     
-    /////////////////////////_________________////////////////////////
+    UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(11, adImageView.frame.size.height+11, self.view.frame.size.width-22, self.view.frame.size.height-adImageView.frame.size.height+1)];
+    [scrollView setShowsVerticalScrollIndicator:YES];
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width-22, 568-adImageView.frame.size.height);
+    [self.view addSubview:scrollView];
+    if (iPhone5||iPhone6||iPhone6Plus) {
+        scrollView.scrollEnabled = NO;
+    }else{
+        scrollView.scrollEnabled = YES;
+    }
+    UIImageView *btnView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-22, 680/2)];
+    btnView.image = [UIImage imageNamed:@"首页按钮.png"];
+    btnView.userInteractionEnabled = YES;
+    [scrollView addSubview:btnView];
+    //线路运价
+    UIButton *topBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    topBtn1.backgroundColor =[UIColor clearColor];
+    topBtn1.tag = 111;
+    topBtn1.frame = CGRectMake(0, 0, 298/2, 90);
+    [topBtn1 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [btnView addSubview:topBtn1];
+    // 运单查询
+    UIButton *topBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    topBtn2.backgroundColor =[UIColor clearColor];
+    topBtn2.tag = 222;
+    topBtn2.frame = CGRectMake(topBtn1.frame.size.width+10/2-2, 0, 296/2, 150);
+    [topBtn2 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [btnView addSubview:topBtn2];
+    //专线宝网点
+    UIButton *topBtn3 = [UIButton buttonWithType:UIButtonTypeCustom];
+    topBtn3.backgroundColor =[UIColor clearColor];
+    topBtn3.tag = 333;
+    topBtn3.frame = CGRectMake(topBtn2.frame.origin.x, topBtn2.frame.size.height+13/2, topBtn1.frame.size.width, 90);
+    [topBtn3 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [btnView addSubview:topBtn3];
+    //        我要发货
+    UIButton *sendProductBut = [UIButton buttonWithType:UIButtonTypeCustom];
+    sendProductBut.backgroundColor =[UIColor clearColor];
+    sendProductBut.tag = 555;
+    sendProductBut.frame = CGRectMake(topBtn1.frame.origin.x, topBtn1.frame.size.height+13/2, topBtn1.frame.size.width, 150);
+    [sendProductBut addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [btnView addSubview:sendProductBut];
     
-        //下面几个btn 的view
-        
-        UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(11, adImageView.frame.size.height+11, self.view.frame.size.width-22, self.view.frame.size.height-adImageView.frame.size.height+1)];
-        [scrollView setShowsVerticalScrollIndicator:YES];
-        scrollView.contentSize = CGSizeMake(self.view.frame.size.width-22, 568-adImageView.frame.size.height);
-        [self.view addSubview:scrollView];
-        if (iPhone5||iPhone6||iPhone6Plus) {
-            scrollView.scrollEnabled = NO;
-        }else{
-            scrollView.scrollEnabled = YES;
-        }
-        UIImageView *btnView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-22, 680/2)];
-        btnView.image = [UIImage imageNamed:@"首页按钮.png"];
-        btnView.userInteractionEnabled = YES;
-        [scrollView addSubview:btnView];
-        //线路运价
-        UIButton *topBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn1.backgroundColor =[UIColor clearColor];
-        topBtn1.tag = 111;
-        topBtn1.frame = CGRectMake(0, 0, 298/2, 90);
-        [topBtn1 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [btnView addSubview:topBtn1];
-        // 运单查询
-        UIButton *topBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn2.backgroundColor =[UIColor clearColor];
-        topBtn2.tag = 222;
-        topBtn2.frame = CGRectMake(topBtn1.frame.size.width+10/2-2, 0, 296/2, 150);
-        [topBtn2 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [btnView addSubview:topBtn2];
-        //专线宝网点
-        UIButton *topBtn3 = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn3.backgroundColor =[UIColor clearColor];
-        topBtn3.tag = 333;
-        topBtn3.frame = CGRectMake(topBtn2.frame.origin.x, topBtn2.frame.size.height+13/2, topBtn1.frame.size.width, 90);
-        [topBtn3 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [btnView addSubview:topBtn3];
-        //        我要发货
-        UIButton *sendProductBut = [UIButton buttonWithType:UIButtonTypeCustom];
-        sendProductBut.backgroundColor =[UIColor clearColor];
-        sendProductBut.tag = 555;
-        sendProductBut.frame = CGRectMake(topBtn1.frame.origin.x, topBtn1.frame.size.height+13/2, topBtn1.frame.size.width, 150);
-        [sendProductBut addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [btnView addSubview:sendProductBut];
-        
-        //客服
-        UIButton *topBtn4 = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn4.backgroundColor =[UIColor clearColor];
-        topBtn4.tag = 444;
-        topBtn4.frame = CGRectMake(sendProductBut.frame.origin.x,sendProductBut.frame.origin.y + sendProductBut.frame.size.height + 6, topBtn1.frame.size.width, 90);
-        [topBtn4 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [btnView addSubview:topBtn4];
-        
-        //个人中心
-        UIButton *topBtn5 = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn5.backgroundColor =[UIColor clearColor];
-        topBtn5.tag = 666;
-        topBtn5.frame = CGRectMake(topBtn3.frame.origin.x-2, topBtn3.frame.origin.y + topBtn3.frame.size.height + 6, topBtn2.frame.size.width, 90);
-        [topBtn5 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [btnView addSubview:topBtn5];
-        
-//    }else
-//    {
-//        UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(11, adImageView.frame.size.height+11, self.view.frame.size.width-22, self.view.frame.size.height-adImageView.frame.size.height+1)];
-//        [scrollView setShowsVerticalScrollIndicator:YES];
-//        scrollView.contentSize = CGSizeMake(self.view.frame.size.width-22, 568-adImageView.frame.size.height);
-//        [self.view addSubview:scrollView];
-//        
-//        
-//        //下面几个btn 的view
-//        UIImageView *btnView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, scrollView.frame.size.width, scrollView.frame.size.height)];
-//        btnView.image = [UIImage imageNamed:@"首页按钮.png"];
-//        btnView.userInteractionEnabled = YES;
-//        [scrollView addSubview:btnView];
-//        //线路运价
-//        UIButton *topBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-//        topBtn1.backgroundColor =[UIColor clearColor];
-//        topBtn1.tag = 111;
-//        topBtn1.frame = CGRectMake(0, 0, 298/2, 177/2+20);
-//        [topBtn1 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-//        [btnView addSubview:topBtn1];
-//        // 运单查询
-//        UIButton *topBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-//        topBtn2.backgroundColor =[UIColor clearColor];
-//        topBtn2.tag = 222;
-//        topBtn2.frame = CGRectMake(topBtn1.frame.size.width+10/2-2, 0, 296/2, 293/2+20);
-//        [topBtn2 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-//        [btnView addSubview:topBtn2];
-//        //专线宝网点
-//        UIButton *topBtn3 = [UIButton buttonWithType:UIButtonTypeCustom];
-//        topBtn3.backgroundColor =[UIColor clearColor];
-//        topBtn3.tag = 333;
-//        topBtn3.frame = CGRectMake(topBtn1.frame.origin.x, topBtn1.frame.size.height+13/2, topBtn1.frame.size.width, 177/2+22);
-//        [topBtn3 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-//        [btnView addSubview:topBtn3];
-//        //客服
-//        UIButton *topBtn4 = [UIButton buttonWithType:UIButtonTypeCustom];
-//        topBtn4.backgroundColor =[UIColor clearColor];
-//        topBtn4.tag = 444;
-//        topBtn4.frame = CGRectMake(topBtn1.frame.origin.x, topBtn1.frame.size.height+13/2+topBtn3.frame.size.height+13/2, topBtn1.frame.size.width, 177/2+22);
-//        [topBtn4 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-//        [btnView addSubview:topBtn4];
-//        //扫描查单
-//        UIButton *topBtn5 = [UIButton buttonWithType:UIButtonTypeCustom];
-//        topBtn5.backgroundColor =[UIColor clearColor];
-//        topBtn5.tag = 555;
-//        topBtn5.frame = CGRectMake(topBtn2.frame.origin.x-2, topBtn2.frame.size.height+13/2, topBtn2.frame.size.width, 197/2+70);
-//        [topBtn5 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-//        [btnView addSubview:topBtn5];
-//        
-//
-//        
-//       
-//    }
-//    
-//
-//
+    //客服
+    UIButton *topBtn4 = [UIButton buttonWithType:UIButtonTypeCustom];
+    topBtn4.backgroundColor =[UIColor clearColor];
+    topBtn4.tag = 444;
+    topBtn4.frame = CGRectMake(sendProductBut.frame.origin.x,sendProductBut.frame.origin.y + sendProductBut.frame.size.height + 6, topBtn1.frame.size.width, 90);
+    [topBtn4 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [btnView addSubview:topBtn4];
+    
+    //个人中心
+    UIButton *topBtn5 = [UIButton buttonWithType:UIButtonTypeCustom];
+    topBtn5.backgroundColor =[UIColor clearColor];
+    topBtn5.tag = 666;
+    topBtn5.frame = CGRectMake(topBtn3.frame.origin.x-2, topBtn3.frame.origin.y + topBtn3.frame.size.height + 6, topBtn2.frame.size.width, 90);
+    [topBtn5 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [btnView addSubview:topBtn5];
+    
 }
+-(BOOL)judgeTimeIsTimeOut
+{
+//    当前时间和服务器返回时间比较 如果 当前时间比较大 则正常  否则 进入登录界面
+    NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyyMMddhhmmss"];
+    NSString * str = [formatter stringFromDate:[NSDate date]];
+    
+    NSString * serverTime = [DPUtil getExpireTime];
+    [serverTime stringByReplacingOccurrencesOfString:@"-" withString:@" "];
+    [serverTime stringByReplacingOccurrencesOfString:@":" withString:@" "];
+    [serverTime stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSLog(@"%@ >>>>   %lld",str,[str longLongValue]);
+    NSLog(@"%@ >>>>   %lld",serverTime,[serverTime longLongValue]);
+    
+    if ([str longLongValue] > [serverTime longLongValue]) {
+        return YES;
+    }
+    return NO;
+}
+
 -(void)topBtnClick:(id)sender
 {
+    [self judgeTimeIsTimeOut];
+    
     UIButton *btn = (UIButton *)sender;
     switch (btn.tag) {
         case 111://线路运价
@@ -211,17 +180,23 @@
             break;
         case 555://我要发货
         {
-            NSLog(@"<<<<<<<   我要发货");
-            
-//            ScanViewController *scanVC = [[ScanViewController alloc] init];
-//            [self.navigationController pushViewController:scanVC animated:YES];
+            if([self judgeTimeIsTimeOut]&&[DPUtil isNotNull:[DPUtil getLoginToken]]){
+                SendProductVC * sendProVC = [[SendProductVC alloc] init];
+                [self.navigationController pushViewController:sendProVC animated:YES];
+            }else{
+                LoginViewController * loginVC = [[LoginViewController alloc]init];
+                [self.navigationController pushViewController:loginVC animated:YES];
+            }
         }
             break;
             case 666:
         {
-            NSLog(@">>>   个人中心   >>>>>>>");
-            LoginViewController * loginVC = [[LoginViewController alloc]init];
-            [self.navigationController pushViewController:loginVC animated:YES];
+            if([self judgeTimeIsTimeOut]&&[DPUtil isNotNull:[DPUtil getLoginToken]]){
+                NSLog(@"登录成功  进入个人中心");
+            }else{
+                LoginViewController * loginVC = [[LoginViewController alloc]init];
+                [self.navigationController pushViewController:loginVC animated:YES];
+            }
         }
 
             break;

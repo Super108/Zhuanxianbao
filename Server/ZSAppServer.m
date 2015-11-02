@@ -54,7 +54,7 @@
     [params setObject:name forKey:@"accountName"];
     [params setObject:password forKey:@"password"];
     
-    [[ZSServerEngine sharedInstance] requestWithParams:params path:kRegistByPhoneWithPassword httpMethod:POST customHeaders:nil success:^(NSString *successMsg, id data) {
+    [[ZSServerEngine sharedInstance] requestWithParams:params path:kLoginUser httpMethod:POST customHeaders:nil success:^(NSString *successMsg, id data) {
         successBlock(successMsg, data);
     } fail:^(NSString *errorMsg, NSString *errorCode) {
         failBlock(errorMsg, errorCode);

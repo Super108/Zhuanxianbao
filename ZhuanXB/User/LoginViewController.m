@@ -65,11 +65,18 @@
     [ZSAppServer loginUserWithUserName:name
                           withPassword:password
                                success:^(NSString *successMsg, id data) {
-                                   NSLog(@">>>>  %@",data);
+                                   NSLog(@">>>   %@",data);
                                    if([[data objectForKey:@"code"] integerValue] == 1){
                                        NSLog(@"密码正确进入个人中心页面");
+                                       if([DPUtil isNotNull:[data objectForKey:@"value"]]){
+                                           NSDictionary * userDic = [data objectForKey:@"value"];
+                                           [DPUtil setLoginToken:[userDic objectForKey:@"token"]];
+                                           [DPUtil setExpireTime:[userDic objectForKey:@"expireTime"]];
+                                       }
                                    }else if ([[data objectForKey:@"code"] integerValue] == -1){
                                        [self setHub:@"用户或者密码不正确"];
+                                   }else{
+                                       [self setHub:@"服务器出错了"];
                                    }
                                } fail:^(NSString *errorMsg, NSString *errorCode) {
                                    [self setHub:@"登录失败，请稍后重试"];

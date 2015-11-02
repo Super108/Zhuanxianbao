@@ -2,8 +2,8 @@
 //  ZSServerEngine.m
 //  molijing
 //
-//  Created by nero on 15-3-16.
-//  Copyright (c) 2015年 xuejili. All rights reserved.
+//  Created by Stenson on 15-3-16.
+//  Copyright (c) 2015年 Stenson. All rights reserved.
 //
 
 #import "ZSServerEngine.h"

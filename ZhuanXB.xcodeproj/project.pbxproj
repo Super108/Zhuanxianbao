@@ -71,6 +71,7 @@
 		62F7A3FC1B464DAF00BC46C3 /* 首页按钮@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62F7A3C81B464DAF00BC46C3 /* 首页按钮@2x.png */; };
 		9846769C1BDA8C9D00F76D6D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9846769B1BDA8C9D00F76D6D /* LoginViewController.m */; };
 		984676A31BDA8D0A00F76D6D /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 984676A21BDA8D0A00F76D6D /* LoginView.m */; };
+		984E679F1BE797840075E9BB /* SendProductVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 984E679E1BE797840075E9BB /* SendProductVC.m */; };
 		988B157A1BD49EC1003745BD /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 988B15791BD49EC1003745BD /* libsqlite3.0.tbd */; };
 		9898CC1D1BD79CF500651732 /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC0A1BD79CF500651732 /* NSData+MKBase64.m */; };
 		9898CC1E1BD79CF500651732 /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC0C1BD79CF500651732 /* NSDate+RFC1123.m */; };
@@ -84,6 +85,7 @@
 		9898CC291BD79D4D00651732 /* ZSServerEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC281BD79D4D00651732 /* ZSServerEngine.m */; };
 		9898CC2C1BD79DF400651732 /* DPUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC2B1BD79DF400651732 /* DPUtil.m */; };
 		9898CC2F1BD79F7100651732 /* ZSAppServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC2E1BD79F7100651732 /* ZSAppServer.m */; };
+		98FBBD731BE0C322001E9BC9 /* 扫描查单@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 98FBBD721BE0C322001E9BC9 /* 扫描查单@2x.png */; };
 		EF459F3C1B32B55900806EA1 /* zxb_area.db in Resources */ = {isa = PBXBuildFile; fileRef = EF459F3B1B32B55900806EA1 /* zxb_area.db */; };
 		EF47B81A1B28281B00045F0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF47B8191B28281B00045F0D /* main.m */; };
 		EF47B81D1B28281B00045F0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF47B81C1B28281B00045F0D /* AppDelegate.m */; };
@@ -208,6 +210,8 @@
 		9846769B1BDA8C9D00F76D6D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = User/LoginViewController.m; sourceTree = "<group>"; };
 		984676A11BDA8D0A00F76D6D /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginView.h; path = User/LoginView.h; sourceTree = "<group>"; };
 		984676A21BDA8D0A00F76D6D /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginView.m; path = User/LoginView.m; sourceTree = "<group>"; };
+		984E679D1BE797840075E9BB /* SendProductVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendProductVC.h; path = SendProduct/SendProductVC.h; sourceTree = "<group>"; };
+		984E679E1BE797840075E9BB /* SendProductVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendProductVC.m; path = SendProduct/SendProductVC.m; sourceTree = "<group>"; };
 		988B15791BD49EC1003745BD /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		9898CC091BD79CF500651732 /* NSData+MKBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MKBase64.h"; sourceTree = "<group>"; };
 		9898CC0A1BD79CF500651732 /* NSData+MKBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MKBase64.m"; sourceTree = "<group>"; };
@@ -234,6 +238,7 @@
 		9898CC2B1BD79DF400651732 /* DPUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPUtil.m; sourceTree = "<group>"; };
 		9898CC2D1BD79F7100651732 /* ZSAppServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZSAppServer.h; path = Server/ZSAppServer.h; sourceTree = SOURCE_ROOT; };
 		9898CC2E1BD79F7100651732 /* ZSAppServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZSAppServer.m; path = Server/ZSAppServer.m; sourceTree = SOURCE_ROOT; };
+		98FBBD721BE0C322001E9BC9 /* 扫描查单@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "扫描查单@2x.png"; sourceTree = "<group>"; };
 		EF459F3B1B32B55900806EA1 /* zxb_area.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = zxb_area.db; sourceTree = "<group>"; };
 		EF47B8141B28281B00045F0D /* ZhuanXB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhuanXB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF47B8181B28281B00045F0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -369,6 +374,7 @@
 		62F7A3911B464DAF00BC46C3 /* iamges */ = {
 			isa = PBXGroup;
 			children = (
+				98FBBD721BE0C322001E9BC9 /* 扫描查单@2x.png */,
 				626F1F841B7225AE005A6BED /* 物流图标 */,
 				62F7A3921B464DAF00BC46C3 /* 640运单列表无图@2x.png */,
 				62F7A3931B464DAF00BC46C3 /* 640返回@2x.png */,
@@ -461,6 +467,15 @@
 			name = UserCenter;
 			sourceTree = "<group>";
 		};
+		984E679C1BE797480075E9BB /* SendProduct */ = {
+			isa = PBXGroup;
+			children = (
+				984E679D1BE797840075E9BB /* SendProductVC.h */,
+				984E679E1BE797840075E9BB /* SendProductVC.m */,
+			);
+			name = SendProduct;
+			sourceTree = "<group>";
+		};
 		9898CC071BD79CF500651732 /* MKNetworkKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -551,6 +566,7 @@
 				EF47B81C1B28281B00045F0D /* AppDelegate.m */,
 				EF47B81E1B28281B00045F0D /* ViewController.h */,
 				EF47B81F1B28281B00045F0D /* ViewController.mm */,
+				984E679C1BE797480075E9BB /* SendProduct */,
 				9846769D1BDA8CC700F76D6D /* UserCenter */,
 				EF47B8211B28281B00045F0D /* Main.storyboard */,
 				EF47B8241B28281B00045F0D /* Images.xcassets */,
@@ -799,6 +815,7 @@
 				62F7A3D21B464DAF00BC46C3 /* Icon-Small-40.png in Resources */,
 				62F7A3FC1B464DAF00BC46C3 /* 首页按钮@2x.png in Resources */,
 				62F7A3D31B464DAF00BC46C3 /* Icon-Small-40@2x.png in Resources */,
+				98FBBD731BE0C322001E9BC9 /* 扫描查单@2x.png in Resources */,
 				62F7A3EE1B464DAF00BC46C3 /* 线路查询结果@2x.png in Resources */,
 				62F7A3CD1B464DAF00BC46C3 /* Icon-120.png in Resources */,
 				62F7A3F51B464DAF00BC46C3 /* 货物跟踪车@2x.png in Resources */,
@@ -909,6 +926,7 @@
 				9898CC1D1BD79CF500651732 /* NSData+MKBase64.m in Sources */,
 				9898CC291BD79D4D00651732 /* ZSServerEngine.m in Sources */,
 				EF47B8601B28357700045F0D /* httpRequest.m in Sources */,
+				984E679F1BE797840075E9BB /* SendProductVC.m in Sources */,
 				EF47B87F1B29126100045F0D /* WebsiteViewController.m in Sources */,
 				EF47B8811B29126100045F0D /* SelectAreaViewController.m in Sources */,
 				EF82D9B31B2FFEB20016518D /* ListDetail.m in Sources */,

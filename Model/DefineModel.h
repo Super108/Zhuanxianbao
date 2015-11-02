@@ -6,6 +6,9 @@
 //  Copyright (c) 2014年 kang_dong. All rights reserved.
 //
 
+#import "DPUtil.h"
+
+
 #ifndef SkyEye_DefineModel_h
 #define SkyEye_DefineModel_h
 
@@ -60,13 +63,13 @@
 
 
 //外网服务器地址
-//#define ZhuanXB_address @"http://222.46.22.220:9104/ZXBMobileEx"
+#define ZhuanXB_address @"http://222.46.22.220:9104/ZXBMobileEx"
 
 //正式服务器地址
-#define ZhuanXB_address @"http://huozhuapp.56123.com"
+//#define ZhuanXB_address @"http://huozhuapp.56123.com"
 //#define ZhuanXB_address @"http://112.124.123.203:9100/ZXBMobileEx"
 
-#define ServerAddress   @"huozhuapp.56123.com"
+#define ServerAddress   @"122.225.192.50:9100/ZXBMobileEx"
 
 //演示服务器  外网
 //#define WaterPump_address @"http://218.244.145.132:8089/aiJiaWebService/api"

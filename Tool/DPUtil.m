@@ -2,9 +2,12 @@
 //  DPUtil.m
 //  dripo
 //
-//  Created by 周 华平 on 14-1-14.
-//  Copyright (c) 2014年 xuejili. All rights reserved.
+//  Created by Stenson on 14-1-14.
+//  Copyright (c) 2014年 Stenson. All rights reserved.
 //
+
+#define kLoginToken  @"keyLoginToken"
+#define kExpireTime  @"keyExpireTime"
 
 #import "DPUtil.h"
 #import "NSString+MKNetworkKitAdditions.h"
@@ -22,6 +25,26 @@
         return NO;
     }
     return YES;
+}
+
+
++ (void)setLoginToken:(NSString *)token{
+    [[NSUserDefaults standardUserDefaults] setObject:token forKey:kLoginToken];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
++ (NSString *)getLoginToken{
+   return [[NSUserDefaults standardUserDefaults] objectForKey:kLoginToken];
+}
+
+//存入过期时间
++ (void)setExpireTime:(NSString *)time
+{
+    [[NSUserDefaults standardUserDefaults] setObject:time forKey:kExpireTime];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
++ (NSString *)getExpireTime
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:kExpireTime];
 }
 
 @end
