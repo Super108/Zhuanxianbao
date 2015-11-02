@@ -1,25 +1,24 @@
 //
-//  LoginViewController.m
+//  RetrievePasswordVC.m
 //  ZhuanXB
 //
-//  Created by Stenson on 15/10/23.
+//  Created by mac on 15/10/25.
 //  Copyright © 2015年 kang_dong. All rights reserved.
 //
 
-#import "LoginViewController.h"
-#import "ZSAppServer.h"
 #import "RetrievePasswordVC.h"
-@interface LoginViewController ()
+#import "ZSAppServer.h"
+@interface RetrievePasswordVC ()
 
 @end
 
-@implementation LoginViewController
+@implementation RetrievePasswordVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"用户登录";
+    self.title = @"重置密码";
     
     [self initRightNavBarItem];
     
@@ -44,7 +43,7 @@
     else{
         self.navigationItem.rightBarButtonItem = rightItem;
     }
-
+    
 }
 -(void)navToHome
 {
@@ -53,24 +52,31 @@
 
 -(void)initView
 {
-    LoginView * loginView = [[LoginView alloc]initWithFrame:self.view.frame];
-    loginView.delegate = self;
-    [self.view addSubview:loginView];
+    RetrievePasswordView * retrievePasswordView = [[RetrievePasswordView alloc]initWithFrame:self.view.frame];
+    retrievePasswordView.delegate = self;
+    [self.view addSubview:retrievePasswordView];
 }
 
--(void)loginWithName:(NSString *)name withPassword:(NSString *)password
+-(void)retrieveWithPhoneNumber:(NSString * )phoneNumber AndCheckCode : (NSString *)checkCode withPassword:(NSString *)password
 {
-    NSLog(@">>>   %@   %@",name,password);
+    NSLog(@">>>   %@   %@",phoneNumber,password);
     
-    [ZSAppServer loginUserWithUserName:name
-                          withPassword:password
-                               success:^(NSString *successMsg, id data) {
-                                   NSLog(@">>>>  %@",data);
-                               } fail:^(NSString *errorMsg, NSString *errorCode) {
-                                   [self setHub:@"登录失败，请稍后重试"];
-                               } error:^(NSError *error) {
-                                   [self setHub:@"登录失败，请稍后重试"];
-                               }];
+//    [ZSAppServer loginUserWithUserName:name
+//                          withPassword:password
+//                               success:^(NSString *successMsg, id data) {
+//                                   NSLog(@">>>>  %@",data);
+//                               } fail:^(NSString *errorMsg, NSString *errorCode) {
+//                                   [self setHub:@"登录失败，请稍后重试"];
+//                               } error:^(NSError *error) {
+//                                   [self setHub:@"登录失败，请稍后重试"];
+//                               }];
+    [ZSAppServer findLostPasswordWithPhoneNumber:phoneNumber withNewPassword:password withCheckCode:checkCode success:^(NSString *successMsg, id data) {
+        
+    } fail:^(NSString *errorMsg, NSString *errorCode) {
+        
+    } error:^(NSError *error) {
+        
+    }];
     
 }
 
@@ -91,11 +97,8 @@
 
 -(void)navToForgetVC
 {
-    NSLog(@"进入忘记密码页面");
-   RetrievePasswordVC *retrievePasswordVC= [[RetrievePasswordVC alloc] init];
-    [self.navigationController pushViewController:retrievePasswordVC animated:YES];
+    NSLog(@"返回登录页面");
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
