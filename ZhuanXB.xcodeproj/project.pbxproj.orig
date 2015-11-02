@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04A617CD1BDD077000ACBB9D /* RetrievePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A617CC1BDD077000ACBB9D /* RetrievePasswordVC.m */; };
-		04A9671D1BE6211E000456C3 /* RetrievePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9671C1BE6211E000456C3 /* RetrievePasswordView.m */; };
+		04A617CD1BDD077000ACBB9D /* RetrievePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A617CC1BDD077000ACBB9D /* RetrievePasswordVC.m */; settings = {ASSET_TAGS = (); }; };
+		04A9671D1BE6211E000456C3 /* RetrievePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9671C1BE6211E000456C3 /* RetrievePasswordView.m */; settings = {ASSET_TAGS = (); }; };
 		6221439E1B2D3D7A0068FEBB /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 6221439D1B2D3D7A0068FEBB /* NSString+MD5.m */; };
 		626F1F8E1B7225AE005A6BED /* -5.png in Resources */ = {isa = PBXBuildFile; fileRef = 626F1F851B7225AE005A6BED /* -5.png */; };
 		626F1F8F1B7225AE005A6BED /* 0灰.png in Resources */ = {isa = PBXBuildFile; fileRef = 626F1F861B7225AE005A6BED /* 0灰.png */; };
@@ -73,7 +73,7 @@
 		62F7A3FC1B464DAF00BC46C3 /* 首页按钮@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62F7A3C81B464DAF00BC46C3 /* 首页按钮@2x.png */; };
 		9846769C1BDA8C9D00F76D6D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9846769B1BDA8C9D00F76D6D /* LoginViewController.m */; };
 		984676A31BDA8D0A00F76D6D /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 984676A21BDA8D0A00F76D6D /* LoginView.m */; };
-		984E67A91BE7B91C0075E9BB /* SendProductVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 984E67A81BE7B91C0075E9BB /* SendProductVC.m */; };
+		984E679F1BE797840075E9BB /* SendProductVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 984E679E1BE797840075E9BB /* SendProductVC.m */; };
 		988B157A1BD49EC1003745BD /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 988B15791BD49EC1003745BD /* libsqlite3.0.tbd */; };
 		9898CC1D1BD79CF500651732 /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC0A1BD79CF500651732 /* NSData+MKBase64.m */; };
 		9898CC1E1BD79CF500651732 /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC0C1BD79CF500651732 /* NSDate+RFC1123.m */; };
@@ -216,8 +216,8 @@
 		9846769B1BDA8C9D00F76D6D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = User/LoginViewController.m; sourceTree = "<group>"; };
 		984676A11BDA8D0A00F76D6D /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginView.h; path = User/LoginView.h; sourceTree = "<group>"; };
 		984676A21BDA8D0A00F76D6D /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginView.m; path = User/LoginView.m; sourceTree = "<group>"; };
-		984E67A41BE7B8AA0075E9BB /* SendProductVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendProductVC.h; path = SendProduct/SendProductVC.h; sourceTree = "<group>"; };
-		984E67A81BE7B91C0075E9BB /* SendProductVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendProductVC.m; path = SendProduct/SendProductVC.m; sourceTree = "<group>"; };
+		984E679D1BE797840075E9BB /* SendProductVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendProductVC.h; path = SendProduct/SendProductVC.h; sourceTree = "<group>"; };
+		984E679E1BE797840075E9BB /* SendProductVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendProductVC.m; path = SendProduct/SendProductVC.m; sourceTree = "<group>"; };
 		988B15791BD49EC1003745BD /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		9898CC091BD79CF500651732 /* NSData+MKBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MKBase64.h"; sourceTree = "<group>"; };
 		9898CC0A1BD79CF500651732 /* NSData+MKBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MKBase64.m"; sourceTree = "<group>"; };
@@ -484,11 +484,11 @@
 			name = UserCenter;
 			sourceTree = "<group>";
 		};
-		984E67A01BE7B8660075E9BB /* SendProduct */ = {
+		984E679C1BE797480075E9BB /* SendProduct */ = {
 			isa = PBXGroup;
 			children = (
-				984E67A41BE7B8AA0075E9BB /* SendProductVC.h */,
-				984E67A81BE7B91C0075E9BB /* SendProductVC.m */,
+				984E679D1BE797840075E9BB /* SendProductVC.h */,
+				984E679E1BE797840075E9BB /* SendProductVC.m */,
 			);
 			name = SendProduct;
 			sourceTree = "<group>";
@@ -583,8 +583,11 @@
 				EF47B81C1B28281B00045F0D /* AppDelegate.m */,
 				EF47B81E1B28281B00045F0D /* ViewController.h */,
 				EF47B81F1B28281B00045F0D /* ViewController.mm */,
-				984E67A01BE7B8660075E9BB /* SendProduct */,
+<<<<<<< HEAD
+				984E679C1BE797480075E9BB /* SendProduct */,
+=======
 				04A617CA1BDD074D00ACBB9D /* RetrievePasswordVC */,
+>>>>>>> 3f49cd0358f294d6d459c64e017379f57baaa55b
 				9846769D1BDA8CC700F76D6D /* UserCenter */,
 				EF47B8211B28281B00045F0D /* Main.storyboard */,
 				EF47B8241B28281B00045F0D /* Images.xcassets */,
@@ -923,7 +926,6 @@
 				EF47B8201B28281B00045F0D /* ViewController.mm in Sources */,
 				EF47B8721B29123B00045F0D /* HZAreaPickerView.m in Sources */,
 				9898CC2F1BD79F7100651732 /* ZSAppServer.m in Sources */,
-				984E67A91BE7B91C0075E9BB /* SendProductVC.m in Sources */,
 				EF47B8651B28357700045F0D /* WebViewController.m in Sources */,
 				9898CC251BD79CF500651732 /* Reachability.m in Sources */,
 				EFF5BEE51B2955F700184D5C /* TrackingViewController.m in Sources */,
@@ -946,6 +948,7 @@
 				9898CC1D1BD79CF500651732 /* NSData+MKBase64.m in Sources */,
 				9898CC291BD79D4D00651732 /* ZSServerEngine.m in Sources */,
 				EF47B8601B28357700045F0D /* httpRequest.m in Sources */,
+				984E679F1BE797840075E9BB /* SendProductVC.m in Sources */,
 				EF47B87F1B29126100045F0D /* WebsiteViewController.m in Sources */,
 				EF47B8811B29126100045F0D /* SelectAreaViewController.m in Sources */,
 				EF82D9B31B2FFEB20016518D /* ListDetail.m in Sources */,
@@ -1097,8 +1100,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 日朋 赵 (F7XQLXZ98F)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 日朋 赵 (F7XQLXZ98F)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: xing wen (VFNUGHVUZ9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xing wen (VFNUGHVUZ9)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1109,7 +1112,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "cc.xueji.Molijing-Release";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiemi.jiemi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1120,8 +1123,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 日朋 赵 (F7XQLXZ98F)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 日朋 赵 (F7XQLXZ98F)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: xing wen (VFNUGHVUZ9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xing wen (VFNUGHVUZ9)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1132,7 +1135,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "cc.xueji.Molijing-Release";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiemi.jiemi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

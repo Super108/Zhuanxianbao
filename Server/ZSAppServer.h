@@ -24,6 +24,12 @@
                      success:(ServerResponseSuccessBlock)successBlock
                         fail:(ServerResponseFailBlock)failBlock
                        error:(MKNKErrorBlock)errorBlock;
-
-
+//重置密码
++(void)findLostPasswordWithPhoneNumber : (NSString *)phoneNumber withNewPassword :(NSString *)newPWD withCheckCode:(NSString *) checkCode success:(ServerResponseSuccessBlock)successBlock
+                                   fail:(ServerResponseFailBlock)failBlock
+                                  error:(MKNKErrorBlock)errorBlock;
+//发送验证码
++(void)sendCheckCodeWithPhoneNumber :(NSString *)phoneNumber success:(ServerResponseSuccessBlock)successBlock
+                                fail:(ServerResponseFailBlock)failBlock
+                               error:(MKNKErrorBlock)errorBlock;
 @end
