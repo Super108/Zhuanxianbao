@@ -41,7 +41,7 @@
 #pragma mark - COLOR
 
 #define MAIN_BackgroundColor  ZhuanXB_color(0xe6ebf0)
-
+#define MAIN_COLOR_BORDERCOLOR  RGBA(182, 182, 182, 1)  //边框颜色
 
 #define USERNAME @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.@_"
 #define PASSWORD @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"

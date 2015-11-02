@@ -9,6 +9,16 @@
 #import "PriceViewController.h"
 #import "SelectAreaViewController.h"
 #import "BtnTableViewCell.h"
+
+
+#define kInquireHistoryBackViewMarginLeft   11
+#define kInquireHistoryBackViewMarginTop    220
+#define kInquireHistoryBackViewWidth        self.view.frame.size.width - 22
+#define kInquireHistoryBackViewHeight       133
+
+#define keyInquireHistory  @"keyInquireHistory"
+#define keyInquireHistory_Start  @"keyInquireHistory_Start"
+#define keyInquireHistory_End  @"keyInquireHistory_End"
 @interface PriceViewController ()
 
 {
@@ -90,12 +100,47 @@
     /////////////////////________________/////////////////
     //查询后的view
     
-   
-    
-    
-    
+//   查询历史
+    [self initInquireHistoryView];
     
 }
+
+#pragma mark - InquireHistoryView
+
+-(void)initInquireHistoryView
+{
+    UIView * inquireHistoryBackView = [[UIView alloc]initWithFrame:CGRectMake(kInquireHistoryBackViewMarginLeft, kInquireHistoryBackViewMarginTop, kInquireHistoryBackViewWidth, kInquireHistoryBackViewHeight)];
+    inquireHistoryBackView.backgroundColor = [UIColor whiteColor];
+    [_firstView addSubview:inquireHistoryBackView];
+    inquireHistoryBackView.layer.borderColor = [MAIN_COLOR_BORDERCOLOR CGColor];
+    inquireHistoryBackView.layer.borderWidth = 1;
+    
+    UILabel * usedWaysLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kInquireHistoryBackViewWidth, 40)];
+    usedWaysLabel.backgroundColor = [UIColor clearColor];
+    usedWaysLabel.textAlignment = NSTextAlignmentLeft;
+    [inquireHistoryBackView addSubview:usedWaysLabel];
+    usedWaysLabel.text = @"  常用路线：";
+    usedWaysLabel.font = [UIFont systemFontOfSize:18];
+    
+    CALayer * lineLayer =   [CALayer layer];
+    lineLayer.frame = CGRectMake(0, 40, kInquireHistoryBackViewWidth, 1);
+    [inquireHistoryBackView.layer addSublayer:lineLayer];
+    lineLayer.backgroundColor = [MAIN_COLOR_BORDERCOLOR CGColor];
+    
+    NSMutableArray * historyArr = [[NSUserDefaults standardUserDefaults] objectForKey:keyInquireHistory];
+    for (int i = 0 ; i < historyArr.count; i ++) {
+        
+        NSDictionary * historyDic = historyArr[i];
+        
+        UILabel * usedWaysLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 50 + 25 * i, kInquireHistoryBackViewWidth, 20)];
+        usedWaysLabel.font = [UIFont systemFontOfSize:12];
+        usedWaysLabel.backgroundColor = [UIColor clearColor];
+        usedWaysLabel.textAlignment = NSTextAlignmentLeft;
+        [inquireHistoryBackView addSubview:usedWaysLabel];
+        usedWaysLabel.text = [NSString stringWithFormat:@"  %@→%@",[historyDic objectForKey:keyInquireHistory_Start],[historyDic objectForKey:keyInquireHistory_End]];
+    }
+}
+
 //查询后的view
 -(void)createSecondView
 {
@@ -127,10 +172,8 @@
             
         }
         
-        NSLog(@"%@",self.startAreaNameString);
         NSArray *array1 = [self.startAreaNameString  componentsSeparatedByString:@"-"];
         
-        NSLog(@"%@",array1);
         NSArray *array2 = [self.endAreaNameString componentsSeparatedByString:@"-"];
         NSString *str1 = [array1 objectAtIndex:1];
         NSString *str2 = [array1 objectAtIndex:2];
@@ -385,9 +428,6 @@
                 cell.areaLabel.text = areaNameString;
                 self.startAreaNameString = areaNameString;
                 self.startAreaCodeString = areaCodeString;
-                
-                NSLog(@"%@",self.startAreaCodeString);
-                
             }
             cell.areaLabel.font = [UIFont systemFontOfSize:15.0];
             cell.areaLabel.textColor = ZhuanXB_color(0x454545);
@@ -423,8 +463,8 @@
     NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:1 inSection:0];
     _cell2 =(BtnTableViewCell *) [_myTableView cellForRowAtIndexPath:indexPath2];
     
-    NSLog(@"%@",_cell1.areaLabel.text);
-    NSLog(@"%@",_cell2.areaLabel.text);
+    NSLog(@" 》》》》》》》》 %@",_cell1.areaLabel.text);
+    NSLog(@" 》》》》》》》》 %@",_cell2.areaLabel.text);
     
     //判断地点是否为空
     if ([_cell1.areaLabel.text isEqualToString:@"请选择起始地"]||[_cell2.areaLabel.text isEqualToString:@"请选择目的地"]) {
@@ -432,7 +472,27 @@
     }else
     {
         //请求接口
+        NSMutableArray * inquireHistoryArr = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:keyInquireHistory]];
+        BOOL hasTheSameHistory = NO;
+        for (NSDictionary * dic in inquireHistoryArr) {
+            NSString * historyStr = [NSString stringWithFormat:@"%@→%@",[dic objectForKey:keyInquireHistory_Start],[dic objectForKey:keyInquireHistory_End]];
+            if ([historyStr isEqualToString:[NSString stringWithFormat:@"%@→%@",_cell1.areaLabel.text,_cell2.areaLabel.text]]) {
+                hasTheSameHistory = YES;
+                break;
+            }
+        }
         
+        if (hasTheSameHistory == NO) {
+            NSDictionary * dic = @{keyInquireHistory_Start:_cell1.areaLabel.text,
+                                   keyInquireHistory_End:_cell2.areaLabel.text};
+            [inquireHistoryArr insertObject:dic atIndex:0];
+//            查询历史超过四个 删除最后一个 保持只有三个最近历史记录
+            if (inquireHistoryArr.count == 4) {
+                [inquireHistoryArr removeLastObject];
+            }
+            [[NSUserDefaults standardUserDefaults] setObject:inquireHistoryArr forKey:keyInquireHistory];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
         
         
         [self createSecondView];
@@ -524,7 +584,7 @@
         {
             NSError *error1=nil;
             id result1 =[NSJSONSerialization JSONObjectWithData:received options:kNilOptions error:&error1];
-            NSLog(@"%@",result1);
+//            NSLog(@"%@",result1);
             if (result1==nil) {
                 [_activity stop];
                 

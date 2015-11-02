@@ -66,6 +66,11 @@
                           withPassword:password
                                success:^(NSString *successMsg, id data) {
                                    NSLog(@">>>>  %@",data);
+                                   if([[data objectForKey:@"code"] integerValue] == 1){
+                                       NSLog(@"密码正确进入个人中心页面");
+                                   }else if ([[data objectForKey:@"code"] integerValue] == -1){
+                                       [self setHub:@"用户或者密码不正确"];
+                                   }
                                } fail:^(NSString *errorMsg, NSString *errorCode) {
                                    [self setHub:@"登录失败，请稍后重试"];
                                } error:^(NSError *error) {
