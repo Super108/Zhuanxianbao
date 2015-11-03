@@ -88,6 +88,7 @@
 		9898CC2C1BD79DF400651732 /* DPUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC2B1BD79DF400651732 /* DPUtil.m */; };
 		9898CC2F1BD79F7100651732 /* ZSAppServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC2E1BD79F7100651732 /* ZSAppServer.m */; };
 		98FBBD731BE0C322001E9BC9 /* 扫描查单@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 98FBBD721BE0C322001E9BC9 /* 扫描查单@2x.png */; };
+		EF069A6D1BE8599300643EB7 /* 登录按钮.png in Resources */ = {isa = PBXBuildFile; fileRef = EF069A6C1BE8599200643EB7 /* 登录按钮.png */; };
 		EF459F3C1B32B55900806EA1 /* zxb_area.db in Resources */ = {isa = PBXBuildFile; fileRef = EF459F3B1B32B55900806EA1 /* zxb_area.db */; };
 		EF47B81A1B28281B00045F0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF47B8191B28281B00045F0D /* main.m */; };
 		EF47B81D1B28281B00045F0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF47B81C1B28281B00045F0D /* AppDelegate.m */; };
@@ -245,6 +246,7 @@
 		9898CC2D1BD79F7100651732 /* ZSAppServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZSAppServer.h; path = Server/ZSAppServer.h; sourceTree = SOURCE_ROOT; };
 		9898CC2E1BD79F7100651732 /* ZSAppServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZSAppServer.m; path = Server/ZSAppServer.m; sourceTree = SOURCE_ROOT; };
 		98FBBD721BE0C322001E9BC9 /* 扫描查单@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "扫描查单@2x.png"; sourceTree = "<group>"; };
+		EF069A6C1BE8599200643EB7 /* 登录按钮.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "登录按钮.png"; sourceTree = "<group>"; };
 		EF459F3B1B32B55900806EA1 /* zxb_area.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = zxb_area.db; sourceTree = "<group>"; };
 		EF47B8141B28281B00045F0D /* ZhuanXB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhuanXB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF47B8181B28281B00045F0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 		62F7A3911B464DAF00BC46C3 /* iamges */ = {
 			isa = PBXGroup;
 			children = (
+				EF069A6C1BE8599200643EB7 /* 登录按钮.png */,
 				98FBBD721BE0C322001E9BC9 /* 扫描查单@2x.png */,
 				626F1F841B7225AE005A6BED /* 物流图标 */,
 				62F7A3921B464DAF00BC46C3 /* 640运单列表无图@2x.png */,
@@ -797,10 +800,10 @@
 				TargetAttributes = {
 					EF47B8131B28281B00045F0D = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 92ZFXD477Q;
 					};
 					EF47B82C1B28281B00045F0D = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = Q665WLAGRE;
 						TestTargetID = EF47B8131B28281B00045F0D;
 					};
 				};
@@ -855,6 +858,7 @@
 				62F7A3DB1B464DAF00BC46C3 /* Default-800-Portrait-736h@3x.png in Resources */,
 				626F1F8F1B7225AE005A6BED /* 0灰.png in Resources */,
 				62F7A3E61B464DAF00BC46C3 /* 扫二维码-默认@2x.png in Resources */,
+				EF069A6D1BE8599300643EB7 /* 登录按钮.png in Resources */,
 				62F7A3C91B464DAF00BC46C3 /* 640运单列表无图@2x.png in Resources */,
 				62F7A3E01B464DAF00BC46C3 /* 二维码黑色背景@2x.png in Resources */,
 				62F7A3F81B464DAF00BC46C3 /* 运单详情箭头@2x.png in Resources */,
@@ -1022,10 +1026,11 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou Netwide IT Co., Ltd (S265FZXSFD)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou Netwide IT Co., Ltd (S265FZXSFD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1043,10 +1048,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "50f4eccc-ddef-406a-9653-de00408423f3";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1068,10 +1073,11 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou Netwide IT Co., Ltd (S265FZXSFD)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou Netwide IT Co., Ltd (S265FZXSFD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1083,10 +1089,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "50f4eccc-ddef-406a-9653-de00408423f3";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1097,8 +1103,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 日朋 赵 (F7XQLXZ98F)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 日朋 赵 (F7XQLXZ98F)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1109,7 +1115,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "cc.xueji.Molijing-Release";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZhuanXB.wangkuo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1120,8 +1126,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 日朋 赵 (F7XQLXZ98F)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 日朋 赵 (F7XQLXZ98F)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1132,7 +1138,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "cc.xueji.Molijing-Release";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZhuanXB.wangkuo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1142,7 +1148,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: xing wen (VFNUGHVUZ9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1163,7 +1170,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: xing wen (VFNUGHVUZ9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

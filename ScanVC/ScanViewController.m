@@ -8,7 +8,7 @@
 
 #import "ScanViewController.h"
 #import "TrackingViewController.h"
-
+#import "WebViewController.h"
 
 @interface ScanViewController ()
 
@@ -149,23 +149,17 @@ static NSString *passImageName = @"返回.png";
     [self.session addOutput:self.output];
     
     
-    [self.output setMetadataObjectTypes:@[AVMetadataObjectTypeCode128Code,AVMetadataObjectTypeCode39Code,AVMetadataObjectTypeCode39Mod43Code,AVMetadataObjectTypeEAN13Code,AVMetadataObjectTypeEAN8Code,AVMetadataObjectTypeCode93Code]];
+//    [self.output setMetadataObjectTypes:@[AVMetadataObjectTypeCode128Code,AVMetadataObjectTypeCode39Code,AVMetadataObjectTypeCode39Mod43Code,AVMetadataObjectTypeEAN13Code,AVMetadataObjectTypeEAN8Code,AVMetadataObjectTypeCode93Code]];
     // 条码类型 AVMetadataObjectTypeQRCode
-//    if ([self.output.availableMetadataObjectTypes containsObject:
-//         AVMetadataObjectTypeQRCode]||
-//        [self.output.availableMetadataObjectTypes containsObject:
-//         AVMetadataObjectTypeCode128Code]) {
-//            self.output.metadataObjectTypes =[NSArray arrayWithObjects:
-//                                              AVMetadataObjectTypeQRCode,
-//                                              AVMetadataObjectTypeCode39Code,
-//                                              AVMetadataObjectTypeCode128Code,
-//                                              AVMetadataObjectTypeCode39Mod43Code,
-//                                              AVMetadataObjectTypeEAN13Code,
-//                                              AVMetadataObjectTypeEAN8Code,
-//                                              AVMetadataObjectTypeCode93Code, nil];
-//        }
-//    
-//    NSLog(@"%@",self.output.metadataObjectTypes);
+    if ([self.output.availableMetadataObjectTypes containsObject:
+         AVMetadataObjectTypeQRCode]||
+        [self.output.availableMetadataObjectTypes containsObject:
+         AVMetadataObjectTypeCode128Code]) {
+            self.output.metadataObjectTypes =[NSArray arrayWithObjects:
+                                              AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code, nil];
+        }
+    
+    NSLog(@"%@",self.output.metadataObjectTypes);
     
     self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
     
@@ -234,11 +228,66 @@ static NSString *passImageName = @"返回.png";
 
     }else
     {
-        TrackingViewController *trackVC = [[TrackingViewController alloc] init];
+//        TrackingViewController *trackVC = [[TrackingViewController alloc] init];
+//        
+//        trackVC.snString = deviceID;
+//        
+//        [self.navigationController pushViewController:trackVC animated:NO];
+        //获取系统当前的时间戳
+        NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+        NSTimeInterval a=[dat timeIntervalSince1970]*1000;
+        NSString *timeString = [NSString stringWithFormat:@"%f", a];//转为字符型
+        NSLog(@"%@",timeString);
         
-        trackVC.snString = deviceID;
+        //请求接口
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:appID, @"appId",deviceID, @"sn",timeString, @"time",nil];
+        NSLog(@"%@",dic);
+        NSString * allStr= @"";
         
-        [self.navigationController pushViewController:trackVC animated:NO];
+        //排序key
+        NSArray* keyArr = [dic allKeys];
+        keyArr = [keyArr sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
+            NSComparisonResult result = [obj1 compare:obj2];
+            return result==NSOrderedDescending;
+        }];
+        
+        //    NSLog(@"%@",keyArr);
+        
+        for (int i=0; i<=2; i++)
+        {
+            NSString *str = [NSString stringWithFormat:@"%@",[keyArr objectAtIndex:i]];
+            NSLog(@"%@",str);
+            allStr = [NSString stringWithFormat:@"%@%@=%@",allStr,[keyArr objectAtIndex:i],[dic objectForKey:[keyArr objectAtIndex:i]]];
+        }
+        NSLog(@"%@",allStr);
+        NSString *resultStr = [NSString stringWithFormat:@"%@%@",allStr,secretKey];
+        NSString *encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                                        NULL,
+                                                                                                        (CFStringRef)resultStr,
+                                                                                                        NULL,
+                                                                                                        (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                                        kCFStringEncodingUTF8 ));
+        
+        NSLog(@"%@",encodedString);
+        NSString *sign = [encodedString MD5];
+        
+        
+        NSString *param=[NSString stringWithFormat:@"appId=%@&sn=%@&time=%@&sign=%@",appID,deviceID,timeString,sign];
+        NSURL *URL=[NSURL URLWithString:[NSString stringWithFormat:@"%@/shipper/waybill/viewwaybill?%@",ZhuanXB_address,param]];//不需要传递参数
+        
+        NSLog(@"%@",URL);
+        
+        //直接用网页打开就行了
+        
+        
+        WebViewController *webView=[[WebViewController alloc] init];
+        //        NSLog(@"%@",_htmlArray);
+        
+        webView.url=[NSString stringWithFormat:@"%@/shipper/waybill/viewwaybill?%@",ZhuanXB_address,param];
+        webView.name = @"货物跟踪";
+        [self.navigationController pushViewController:webView animated:YES];
+
+        
     }
     
    

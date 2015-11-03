@@ -10,10 +10,13 @@
 #import "TrackingViewController.h"
 #import "ScanViewController.h"
 
+#import "WebViewController.h"
+
 @interface InquireViewController ()
 
 {
     UITextField *_textField ;
+    
 }
 
 
@@ -90,10 +93,64 @@
         
     }else
     {
-        TrackingViewController *trackingVC = [[TrackingViewController alloc] init];
+//        TrackingViewController *trackingVC = [[TrackingViewController alloc] init];
+//        
+//        trackingVC.snString = _textField.text;
+//        [self.navigationController pushViewController:trackingVC animated:NO];
+        //获取系统当前的时间戳
+        NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+        NSTimeInterval a=[dat timeIntervalSince1970]*1000;
+        NSString *timeString = [NSString stringWithFormat:@"%f", a];//转为字符型
+        NSLog(@"%@",timeString);
         
-        trackingVC.snString = _textField.text;
-        [self.navigationController pushViewController:trackingVC animated:NO];
+        //请求接口
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:appID, @"appId",_textField.text, @"sn",timeString, @"time",nil];
+        NSLog(@"%@",dic);
+        NSString * allStr= @"";
+        
+        //排序key
+        NSArray* keyArr = [dic allKeys];
+        keyArr = [keyArr sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
+            NSComparisonResult result = [obj1 compare:obj2];
+            return result==NSOrderedDescending;
+        }];
+        
+        //    NSLog(@"%@",keyArr);
+        
+        for (int i=0; i<=2; i++)
+        {
+            NSString *str = [NSString stringWithFormat:@"%@",[keyArr objectAtIndex:i]];
+            NSLog(@"%@",str);
+            allStr = [NSString stringWithFormat:@"%@%@=%@",allStr,[keyArr objectAtIndex:i],[dic objectForKey:[keyArr objectAtIndex:i]]];
+        }
+        NSLog(@"%@",allStr);
+        NSString *resultStr = [NSString stringWithFormat:@"%@%@",allStr,secretKey];
+        NSString *encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                                        NULL,
+                                                                                                        (CFStringRef)resultStr,
+                                                                                                        NULL,
+                                                                                                        (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                                        kCFStringEncodingUTF8 ));
+        
+        NSLog(@"%@",encodedString);
+        NSString *sign = [encodedString MD5];
+        
+        
+        NSString *param=[NSString stringWithFormat:@"appId=%@&sn=%@&time=%@&sign=%@",appID,_textField.text,timeString,sign];
+        NSURL *URL=[NSURL URLWithString:[NSString stringWithFormat:@"%@/shipper/waybill/viewwaybill?%@",ZhuanXB_address,param]];//不需要传递参数
+        
+        NSLog(@"%@",URL);
+        
+        //直接用网页打开就行了
+        
+        
+        WebViewController *webView=[[WebViewController alloc] init];
+        //        NSLog(@"%@",_htmlArray);
+        
+        webView.url=[NSString stringWithFormat:@"%@/shipper/waybill/viewwaybill?%@",ZhuanXB_address,param];
+        webView.name = @"货物跟踪";
+        [self.navigationController pushViewController:webView animated:YES];
+
     }
     
    

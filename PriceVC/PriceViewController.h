@@ -23,7 +23,7 @@
     UILabel *_label;
     //时效label
     UILabel *_timeLabel;
-    UIScrollView *scrollView;
+//    UIScrollView *scrollView;
     
     UIView *_noInfoView;
     Activity *_activity;

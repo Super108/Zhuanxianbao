@@ -52,9 +52,57 @@
                         fail:(ServerResponseFailBlock)failBlock
                        error:(MKNKErrorBlock)errorBlock
 {
+    //获取系统当前的时间戳
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970]*1000;
+    NSString *timeString = [NSString stringWithFormat:@"%f", a];//转为字符型
+    NSLog(@"%@",timeString);
+    
+    //请求接口
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:appID, @"appId",timeString, @"time",name, @"accountName",password, @"password",nil];
+    NSLog(@"%@",dic);
+    NSString * allStr= @"";
+    
+    //排序key
+    NSArray* keyArr = [dic allKeys];
+    keyArr = [keyArr sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
+        NSComparisonResult result = [obj1 compare:obj2];
+        return result==NSOrderedDescending;
+    }];
+    
+    //    NSLog(@"%@",keyArr);
+    
+    for (int i=0; i<=3; i++)
+    {
+        NSString *str = [NSString stringWithFormat:@"%@",[keyArr objectAtIndex:i]];
+        NSLog(@"%@",str);
+        allStr = [NSString stringWithFormat:@"%@%@=%@",allStr,[keyArr objectAtIndex:i],[dic objectForKey:[keyArr objectAtIndex:i]]];
+    }
+    NSLog(@"%@",allStr);
+    NSString *resultStr = [NSString stringWithFormat:@"%@%@",allStr,secretKey];
+    NSString *encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                                    NULL,
+                                                                                                    (CFStringRef)resultStr,
+                                                                                                    NULL,
+                                                                                                    (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                                    kCFStringEncodingUTF8 ));
+    
+    NSLog(@"%@",encodedString);
+    NSString *sign = [encodedString MD5];
+    
+    
+//    NSString *params=[NSString stringWithFormat:@"appId=%@&time=%@&sign=%@password=%@accountName=%@,",appID,timeString,sign,password,name];
+
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:name forKey:@"accountName"];
+    [params setObject:appID forKey:@"appId"];
     [params setObject:password forKey:@"password"];
+    [params setObject:sign forKey:@"sign"];
+    [params setObject:timeString forKey:@"time"];
+    
+    
+    NSLog(@"LLL%@",params);
     
     [[ZSServerEngine sharedInstance] requestWithParams:params path:kLoginUser httpMethod:POST customHeaders:nil success:^(NSString *successMsg, id data) {
         successBlock(successMsg, data);

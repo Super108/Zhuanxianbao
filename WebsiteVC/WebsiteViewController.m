@@ -10,6 +10,8 @@
 #import <BaiduMapAPI/BMapKit.h>
 #import "webDetail.h"
 
+#import "WebViewController.h"
+
 @interface WebsiteViewController ()
 <BMKMapViewDelegate>
 {
@@ -25,64 +27,64 @@
 
 @implementation WebsiteViewController
 
-- (void) viewDidAppear:(BOOL)animated {
-    
-    _activity  = [[Activity alloc] initWithActivity:self.view];
-    
-    [self getInfoHttp];
-    
-    if (_allArry.count==0) {
-        
-        [self createNoView];
-        
-    }else
-    {
-        [_noInfoView removeFromSuperview];
-        _mapView = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width , self.view.frame.size.height)];
-        self.view = _mapView;
-        _mapView.delegate = self;
-        //设置地图缩放级别
-        [_mapView setZoomLevel:10];
-        [_locService startUserLocationService];
-        _mapView.showsUserLocation = NO;//先关闭显示的定位图层
-        _mapView.userTrackingMode = BMKUserTrackingModeNone;//设置定位的状态
-        _mapView.showsUserLocation = YES;//显示定位图层
-
-        
-        for (int i=0; i<_allArry.count; i++) {
-            
-            webDetail *web  = [_allArry objectAtIndex:i];
-    
-            //如果经纬度为空 什么都不做
-            if ([web.longitude isKindOfClass:[NSNull class]]||[web.dimensions isKindOfClass:[NSNull class]]) {
-                
-            }else
-            {
-                // 添加一个PointAnnotation
-                BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
-                CLLocationCoordinate2D coor;
-//                        NSLog(@"%f",[web.dimensions floatValue]);
-//                        NSLog(@"%f",[web.longitude floatValue]);
-                
-                coor.latitude = [web.longitude floatValue];
-                coor.longitude = [web.dimensions floatValue];
-                annotation.title = web.name;
-//                annotation.subtitle = web.memo;
-                [_mapView setCenterCoordinate:coor animated:NO];
-                
-                annotation.coordinate = coor;
-                
-                [_mapView addAnnotation:annotation];
-                [_mapView selectAnnotation:annotation animated:YES];
-            }
-            
-        }
-
-    }
-    
-    
-    
-}
+//- (void) viewDidAppear:(BOOL)animated {
+//    
+//    _activity  = [[Activity alloc] initWithActivity:self.view];
+//    
+//    [self getInfoHttp];
+//    
+//    if (_allArry.count==0) {
+//        
+//        [self createNoView];
+//        
+//    }else
+//    {
+//        [_noInfoView removeFromSuperview];
+//        _mapView = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width , self.view.frame.size.height)];
+//        self.view = _mapView;
+//        _mapView.delegate = self;
+//        //设置地图缩放级别
+//        [_mapView setZoomLevel:10];
+//        [_locService startUserLocationService];
+//        _mapView.showsUserLocation = NO;//先关闭显示的定位图层
+//        _mapView.userTrackingMode = BMKUserTrackingModeNone;//设置定位的状态
+//        _mapView.showsUserLocation = YES;//显示定位图层
+//
+//        
+//        for (int i=0; i<_allArry.count; i++) {
+//            
+//            webDetail *web  = [_allArry objectAtIndex:i];
+//    
+//            //如果经纬度为空 什么都不做
+//            if ([web.longitude isKindOfClass:[NSNull class]]||[web.dimensions isKindOfClass:[NSNull class]]) {
+//                
+//            }else
+//            {
+//                // 添加一个PointAnnotation
+//                BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
+//                CLLocationCoordinate2D coor;
+////                        NSLog(@"%f",[web.dimensions floatValue]);
+////                        NSLog(@"%f",[web.longitude floatValue]);
+//                
+//                coor.latitude = [web.longitude floatValue];
+//                coor.longitude = [web.dimensions floatValue];
+//                annotation.title = web.name;
+////                annotation.subtitle = web.memo;
+//                [_mapView setCenterCoordinate:coor animated:NO];
+//                
+//                annotation.coordinate = coor;
+//                
+//                [_mapView addAnnotation:annotation];
+//                [_mapView selectAnnotation:annotation animated:YES];
+//            }
+//            
+//        }
+//
+//    }
+//    
+//    
+//    
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -111,8 +113,61 @@
     
     _allArry = [[NSMutableArray alloc] initWithCapacity:0];
     
-    
+    _activity = [[Activity alloc] initWithActivity:self.view];
 
+    //获取系统当前的时间戳
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970]*1000;
+    NSString *timeString = [NSString stringWithFormat:@"%f", a];//转为字符型
+    NSLog(@"%@",timeString);
+    
+    //请求接口
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:appID, @"appId",timeString, @"time",nil];
+    NSLog(@"%@",dic);
+    NSString * allStr= @"";
+    
+    //排序key
+    NSArray* keyArr = [dic allKeys];
+    keyArr = [keyArr sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
+        NSComparisonResult result = [obj1 compare:obj2];
+        return result==NSOrderedDescending;
+    }];
+    
+    //    NSLog(@"%@",keyArr);
+    
+    for (int i=0; i<=1; i++)
+    {
+        NSString *str = [NSString stringWithFormat:@"%@",[keyArr objectAtIndex:i]];
+        NSLog(@"%@",str);
+        allStr = [NSString stringWithFormat:@"%@%@=%@",allStr,[keyArr objectAtIndex:i],[dic objectForKey:[keyArr objectAtIndex:i]]];
+    }
+    NSLog(@"%@",allStr);
+    NSString *resultStr = [NSString stringWithFormat:@"%@%@",allStr,secretKey];
+    NSString *encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                                    NULL,
+                                                                                                    (CFStringRef)resultStr,
+                                                                                                    NULL,
+                                                                                                    (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                                    kCFStringEncodingUTF8 ));
+    
+    NSLog(@"%@",encodedString);
+    NSString *sign = [encodedString MD5];
+    
+    
+    NSString *param=[NSString stringWithFormat:@"appId=%@&time=%@&sign=%@",appID,timeString,sign];
+    NSURL *URL=[NSURL URLWithString:[NSString stringWithFormat:@"%@/shipper/branch/allbranch?%@",ZhuanXB_address,param]];//不需要传递参数
+    
+    NSLog(@"%@",URL);
+    
+    //直接用网页打开就行了
+    
+    
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64)];
+    webView.delegate = self;
+    NSURLRequest *request =[NSURLRequest requestWithURL:URL];
+    [self.view addSubview: webView];
+    [webView loadRequest:request];
+   
     
     
     
@@ -142,6 +197,32 @@
 //    [window addSubview:minusBtn];
 //    
 //    value = (int)[_faderSlider value];
+    
+}
+
+- (void )webViewDidStartLoad:(UIWebView  *)webView
+{
+    
+    [_activity start];
+    
+    
+}
+- (void )webViewDidFinishLoad:(UIWebView  *)webView
+{
+    
+    [_activity stop];
+    
+    
+}
+
+- (void)webView:(UIWebView *)webView  didFailLoadWithError:(NSError *)error
+{
+    
+    
+    [_activity stop];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"加载错误" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [alert show];
+    
     
 }
 
@@ -235,97 +316,107 @@
     
     NSLog(@"%@",URL);
     
-    
-    //第二步，创建请求
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-    request.HTTPMethod=@"POST";//设置请求方法
-    
-    //第三步，连接服务器
-    
-    NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
-    
-//    NSLog(@"%@",connection);
-    NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    
-    NSLog(@"%@",received);
-    if (received==nil) {
-        [_activity stop];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"网络断了" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        
-        [self createNoView];
-        [alert show];
-    }else
-    {
-        NSError *error1=nil;
-        id result1 =[NSJSONSerialization JSONObjectWithData:received options:kNilOptions error:&error1];
-        NSLog(@"%@",result1);
-        if (result1==nil) {
-            [_activity stop];
-            return;
-        }else
-        {
-            if ([[result1 objectForKey:@"code"]isEqualToString:@"1"]) {//正确
-                NSArray *arr = [result1 objectForKey:@"value"];
-                //            NSLog(@"arrarrarrararararararar%@",arr);
-                //判断数组是否存在
-                if([[result1 objectForKey:@"value"] isKindOfClass:[NSNull class]])
-                {
-                    [self createNoView];
-                    
-                }else
-                {
-                    for (int i =0; i<arr.count;i++) {
-                        NSMutableDictionary *detailDic = [arr objectAtIndex:i];
-                        _web = [[webDetail alloc] init];
-                        _web.name = [detailDic objectForKey:@"name"];
-                        //                    _web.memo = [detailDic objectForKey:@"memo"];
-                        _web.longitude = [detailDic objectForKey:@"longitude"];
-                        _web.dimensions = [detailDic objectForKey:@"dimensions"];
-                        
-                        [_allArry addObject:_web];
-                    }
-                    
-                }
-                //            [_activity stop];
-            }
-            
-            else if ([[result1 objectForKey:@"code"]isEqualToString:@"0"])
-            {
-                [_activity stop];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"服务端异常" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alert show];
-                
-            }else if ([[result1 objectForKey:@"code"]isEqualToString:@"100"])
-            {
-                [_activity stop];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"非法请求" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alert show];
-                
-                
-            }else if ([[result1 objectForKey:@"code"]isEqualToString:@"101"])
-            {
-                [_activity stop];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"非法请求" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alert show];
-                
-            }else if ([[result1 objectForKey:@"code"]isEqualToString:@"102"])
-            {
-                [_activity stop];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"用户不存在" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alert show];
-            }else if ([[result1 objectForKey:@"code"]isEqualToString:@"103"])//记录不存在
-            {
-                [_activity stop];
-                [self createNoView];
-                
-            }
-            
-        }
- 
-    }
+    //直接用网页打开就行了
     
     
+    WebViewController *webView=[[WebViewController alloc] init];
+    //        NSLog(@"%@",_htmlArray);
+    
+    webView.url=[NSString stringWithFormat:@"%@/shipper/waybill/viewroute?%@",ZhuanXB_address,param];
+    webView.name = @"线路运价";
+    [self.navigationController pushViewController:webView animated:YES];
+    
+//    
+//    //第二步，创建请求
+//    
+//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+//    request.HTTPMethod=@"POST";//设置请求方法
+//    
+//    //第三步，连接服务器
+//    
+//    NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+//    
+////    NSLog(@"%@",connection);
+//    NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+//    
+//    NSLog(@"%@",received);
+//    if (received==nil) {
+//        [_activity stop];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"网络断了" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//        
+//        [self createNoView];
+//        [alert show];
+//    }else
+//    {
+//        NSError *error1=nil;
+//        id result1 =[NSJSONSerialization JSONObjectWithData:received options:kNilOptions error:&error1];
+//        NSLog(@"%@",result1);
+//        if (result1==nil) {
+//            [_activity stop];
+//            return;
+//        }else
+//        {
+//            if ([[result1 objectForKey:@"code"]isEqualToString:@"1"]) {//正确
+//                NSArray *arr = [result1 objectForKey:@"value"];
+//                //            NSLog(@"arrarrarrararararararar%@",arr);
+//                //判断数组是否存在
+//                if([[result1 objectForKey:@"value"] isKindOfClass:[NSNull class]])
+//                {
+//                    [self createNoView];
+//                    
+//                }else
+//                {
+//                    for (int i =0; i<arr.count;i++) {
+//                        NSMutableDictionary *detailDic = [arr objectAtIndex:i];
+//                        _web = [[webDetail alloc] init];
+//                        _web.name = [detailDic objectForKey:@"name"];
+//                        //                    _web.memo = [detailDic objectForKey:@"memo"];
+//                        _web.longitude = [detailDic objectForKey:@"longitude"];
+//                        _web.dimensions = [detailDic objectForKey:@"dimensions"];
+//                        
+//                        [_allArry addObject:_web];
+//                    }
+//                    
+//                }
+//                //            [_activity stop];
+//            }
+//            
+//            else if ([[result1 objectForKey:@"code"]isEqualToString:@"0"])
+//            {
+//                [_activity stop];
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"服务端异常" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                [alert show];
+//                
+//            }else if ([[result1 objectForKey:@"code"]isEqualToString:@"100"])
+//            {
+//                [_activity stop];
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"非法请求" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                [alert show];
+//                
+//                
+//            }else if ([[result1 objectForKey:@"code"]isEqualToString:@"101"])
+//            {
+//                [_activity stop];
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"非法请求" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                [alert show];
+//                
+//            }else if ([[result1 objectForKey:@"code"]isEqualToString:@"102"])
+//            {
+//                [_activity stop];
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"用户不存在" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                [alert show];
+//            }else if ([[result1 objectForKey:@"code"]isEqualToString:@"103"])//记录不存在
+//            {
+//                [_activity stop];
+//                [self createNoView];
+//                
+//            }
+//            
+//        }
+// 
+//    }
+//    
+//    
     
 }
 

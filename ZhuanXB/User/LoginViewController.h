@@ -10,4 +10,7 @@
 #import "LoginView.h"
 @interface LoginViewController : UIViewController<loginViewDelegate>
 
+{
+     UIView *_noInfoView;
+}
 @end

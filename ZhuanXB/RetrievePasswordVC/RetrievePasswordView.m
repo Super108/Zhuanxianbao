@@ -148,24 +148,126 @@
 -(void)sendMessageToMobile:(UIButton *)sender{
     
     NSLog(@"发送短信验证码");
-    [ZSAppServer sendCheckCodeWithPhoneNumber:_nameField.text success:^(NSString *successMsg, id data) {
-        NSLog(@"%@",data);
-    } fail:^(NSString *errorMsg, NSString *errorCode) {
-        
-    } error:^(NSError *error) {
-        
+//    [ZSAppServer sendCheckCodeWithPhoneNumber:_nameField.text success:^(NSString *successMsg, id data) {
+//        NSLog(@"%@",data);
+//    } fail:^(NSString *errorMsg, NSString *errorCode) {
+//        
+//    } error:^(NSError *error) {
+//        
+//    }];
+    
+    
+    //获取系统当前的时间戳
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970]*1000;
+    NSString *timeString = [NSString stringWithFormat:@"%f", a];//转为字符型
+    NSLog(@"%@",timeString);
+    
+    
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:appID, @"appId",_nameField.text, @"mobile",timeString, @"time",nil];
+    NSLog(@"%@",dic);
+    NSString * allStr= @"";
+    
+    //排序key
+    NSArray* keyArr = [dic allKeys];
+    keyArr = [keyArr sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
+        NSComparisonResult result = [obj1 compare:obj2];
+        return result==NSOrderedDescending;
     }];
     
-    sender.selected=YES;
-    sender.userInteractionEnabled=NO;
-    sender.backgroundColor=[UIColor grayColor];
-    sender.tag=60;
-    if (sender.selected==YES) {
-         [getCheckCodeBtn setTitle:[NSString stringWithFormat:@"(%ld)秒后重发",(long)getCheckCodeBtn.tag] forState:UIControlStateNormal];
-        _timerCheck=[NSTimer timerWithTimeInterval:1 target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
-        [[NSRunLoop  currentRunLoop] addTimer:_timerCheck forMode:NSDefaultRunLoopMode];
-    }
+    //            NSLog(@"%@",keyArr);
     
+    for (int i=0; i<=2; i++)
+    {
+        NSString *str = [NSString stringWithFormat:@"%@",[keyArr objectAtIndex:i]];
+        NSLog(@"%@",str);
+        allStr = [NSString stringWithFormat:@"%@%@=%@",allStr,[keyArr objectAtIndex:i],[dic objectForKey:[keyArr objectAtIndex:i]]];
+    }
+    NSLog(@"%@",allStr);
+    
+    NSString *resultStr = [NSString stringWithFormat:@"%@%@",allStr,secretKey];
+    NSString *encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                                    NULL,
+                                                                                                    (CFStringRef)resultStr,
+                                                                                                    NULL,
+                                                                                                    (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                                    kCFStringEncodingUTF8 ));
+    
+    NSLog(@"%@",encodedString);
+    NSString *sign = [encodedString MD5];
+    
+    
+    
+    
+    NSString *param=[NSString stringWithFormat:@"appId=%@&mobile=%@&time=%@&sign=%@",appID,_nameField.text,timeString,sign];
+    NSURL *URL=[NSURL URLWithString:[NSString stringWithFormat:@"%@/shipper/password/sendCode?%@",ZhuanXB_address,param]];//不需要传递参数
+    
+    NSLog(@"%@",URL);
+    
+    
+    //第二步，创建请求
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    request.HTTPMethod=@"POST";//设置请求方法
+    
+    //第三步，连接服务器
+    
+    NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+    
+    NSLog(@"%@",connection);
+    NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    if (received==nil) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"网络断了" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        
+        //        [self createNoView];
+        [alert show];
+    }else
+    {
+        NSError *error1=nil;
+        id result1 =[NSJSONSerialization JSONObjectWithData:received options:kNilOptions error:&error1];
+        NSLog(@"%@",result1);
+        if (result1==nil) {
+            
+            
+            return;
+        }else
+        {
+            if ([[result1 objectForKey:@"code"]isEqualToString:@"1"]) {//正确
+                
+                [self setHub:@"成功发送验证码"];
+                sender.selected=YES;
+                sender.userInteractionEnabled=NO;
+                sender.backgroundColor=[UIColor grayColor];
+                sender.tag=60;
+                if (sender.selected==YES) {
+                    [getCheckCodeBtn setTitle:[NSString stringWithFormat:@"(%ld)秒后重发",(long)getCheckCodeBtn.tag] forState:UIControlStateNormal];
+                    _timerCheck=[NSTimer timerWithTimeInterval:1 target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
+                    [[NSRunLoop  currentRunLoop] addTimer:_timerCheck forMode:NSDefaultRunLoopMode];
+                }
+
+                
+            }else if ([[result1 objectForKey:@"code"]isEqualToString:@"-1"])
+            {
+                
+                [self setHub:@"手机号码不存在"];
+                
+            }else if ([[result1 objectForKey:@"code"]isEqualToString:@"-2"])
+            {
+                
+                [self setHub:@"超过当日发送限制"];
+                
+            }else
+            {
+                
+                [self setHub:@"发送验证码失败"];
+                
+                
+            }
+        }
+        
+    }
+
     
 }
 -(void)timeDown{

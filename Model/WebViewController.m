@@ -64,7 +64,7 @@
 //    [self.view addSubview:buttomView];
     
     // Do any additional setup after loading the view.
-    UIWebView * myWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-10)];
+    UIWebView * myWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64)];
     NSURL *url = [NSURL URLWithString:_url];
     NSURLRequest *request =[NSURLRequest requestWithURL:url];
     myWebView.backgroundColor=ZhuanXB_color(0xf5f5f5);

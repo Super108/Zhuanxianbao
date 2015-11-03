@@ -70,13 +70,117 @@
 //                               } error:^(NSError *error) {
 //                                   [self setHub:@"登录失败，请稍后重试"];
 //                               }];
-    [ZSAppServer findLostPasswordWithPhoneNumber:phoneNumber withNewPassword:password withCheckCode:checkCode success:^(NSString *successMsg, id data) {
-        
-    } fail:^(NSString *errorMsg, NSString *errorCode) {
-        
-    } error:^(NSError *error) {
-        
+//    [ZSAppServer findLostPasswordWithPhoneNumber:phoneNumber withNewPassword:password withCheckCode:checkCode success:^(NSString *successMsg, id data) {
+//        
+//    } fail:^(NSString *errorMsg, NSString *errorCode) {
+//        
+//    } error:^(NSError *error) {
+//        
+//    }];
+    
+    //获取系统当前的时间戳
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970]*1000;
+    NSString *timeString = [NSString stringWithFormat:@"%f", a];//转为字符型
+    NSLog(@"%@",timeString);
+    
+    
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:appID, @"appId",phoneNumber, @"mobile",password, @"password",checkCode, @"validateCode",timeString, @"time",nil];
+    NSLog(@"%@",dic);
+    NSString * allStr= @"";
+    
+    //排序key
+    NSArray* keyArr = [dic allKeys];
+    keyArr = [keyArr sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
+        NSComparisonResult result = [obj1 compare:obj2];
+        return result==NSOrderedDescending;
     }];
+    
+    //            NSLog(@"%@",keyArr);
+    
+    for (int i=0; i<=4; i++)
+    {
+        NSString *str = [NSString stringWithFormat:@"%@",[keyArr objectAtIndex:i]];
+        NSLog(@"%@",str);
+        allStr = [NSString stringWithFormat:@"%@%@=%@",allStr,[keyArr objectAtIndex:i],[dic objectForKey:[keyArr objectAtIndex:i]]];
+    }
+    NSLog(@"%@",allStr);
+    
+    NSString *resultStr = [NSString stringWithFormat:@"%@%@",allStr,secretKey];
+    NSString *encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                                    NULL,
+                                                                                                    (CFStringRef)resultStr,
+                                                                                                    NULL,
+                                                                                                    (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                                    kCFStringEncodingUTF8 ));
+    
+    NSLog(@"%@",encodedString);
+    NSString *sign = [encodedString MD5];
+    
+    
+    
+    
+    NSString *param=[NSString stringWithFormat:@"appId=%@&mobile=%@&password=%@&validateCode=%@&time=%@&sign=%@",appID,phoneNumber,password,checkCode,timeString,sign];
+    NSURL *URL=[NSURL URLWithString:[NSString stringWithFormat:@"%@/shipper/password?%@",ZhuanXB_address,param]];//不需要传递参数
+    
+    NSLog(@"%@",URL);
+    
+    
+    //第二步，创建请求
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    request.HTTPMethod=@"POST";//设置请求方法
+    
+    //第三步，连接服务器
+    
+    NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+    
+    NSLog(@"%@",connection);
+    NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    
+    if (received==nil) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"网络断了" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        
+        //        [self createNoView];
+        [alert show];
+    }else
+    {
+        NSError *error1=nil;
+        id result1 =[NSJSONSerialization JSONObjectWithData:received options:kNilOptions error:&error1];
+        NSLog(@"%@",result1);
+        if (result1==nil) {
+            
+            
+            return;
+        }else
+        {
+            if ([[result1 objectForKey:@"code"]isEqualToString:@"1"]) {//正确
+                
+                [self setHub:@"重置密码成功"];
+                
+                
+            }else if ([[result1 objectForKey:@"code"]isEqualToString:@"-1"])
+            {
+                
+                [self setHub:@"手机号码不存在"];
+                
+            }else if ([[result1 objectForKey:@"code"]isEqualToString:@"-2"])
+            {
+                
+                [self setHub:@"验证码不正确"];
+                
+            }else
+            {
+                
+                [self setHub:@"发送验证码失败"];
+                
+                
+            }
+        }
+        
+    }
+
     
 }
 

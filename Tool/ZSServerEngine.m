@@ -68,6 +68,7 @@ static ZSServerEngine *serverEngine = nil;
     [operation addHeaders:customHeaders];
     
     NSLog(@"url is : %@", operation.url);
+//    NSLog(@"ur1111: %@", params);
     
     [operation addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         id responseData = completedOperation.responseJSON;

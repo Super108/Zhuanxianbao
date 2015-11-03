@@ -193,6 +193,8 @@
         {
             if([self judgeTimeIsTimeOut]&&[DPUtil isNotNull:[DPUtil getLoginToken]]){
                 NSLog(@"登录成功  进入个人中心");
+                LoginViewController * loginVC = [[LoginViewController alloc]init];
+                [self.navigationController pushViewController:loginVC animated:YES];
             }else{
                 LoginViewController * loginVC = [[LoginViewController alloc]init];
                 [self.navigationController pushViewController:loginVC animated:YES];

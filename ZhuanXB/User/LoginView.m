@@ -83,7 +83,7 @@
     //登录按钮
     UIButton *loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     loginBtn.frame = CGRectMake(kLoginBtnMarginLeft, kLoginBtnMarginTop, kLoginBtnWidth, kLoginBtnHeight);
-    [loginBtn setBackgroundImage:[UIImage imageNamed:@"线路查询按钮.png"] forState:UIControlStateNormal];
+    [loginBtn setBackgroundImage:[UIImage imageNamed:@"登录按钮.png"] forState:UIControlStateNormal];
     [loginBtn addTarget:self action:@selector(navToUserCenter) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:loginBtn];
     

@@ -9,7 +9,7 @@
 #import "PriceViewController.h"
 #import "SelectAreaViewController.h"
 #import "BtnTableViewCell.h"
-
+#import "WebViewController.h"
 
 #define kInquireHistoryBackViewMarginLeft   11
 #define kInquireHistoryBackViewMarginTop    220
@@ -55,7 +55,7 @@
     }
 
     
-    [self createSecondView];
+//    [self createSecondView];
     
     //查询前的view
     
@@ -142,215 +142,113 @@
 }
 
 //查询后的view
--(void)createSecondView
-{
-    if (iPhone5||iPhone6||iPhone6Plus) {
-        [_secondView removeFromSuperview];
-        _secondView = [[UIView alloc] initWithFrame:CGRectMake(11, 11, self.view.frame.size.width-22, self.view.frame.size.height-22)];
-        //        if (IOS_VERSION>=8.0) {
-        //            _secondView = [[UIView alloc] initWithFrame:CGRectMake(11, 11, self.view.frame.size.width-22, self.view.frame.size.height-22)];
-        //
-        //        }else
-        //        {
-        //
-        //            _secondView = [[UIView alloc] initWithFrame:CGRectMake(11, 11, self.view.frame.size.width-22, self.view.frame.size.height-22-64)];
-        //        }
-        
-        
-        _secondView.backgroundColor = [UIColor whiteColor];
-        [self.view addSubview:_secondView];
-        
-        //地区label
-        UILabel *areaLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _secondView.frame.size.width, 25)];
-        areaLabel.textAlignment = NSTextAlignmentCenter;
-        areaLabel.textColor = ZhuanXB_color(0x454545);
-        areaLabel.font = [UIFont systemFontOfSize:16.0];
-        if (self.startAreaNameString ==nil) {
-            self.startAreaNameString = @"浙江省-杭州市-滨江区";
-        }else
-        {
-            
-        }
-        
-        NSArray *array1 = [self.startAreaNameString  componentsSeparatedByString:@"-"];
-        
-        NSArray *array2 = [self.endAreaNameString componentsSeparatedByString:@"-"];
-        NSString *str1 = [array1 objectAtIndex:1];
-        NSString *str2 = [array1 objectAtIndex:2];
-        NSString *allStr1 = [NSString stringWithFormat:@"%@-%@",str1,str2];
-        
-        NSString *str3 = [array2 objectAtIndex:1];
-        NSString *str4 = [array2 objectAtIndex:2];
-        NSString *allStr2 = [NSString stringWithFormat:@"%@-%@",str3,str4];
-        
-        areaLabel.text = [NSString stringWithFormat:@"%@->%@",allStr1,allStr2];
-        [_secondView addSubview:areaLabel];
-        
-        //时效label
-        _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, areaLabel.frame.origin.y+areaLabel.frame.size.height-10, _secondView.frame.size.width, 30)];
-        _timeLabel.textAlignment = NSTextAlignmentCenter;
-        _timeLabel.textColor = ZhuanXB_color(0xff5000);
-        _timeLabel.font = [UIFont systemFontOfSize:13.0];
-        [_secondView addSubview:_timeLabel];
-        
-        
-        //上面那块表格
-        UIImageView *topImage = [[UIImageView alloc] initWithFrame:CGRectMake(_secondView.frame.size.width/2-569/4, _timeLabel.frame.origin.y+_timeLabel.frame.size.height-5, 569/2, 406/2)];
-        topImage.image = [UIImage imageNamed:@"线路查询结果.png"];
-        [_secondView addSubview:topImage];
-        
-        //创建八个label
-        for (int i=0; i<=7; i++) {
-            _label = [[UILabel alloc] initWithFrame:CGRectMake(_secondView.frame.size.width-15-120+8, 2+25*i, 60, 25)];
-            _label.backgroundColor= [UIColor clearColor];
-            _label.textAlignment = NSTextAlignmentCenter;
-            _label.font = [UIFont systemFontOfSize:11.0];
-            _label.textColor = ZhuanXB_color(0x454545);
-            _label.tag = i+100;
-            [topImage addSubview:_label];
-            
-        }
-        //创建八个label
-        for (int i=0; i<=7; i++) {
-            _label = [[UILabel alloc] initWithFrame:CGRectMake(_secondView.frame.size.width-15-120+2+60, 2+25*i, 60, 25)];
-            _label.backgroundColor= [UIColor clearColor];
-//                        _label.textAlignment = NSTextAlignmentCenter;
-            _label.textColor = ZhuanXB_color(0x454545);
-            _label.font = [UIFont systemFontOfSize:11.0];
-            _label.tag = i+200;
-            [topImage addSubview:_label];
-        }
-        
-        
-        //下面那块注意
-//        UIImageView *bottomImage = [[UIImageView alloc] initWithFrame:CGRectMake(topImage.frame.origin.x, topImage.frame.origin.y+topImage.frame.size.height+8/2, 569/2, 470/2)];
-//        bottomImage.image = [UIImage imageNamed:@"线路查询结果1.png"];
-//        [_secondView addSubview:bottomImage];
-        
-        UILabel *aLabel = [[UILabel alloc] initWithFrame:CGRectMake(topImage.frame.origin.x, topImage.frame.origin.y+topImage.frame.size.height+8/2, 569/2, 20)];
-        aLabel.backgroundColor = [UIColor clearColor];
-        aLabel.text = @"注意：";
-        aLabel.textColor = ZhuanXB_color(0x454545);
-        aLabel.font = [UIFont systemFontOfSize:14.0];
-        [_secondView addSubview:aLabel];
-        
-        
-        vie = [[UITextView alloc] initWithFrame:CGRectMake(topImage.frame.origin.x, aLabel.frame.origin.y+aLabel.frame.size.height, 569/2, 470/2-15)];
-        vie.textColor = ZhuanXB_color(0x454545);
-        vie.backgroundColor = [UIColor clearColor];
-        vie.userInteractionEnabled = NO;
-        [_secondView addSubview:vie];
-        
-        
-        
-        _activity = [[Activity alloc] initWithActivity:_secondView];
-
-        
-    }else
-    {
-        [scrollView removeFromSuperview];
-        
-        scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(11, 11, self.view.frame.size.width-22, self.view.frame.size.height-22)];
-        
-        
-        scrollView.contentSize = CGSizeMake(self.view.frame.size.width-22, 568-30);
-        [self.view addSubview:scrollView];
-        
-        _secondView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, scrollView.frame.size.width, 568-22)];
-        _secondView.backgroundColor = [UIColor whiteColor];
-        [scrollView addSubview:_secondView];
-        
-        //地区label
-        UILabel *areaLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _secondView.frame.size.width, 25)];
-        areaLabel.textAlignment = NSTextAlignmentCenter;
-        areaLabel.textColor = ZhuanXB_color(0x454545);
-        areaLabel.font = [UIFont systemFontOfSize:16.0];
-        
-        if (self.startAreaNameString==nil) {
-            self.startAreaNameString = @"浙江省-杭州市-滨江区";
-        }else
-        {
-            
-        }
-        
-        NSArray *array1 = [self.startAreaNameString componentsSeparatedByString:@"-"];
-        NSArray *array2 = [self.endAreaNameString componentsSeparatedByString:@"-"];
-        NSString *str1 = [array1 objectAtIndex:1];
-        NSString *str2 = [array1 objectAtIndex:2];
-        NSString *allStr1 = [NSString stringWithFormat:@"%@-%@",str1,str2];
-        
-        NSString *str3 = [array2 objectAtIndex:1];
-        NSString *str4 = [array2 objectAtIndex:2];
-        NSString *allStr2 = [NSString stringWithFormat:@"%@-%@",str3,str4];
-        
-        areaLabel.text = [NSString stringWithFormat:@"%@->%@",allStr1,allStr2];
-        [_secondView addSubview:areaLabel];
-        
-        //时效label
-        _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, areaLabel.frame.origin.y+areaLabel.frame.size.height-10, _secondView.frame.size.width, 30)];
-        _timeLabel.textAlignment = NSTextAlignmentCenter;
-        _timeLabel.textColor = ZhuanXB_color(0xff5000);
-        _timeLabel.font = [UIFont systemFontOfSize:13.0];
-        //        _timeLabel.text = @"氨基酸的";
-        [_secondView addSubview:_timeLabel];
-        
-        
-        //上面那块表格
-        UIImageView *topImage = [[UIImageView alloc] initWithFrame:CGRectMake(_secondView.frame.size.width/2-569/4, _timeLabel.frame.origin.y+_timeLabel.frame.size.height-5, 569/2, 406/2)];
-        topImage.image = [UIImage imageNamed:@"线路查询结果.png"];
-        [_secondView addSubview:topImage];
-        
-        //创建八个label
-        for (int i=0; i<=7; i++) {
-            _label = [[UILabel alloc] initWithFrame:CGRectMake(_secondView.frame.size.width-15-120+8, 2+25*i, 60, 25)];
-            _label.backgroundColor= [UIColor clearColor];
-            _label.textAlignment = NSTextAlignmentCenter;
-            _label.font = [UIFont systemFontOfSize:11.0];
-            _label.textColor = ZhuanXB_color(0x454545);
-            _label.tag = i+100;
-            [topImage addSubview:_label];
-        }
-        //创建八个label
-        for (int i=0; i<=7; i++) {
-            _label = [[UILabel alloc] initWithFrame:CGRectMake(_secondView.frame.size.width-15-120+2+60, 2+25*i, 60, 25)];
-            _label.backgroundColor= [UIColor clearColor];
-            //            _label.textAlignment = NSTextAlignmentCenter;
-            _label.textColor = ZhuanXB_color(0x454545);
-            _label.font = [UIFont systemFontOfSize:11.0];
-            _label.tag = i+200;
-            [topImage addSubview:_label];
-        }
-        
-        //下面那块注意
-        //        UIImageView *bottomImage = [[UIImageView alloc] initWithFrame:CGRectMake(topImage.frame.origin.x, topImage.frame.origin.y+topImage.frame.size.height+8/2, 569/2, 470/2)];
-        //        bottomImage.image = [UIImage imageNamed:@"线路查询结果1.png"];
-        //        [_secondView addSubview:bottomImage];
-        
-        UILabel *aLabel = [[UILabel alloc] initWithFrame:CGRectMake(topImage.frame.origin.x, topImage.frame.origin.y+topImage.frame.size.height+8/2, 569/2, 20)];
-        aLabel.backgroundColor = [UIColor clearColor];
-        aLabel.text = @"注意：";
-        aLabel.textColor = ZhuanXB_color(0x454545);
-        aLabel.font = [UIFont systemFontOfSize:14.0];
-        [_secondView addSubview:aLabel];
-        
-        
-        vie = [[UITextView alloc] initWithFrame:CGRectMake(topImage.frame.origin.x, aLabel.frame.origin.y+aLabel.frame.size.height, 569/2, 470/2-15)];
-        vie.textColor = ZhuanXB_color(0x454545);
-        vie.backgroundColor = [UIColor clearColor];
-        vie.userInteractionEnabled = NO;
-        [_secondView addSubview:vie];
-
-        
-        
-        _activity = [[Activity alloc] initWithActivity:scrollView];
-        
-        
-        
-          }
-    
-    
-}
-
+//-(void)createSecondView
+//{
+//        [_secondView removeFromSuperview];
+//        _secondView = [[UIView alloc] initWithFrame:CGRectMake(11, 11, self.view.frame.size.width-22, self.view.frame.size.height-22)];
+//        //        if (IOS_VERSION>=8.0) {
+//        //            _secondView = [[UIView alloc] initWithFrame:CGRectMake(11, 11, self.view.frame.size.width-22, self.view.frame.size.height-22)];
+//        //
+//        //        }else
+//        //        {
+//        //
+//        //            _secondView = [[UIView alloc] initWithFrame:CGRectMake(11, 11, self.view.frame.size.width-22, self.view.frame.size.height-22-64)];
+//        //        }
+//        
+//        
+//        _secondView.backgroundColor = [UIColor whiteColor];
+//        [self.view addSubview:_secondView];
+//        
+////        //地区label
+////        UILabel *areaLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _secondView.frame.size.width, 25)];
+////        areaLabel.textAlignment = NSTextAlignmentCenter;
+////        areaLabel.textColor = ZhuanXB_color(0x454545);
+////        areaLabel.font = [UIFont systemFontOfSize:16.0];
+////        if (self.startAreaNameString ==nil) {
+////            self.startAreaNameString = @"浙江省-杭州市-滨江区";
+////        }else
+////        {
+////            
+////        }
+////        
+////        NSArray *array1 = [self.startAreaNameString  componentsSeparatedByString:@"-"];
+////        
+////        NSArray *array2 = [self.endAreaNameString componentsSeparatedByString:@"-"];
+////        NSString *str1 = [array1 objectAtIndex:1];
+////        NSString *str2 = [array1 objectAtIndex:2];
+////        NSString *allStr1 = [NSString stringWithFormat:@"%@-%@",str1,str2];
+////        
+////        NSString *str3 = [array2 objectAtIndex:1];
+////        NSString *str4 = [array2 objectAtIndex:2];
+////        NSString *allStr2 = [NSString stringWithFormat:@"%@-%@",str3,str4];
+////        
+////        areaLabel.text = [NSString stringWithFormat:@"%@->%@",allStr1,allStr2];
+////        [_secondView addSubview:areaLabel];
+////        
+////        //时效label
+////        _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, areaLabel.frame.origin.y+areaLabel.frame.size.height-10, _secondView.frame.size.width, 30)];
+////        _timeLabel.textAlignment = NSTextAlignmentCenter;
+////        _timeLabel.textColor = ZhuanXB_color(0xff5000);
+////        _timeLabel.font = [UIFont systemFontOfSize:13.0];
+////        [_secondView addSubview:_timeLabel];
+////        
+////        
+////        //上面那块表格
+////        UIImageView *topImage = [[UIImageView alloc] initWithFrame:CGRectMake(_secondView.frame.size.width/2-569/4, _timeLabel.frame.origin.y+_timeLabel.frame.size.height-5, 569/2, 406/2)];
+////        topImage.image = [UIImage imageNamed:@"线路查询结果.png"];
+////        [_secondView addSubview:topImage];
+////        
+////        //创建八个label
+////        for (int i=0; i<=7; i++) {
+////            _label = [[UILabel alloc] initWithFrame:CGRectMake(_secondView.frame.size.width-15-120+8, 2+25*i, 60, 25)];
+////            _label.backgroundColor= [UIColor clearColor];
+////            _label.textAlignment = NSTextAlignmentCenter;
+////            _label.font = [UIFont systemFontOfSize:11.0];
+////            _label.textColor = ZhuanXB_color(0x454545);
+////            _label.tag = i+100;
+////            [topImage addSubview:_label];
+////            
+////        }
+////        //创建八个label
+////        for (int i=0; i<=7; i++) {
+////            _label = [[UILabel alloc] initWithFrame:CGRectMake(_secondView.frame.size.width-15-120+2+60, 2+25*i, 60, 25)];
+////            _label.backgroundColor= [UIColor clearColor];
+//////                        _label.textAlignment = NSTextAlignmentCenter;
+////            _label.textColor = ZhuanXB_color(0x454545);
+////            _label.font = [UIFont systemFontOfSize:11.0];
+////            _label.tag = i+200;
+////            [topImage addSubview:_label];
+////        }
+////        
+////        
+////        //下面那块注意
+//////        UIImageView *bottomImage = [[UIImageView alloc] initWithFrame:CGRectMake(topImage.frame.origin.x, topImage.frame.origin.y+topImage.frame.size.height+8/2, 569/2, 470/2)];
+//////        bottomImage.image = [UIImage imageNamed:@"线路查询结果1.png"];
+//////        [_secondView addSubview:bottomImage];
+////        
+////        UILabel *aLabel = [[UILabel alloc] initWithFrame:CGRectMake(topImage.frame.origin.x, topImage.frame.origin.y+topImage.frame.size.height+8/2, 569/2, 20)];
+////        aLabel.backgroundColor = [UIColor clearColor];
+////        aLabel.text = @"注意：";
+////        aLabel.textColor = ZhuanXB_color(0x454545);
+////        aLabel.font = [UIFont systemFontOfSize:14.0];
+////        [_secondView addSubview:aLabel];
+////        
+////        
+////        vie = [[UITextView alloc] initWithFrame:CGRectMake(topImage.frame.origin.x, aLabel.frame.origin.y+aLabel.frame.size.height, 569/2, 470/2-15)];
+////        vie.textColor = ZhuanXB_color(0x454545);
+////        vie.backgroundColor = [UIColor clearColor];
+////        vie.userInteractionEnabled = NO;
+////        [_secondView addSubview:vie];
+////        
+////        
+////        
+////        _activity = [[Activity alloc] initWithActivity:_secondView];
+////
+//    
+//       
+//    
+//}
+//
 
 #pragma mark UITableViewDelegate
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -495,13 +393,12 @@
         }
         
         
-        [self createSecondView];
+//        [self createSecondView];
         
-        [_activity start];
+//        [_activity start];
         
         
-        [_firstView removeFromSuperview];
-        [_firstView removeFromSuperview];
+     
         [_noInfoView removeFromSuperview];
         
         //获取系统当前的时间戳
@@ -561,355 +458,364 @@
         
             NSLog(@"%@",URL);
         
+        //直接用网页打开就行了
         
-        //第二步，创建请求
         
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-        request.HTTPMethod=@"POST";//设置请求方法
+        WebViewController *webView=[[WebViewController alloc] init];
+        //        NSLog(@"%@",_htmlArray);
         
-        //第三步，连接服务器
+        webView.url=[NSString stringWithFormat:@"%@/shipper/waybill/viewroute?%@",ZhuanXB_address,param];
+        webView.name = @"线路运价";
+        [self.navigationController pushViewController:webView animated:YES];
         
-        NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
-        
-        NSLog(@"%@",connection);
-        NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-        
-        if (received==nil) {
-            [_activity stop];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"网络断了" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            
-            [self createNoView];
-            [alert show];
-        }else
-        {
-            NSError *error1=nil;
-            id result1 =[NSJSONSerialization JSONObjectWithData:received options:kNilOptions error:&error1];
+//        //第二步，创建请求
+//        
+//        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+//        request.HTTPMethod=@"GET";//设置请求方法
+//        
+//        //第三步，连接服务器
+//        
+//        NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+//        
+//        NSLog(@"%@",connection);
+//        NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+//        
+//        if (received==nil) {
+//            [_activity stop];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"网络断了" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//            
+//            [self createNoView];
+//            [alert show];
+//        }else
+//        {
+//            NSError *error1=nil;
+//            id result1 =[NSJSONSerialization JSONObjectWithData:received options:kNilOptions error:&error1];
 //            NSLog(@"%@",result1);
-            if (result1==nil) {
-                [_activity stop];
-                
-                return;
-            }else
-            {
-                if ([[result1 objectForKey:@"code"]isEqualToString:@"1"]) {//正确
-                    
-                    if ([[result1 objectForKey:@"value"] isKindOfClass:[NSNull class]]) {
-                        
-                        if (iPhone4) {
-                            [scrollView removeFromSuperview];
-                        }else
-                        {
-                            [_secondView removeFromSuperview];
-                        }
-                        
-                        [self createNoView];
-                        
-                    }else
-                    {
-                        
-                        //时效
-                        _timeLabel.text =[NSString stringWithFormat:@"时效：%@天",[[result1 objectForKey:@"value"] objectForKey:@"aging"]];
-                        NSLog(@"%@",_timeLabel.text);
-                        UILabel *label;
-                        UILabel *label1;
-
-                        
-                        vie.text = [[result1 objectForKey:@"value"] objectForKey:@"carefulNote"];
-
-//                        NSLog(@"%@",[[result1 objectForKey:@"value"] objectForKey:@"carefulNote"]);
-                        
-                        for (int i=0; i<=7; i++) {
-                            label = (UILabel *)[_secondView viewWithTag:i+100];
-                            
-                            switch (label.tag) {
-                                case 100://重货1吨以下
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice1"] isKindOfClass:[NSNull class]]) {
-                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice1"] floatValue]];
-                                        
-                                    }else
-                                    {
-                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice1"] floatValue]];
-                                        label.textColor = [UIColor grayColor];
-                                        
-                                        NSUInteger length = [label.text length];
-                                        
-                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
-                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
-                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
-                                        [label setAttributedText:attri];
-
-                                    }
-                                    
-                                    
-                                    break;
-                                case 101://重货(1-3)吨
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice2"] isKindOfClass:[NSNull class]]) {
-                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice2"] floatValue]];
-                                        
-                                    }else
-                                    {
-                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice2"] floatValue]];
-                                        label.textColor = [UIColor grayColor];
-                                        NSUInteger length = [label.text length];
-                                        
-                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
-                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
-                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
-                                        [label setAttributedText:attri];
-                                    }
-                                    break;
-                                case 102://重货(3-5)吨
-                                    
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice3"] isKindOfClass:[NSNull class]]) {
-                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice3"] floatValue]];
-                                        
-                                    }else
-                                    {
-                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice3"] floatValue]];
-                                        label.textColor = [UIColor grayColor];
-                                        NSUInteger length = [label.text length];
-                                        
-                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
-                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
-                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
-                                        [label setAttributedText:attri];
-                                    }
-
-                                    break;
-                                
-
-                                case 103://重货5吨以上
-                                    
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice4"] isKindOfClass:[NSNull class]]) {
-                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice4"] floatValue]];
-                                        
-                                    }else
-                                    {
-                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice4"] floatValue]];
-                                        label.textColor = [UIColor grayColor];
-                                        NSUInteger length = [label.text length];
-                                        
-                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
-                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
-                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
-                                        [label setAttributedText:attri];
-                                    }
-                                    break;
-                                
-
-                                case 104://抛货2方以下
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice1"] isKindOfClass:[NSNull class]]) {
-                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice1"] floatValue]];
-                                        
-                                    }else
-                                    {
-                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice1"] floatValue]];
-                                        label.textColor = [UIColor grayColor];
-                                        NSUInteger length = [label.text length];
-                                        
-                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
-                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
-                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
-                                        [label setAttributedText:attri];
-                                    }
-
-                                    
-                                    break;
-                                case 105://抛货2-6方
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice2"] isKindOfClass:[NSNull class]]) {
-                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice2"] floatValue]];
-                                        
-                                    }else
-                                    {
-                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice2"] floatValue]];
-                                        label.textColor = [UIColor grayColor];
-                                        NSUInteger length = [label.text length];
-                                        
-                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
-                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
-                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
-                                        [label setAttributedText:attri];
-                                    }
-
-                                    break;
-                                
-
-                                case 106://抛货6-15方
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice3"] isKindOfClass:[NSNull class]]) {
-                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice3"] floatValue]];
-                                        
-                                    }else
-                                    {
-                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice3"] floatValue]];
-                                        label.textColor = [UIColor grayColor];
-                                        NSUInteger length = [label.text length];
-                                        
-                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
-                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
-                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
-                                        [label setAttributedText:attri];
-                                    }
-
-                                    break;
-                                
-                                case 107://抛货15方以上
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice4"] isKindOfClass:[NSNull class]]) {
-                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice4"] floatValue]];
-                                        
-                                    }else
-                                    {
-                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice4"] floatValue]];
-                                        label.textColor = [UIColor grayColor];
-                                        NSUInteger length = [label.text length];
-                                        
-                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
-                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
-                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
-                                        [label setAttributedText:attri];
-                                    }
-
-                                    
-                                    break;
-                                    
-                                default:
-                                    break;
-                            }
-                            
-                        }
-                        
-                        for (int i=0; i<=7; i++) {
-                            label1 = (UILabel *)[_secondView viewWithTag:i+200];
-                            switch (label1.tag) {
-                                case 200://重货1吨以下
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice1"] isKindOfClass:[NSNull class]])
-                                    {
-                                        label1.text = @"";
-                                        
-                                    }else
-                                    {
-                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice1"] floatValue]];
-                                    }
-                                    
-                                    break;
-                                case 201:
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice2"] isKindOfClass:[NSNull class]])
-                                    {
-                                        label1.text = @"";
-                                        
-                                    }else
-                                    {
-                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice2"] floatValue]];
-                                    }
-                                    
-                                    break;
-                                case 202:
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice3"] isKindOfClass:[NSNull class]])
-                                    {
-                                        label1.text = @"";
-                                        
-                                    }else
-                                    {
-                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice3"] floatValue]];
-                                    }
-                                    break;
-                                case 203:
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice4"] isKindOfClass:[NSNull class]])
-                                    {
-                                        label1.text = @"";
-                                        
-                                    }else
-                                    {
-                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice4"] floatValue]];
-                                    }
-                                    break;
-                                case 204:
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice1"] isKindOfClass:[NSNull class]])
-                                    {
-                                        label1.text = @"";
-                                        
-                                    }else
-                                    {
-                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice1"] floatValue]];
-                                    }
-                                    break;
-                                case 205:
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice2"] isKindOfClass:[NSNull class]])
-                                    {
-                                        label1.text = @"";
-                                        
-                                    }else
-                                    {
-                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice2"] floatValue]];
-                                    }
-                                    break;
-                                case 206:
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice3"] isKindOfClass:[NSNull class]])
-                                    {
-                                        label1.text = @"";
-                                        
-                                    }else
-                                    {
-                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice3"] floatValue]];
-                                    }
-                                    break;
-                                case 207:
-                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice4"] isKindOfClass:[NSNull class]])
-                                    {
-                                        label1.text = @"";
-                                        
-                                    }else
-                                    {
-                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice4"] floatValue]];
-                                    }
-                                    break;
-                                    
-                                default:
-                                    break;
-                            }
-                            
-                        }
-                        
-                        
-                        
-                    }
-                    
-                    [_activity stop];
-                    
-                }else if ([[result1 objectForKey:@"code"]isEqualToString:@"0"])
-                {
-                    [_activity stop];
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"服务端异常" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                    [alert show];
-                    
-                }else if ([[result1 objectForKey:@"code"]isEqualToString:@"100"])
-                {
-                    [_activity stop];
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"非法请求" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                    [alert show];
-                    
-                    
-                }else if ([[result1 objectForKey:@"code"]isEqualToString:@"101"])
-                {
-                    [_activity stop];
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"非法请求" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                    [alert show];
-                    
-                }else if ([[result1 objectForKey:@"code"]isEqualToString:@"102"])
-                {
-                    [_activity stop];
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"用户不存在" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                    [alert show];
-                }else if ([[result1 objectForKey:@"code"]isEqualToString:@"103"])//记录不存在
-                {
-                    [_activity stop];
-                    [self createNoView];
-                }
-                
-            }
-            
-            
-        }
-
+//            if (result1==nil) {
+//                [_activity stop];
+//                
+//                return;
+//            }else
+//            {
+//                if ([[result1 objectForKey:@"code"]isEqualToString:@"1"]) {//正确
+//                    
+//                    if ([[result1 objectForKey:@"value"] isKindOfClass:[NSNull class]]) {
+//                        
+//                        if (iPhone4) {
+//                            [scrollView removeFromSuperview];
+//                        }else
+//                        {
+//                            [_secondView removeFromSuperview];
+//                        }
+//                        
+//                        [self createNoView];
+//                        
+//                    }else
+//                    {
+//                        
+//                        //时效
+//                        _timeLabel.text =[NSString stringWithFormat:@"时效：%@天",[[result1 objectForKey:@"value"] objectForKey:@"aging"]];
+//                        NSLog(@"%@",_timeLabel.text);
+//                        UILabel *label;
+//                        UILabel *label1;
+//
+//                        
+//                        vie.text = [[result1 objectForKey:@"value"] objectForKey:@"carefulNote"];
+//
+////                        NSLog(@"%@",[[result1 objectForKey:@"value"] objectForKey:@"carefulNote"]);
+//                        
+//                        for (int i=0; i<=7; i++) {
+//                            label = (UILabel *)[_secondView viewWithTag:i+100];
+//                            
+//                            switch (label.tag) {
+//                                case 100://重货1吨以下
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice1"] isKindOfClass:[NSNull class]]) {
+//                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice1"] floatValue]];
+//                                        
+//                                    }else
+//                                    {
+//                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice1"] floatValue]];
+//                                        label.textColor = [UIColor grayColor];
+//                                        
+//                                        NSUInteger length = [label.text length];
+//                                        
+//                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
+//                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
+//                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
+//                                        [label setAttributedText:attri];
+//
+//                                    }
+//                                    
+//                                    
+//                                    break;
+//                                case 101://重货(1-3)吨
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice2"] isKindOfClass:[NSNull class]]) {
+//                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice2"] floatValue]];
+//                                        
+//                                    }else
+//                                    {
+//                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice2"] floatValue]];
+//                                        label.textColor = [UIColor grayColor];
+//                                        NSUInteger length = [label.text length];
+//                                        
+//                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
+//                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
+//                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
+//                                        [label setAttributedText:attri];
+//                                    }
+//                                    break;
+//                                case 102://重货(3-5)吨
+//                                    
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice3"] isKindOfClass:[NSNull class]]) {
+//                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice3"] floatValue]];
+//                                        
+//                                    }else
+//                                    {
+//                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice3"] floatValue]];
+//                                        label.textColor = [UIColor grayColor];
+//                                        NSUInteger length = [label.text length];
+//                                        
+//                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
+//                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
+//                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
+//                                        [label setAttributedText:attri];
+//                                    }
+//
+//                                    break;
+//                                
+//
+//                                case 103://重货5吨以上
+//                                    
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice4"] isKindOfClass:[NSNull class]]) {
+//                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice4"] floatValue]];
+//                                        
+//                                    }else
+//                                    {
+//                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrice4"] floatValue]];
+//                                        label.textColor = [UIColor grayColor];
+//                                        NSUInteger length = [label.text length];
+//                                        
+//                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
+//                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
+//                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
+//                                        [label setAttributedText:attri];
+//                                    }
+//                                    break;
+//                                
+//
+//                                case 104://抛货2方以下
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice1"] isKindOfClass:[NSNull class]]) {
+//                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice1"] floatValue]];
+//                                        
+//                                    }else
+//                                    {
+//                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice1"] floatValue]];
+//                                        label.textColor = [UIColor grayColor];
+//                                        NSUInteger length = [label.text length];
+//                                        
+//                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
+//                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
+//                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
+//                                        [label setAttributedText:attri];
+//                                    }
+//
+//                                    
+//                                    break;
+//                                case 105://抛货2-6方
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice2"] isKindOfClass:[NSNull class]]) {
+//                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice2"] floatValue]];
+//                                        
+//                                    }else
+//                                    {
+//                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice2"] floatValue]];
+//                                        label.textColor = [UIColor grayColor];
+//                                        NSUInteger length = [label.text length];
+//                                        
+//                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
+//                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
+//                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
+//                                        [label setAttributedText:attri];
+//                                    }
+//
+//                                    break;
+//                                
+//
+//                                case 106://抛货6-15方
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice3"] isKindOfClass:[NSNull class]]) {
+//                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice3"] floatValue]];
+//                                        
+//                                    }else
+//                                    {
+//                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice3"] floatValue]];
+//                                        label.textColor = [UIColor grayColor];
+//                                        NSUInteger length = [label.text length];
+//                                        
+//                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
+//                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
+//                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
+//                                        [label setAttributedText:attri];
+//                                    }
+//
+//                                    break;
+//                                
+//                                case 107://抛货15方以上
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice4"] isKindOfClass:[NSNull class]]) {
+//                                        label.text = [NSString stringWithFormat:@"%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice4"] floatValue]];
+//                                        
+//                                    }else
+//                                    {
+//                                        label.text = [NSString stringWithFormat:@"原：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrice4"] floatValue]];
+//                                        label.textColor = [UIColor grayColor];
+//                                        NSUInteger length = [label.text length];
+//                                        
+//                                        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:label.text];
+//                                        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
+//                                        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, length)];
+//                                        [label setAttributedText:attri];
+//                                    }
+//
+//                                    
+//                                    break;
+//                                    
+//                                default:
+//                                    break;
+//                            }
+//                            
+//                        }
+//                        
+//                        for (int i=0; i<=7; i++) {
+//                            label1 = (UILabel *)[_secondView viewWithTag:i+200];
+//                            switch (label1.tag) {
+//                                case 200://重货1吨以下
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice1"] isKindOfClass:[NSNull class]])
+//                                    {
+//                                        label1.text = @"";
+//                                        
+//                                    }else
+//                                    {
+//                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice1"] floatValue]];
+//                                    }
+//                                    
+//                                    break;
+//                                case 201:
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice2"] isKindOfClass:[NSNull class]])
+//                                    {
+//                                        label1.text = @"";
+//                                        
+//                                    }else
+//                                    {
+//                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice2"] floatValue]];
+//                                    }
+//                                    
+//                                    break;
+//                                case 202:
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice3"] isKindOfClass:[NSNull class]])
+//                                    {
+//                                        label1.text = @"";
+//                                        
+//                                    }else
+//                                    {
+//                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice3"] floatValue]];
+//                                    }
+//                                    break;
+//                                case 203:
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice4"] isKindOfClass:[NSNull class]])
+//                                    {
+//                                        label1.text = @"";
+//                                        
+//                                    }else
+//                                    {
+//                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"heavyPrePrice4"] floatValue]];
+//                                    }
+//                                    break;
+//                                case 204:
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice1"] isKindOfClass:[NSNull class]])
+//                                    {
+//                                        label1.text = @"";
+//                                        
+//                                    }else
+//                                    {
+//                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice1"] floatValue]];
+//                                    }
+//                                    break;
+//                                case 205:
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice2"] isKindOfClass:[NSNull class]])
+//                                    {
+//                                        label1.text = @"";
+//                                        
+//                                    }else
+//                                    {
+//                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice2"] floatValue]];
+//                                    }
+//                                    break;
+//                                case 206:
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice3"] isKindOfClass:[NSNull class]])
+//                                    {
+//                                        label1.text = @"";
+//                                        
+//                                    }else
+//                                    {
+//                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice3"] floatValue]];
+//                                    }
+//                                    break;
+//                                case 207:
+//                                    if ([[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice4"] isKindOfClass:[NSNull class]])
+//                                    {
+//                                        label1.text = @"";
+//                                        
+//                                    }else
+//                                    {
+//                                        label1.text = [NSString stringWithFormat:@"现：%.2f",[[[result1 objectForKey:@"value"] objectForKey:@"lightPrePrice4"] floatValue]];
+//                                    }
+//                                    break;
+//                                    
+//                                default:
+//                                    break;
+//                            }
+//                            
+//                        }
+//                        
+//                        
+//                        
+//                    }
+//                    
+//                    [_activity stop];
+//                    
+//                }else if ([[result1 objectForKey:@"code"]isEqualToString:@"0"])
+//                {
+//                    [_activity stop];
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"服务端异常" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                    [alert show];
+//                    
+//                }else if ([[result1 objectForKey:@"code"]isEqualToString:@"100"])
+//                {
+//                    [_activity stop];
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"非法请求" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                    [alert show];
+//                    
+//                    
+//                }else if ([[result1 objectForKey:@"code"]isEqualToString:@"101"])
+//                {
+//                    [_activity stop];
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"非法请求" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                    [alert show];
+//                    
+//                }else if ([[result1 objectForKey:@"code"]isEqualToString:@"102"])
+//                {
+//                    [_activity stop];
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"用户不存在" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                    [alert show];
+//                }else if ([[result1 objectForKey:@"code"]isEqualToString:@"103"])//记录不存在
+//                {
+//                    [_activity stop];
+//                    [self createNoView];
+//                }
+//                
+//            }
+//            
+//            
+//        }
+//
 
     }
     

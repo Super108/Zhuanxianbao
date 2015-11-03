@@ -63,7 +63,7 @@
 
 
 //外网服务器地址
-#define ZhuanXB_address @"http://222.46.22.220:9104/ZXBMobileEx"
+#define ZhuanXB_address @"http://122.225.192.50:9100/ZXBMobileEx"
 
 //正式服务器地址
 //#define ZhuanXB_address @"http://huozhuapp.56123.com"
