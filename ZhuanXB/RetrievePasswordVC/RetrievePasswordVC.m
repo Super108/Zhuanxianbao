@@ -18,7 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"重置密码";
+    self.title = @"找回密码";
     
     [self initRightNavBarItem];
     
@@ -158,7 +158,7 @@
             if ([[result1 objectForKey:@"code"]isEqualToString:@"1"]) {//正确
                 
                 [self setHub:@"重置密码成功"];
-                
+                [self.navigationController popViewControllerAnimated:YES];
                 
             }else if ([[result1 objectForKey:@"code"]isEqualToString:@"-1"])
             {

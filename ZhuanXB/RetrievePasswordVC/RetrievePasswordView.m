@@ -16,15 +16,15 @@
 #define kInputViewWidth         _viewFrame.size.width - 22
 #define kInputViewHeight        90
 
-#define kgetCheckCodeBtnMarginLeft (kInputViewWidth-10)*3/5
-#define kgetCheckCodeBtnMarginTop       kInputViewHeight/2+2.5
-#define kgetCheckCodeBtnWidth         (kInputViewWidth-10)*2/5
-#define kgetCheckCodeBtnHeight        40
+#define kgetCheckCodeBtnMarginLeft (kInputViewWidth-10)*2/5
+#define kgetCheckCodeBtnMarginTop       kInputViewHeight/2+5
+#define kgetCheckCodeBtnWidth         (kInputViewWidth-10)*3/5-10
+#define kgetCheckCodeBtnHeight        35
 
 #define kForgetPwdBtnMarginLeft    11
-#define kForgetPwdBtnMarginTop     185+100
+#define kForgetPwdBtnMarginTop     185+70
 #define kForgetPwdBtnWidth         _viewFrame.size.width-22
-#define kForgetPwdBtnHeight        40
+#define kForgetPwdBtnHeight        45
 
 
 
@@ -91,17 +91,17 @@
     [passwordView addSubview:userPwdLab];
     
     UILabel * confirmUserPwdLab = [[UILabel alloc] initWithFrame:CGRectMake(0, kInputViewHeight / 2 , kSpace+30, kInputViewHeight/2)];
-    confirmUserPwdLab.backgroundColor = [UIColor blueColor];
+//    confirmUserPwdLab.backgroundColor = [UIColor blueColor];
     confirmUserPwdLab.textAlignment = NSTextAlignmentRight;
     confirmUserPwdLab.text =  @"确认密码：";
     [passwordView addSubview:confirmUserPwdLab];
     
     _nameField = [[UITextField alloc]initWithFrame:CGRectMake(kSpace, 0, kInputViewWidth - kSpace, kInputViewHeight/2)];
-    _nameField.backgroundColor=[UIColor yellowColor];
+//    _nameField.backgroundColor=[UIColor yellowColor];
     _nameField.placeholder = @"请输入11位手机号";
     [inputView addSubview:_nameField];
     
-    _checkCodeField = [[UITextField alloc]initWithFrame:CGRectMake(10,  kInputViewHeight/2, (inputView.frame.size.width-10)*3/5, kInputViewHeight/2)];
+    _checkCodeField = [[UITextField alloc]initWithFrame:CGRectMake(10,  kInputViewHeight/2, (inputView.frame.size.width-10)*2/5, kInputViewHeight/2)];
     _checkCodeField.placeholder = @"请输入验证码";
     [inputView addSubview:_checkCodeField];
     
@@ -110,12 +110,12 @@
     
     
     _pwdField = [[UITextField alloc]initWithFrame:CGRectMake(kSpace+25, 0 , kInputViewWidth - kSpace-25, kInputViewHeight/2)];
-    _pwdField.backgroundColor=[UIColor redColor];
+//    _pwdField.backgroundColor=[UIColor redColor];
     _pwdField.secureTextEntry = YES;
 //    _pwdField.placeholder = @"4 - 30位数字或字母";
     [passwordView addSubview:_pwdField];
     _confirmPWDField = [[UITextField alloc]initWithFrame:CGRectMake(kSpace+30, kInputViewHeight / 2, kInputViewWidth - kSpace-30, kInputViewHeight/2)];
-    _confirmPWDField.backgroundColor=[UIColor greenColor];
+//    _confirmPWDField.backgroundColor=[UIColor greenColor];
     _confirmPWDField.secureTextEntry = YES;
 //    _confirmPWDField.placeholder = @"4 - 30位数字或字母";
     [passwordView addSubview:_confirmPWDField];
@@ -123,7 +123,11 @@
     //获取验证码
    getCheckCodeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     getCheckCodeBtn.frame = CGRectMake(kgetCheckCodeBtnMarginLeft+10, kgetCheckCodeBtnMarginTop, kgetCheckCodeBtnWidth, kgetCheckCodeBtnHeight);
-    getCheckCodeBtn.backgroundColor=[UIColor redColor];
+    getCheckCodeBtn.layer.cornerRadius=2;
+    getCheckCodeBtn.clipsToBounds=YES;
+    getCheckCodeBtn.layer.borderColor=[UIColor lightGrayColor].CGColor;
+    getCheckCodeBtn.layer.borderWidth=0.2;
+    getCheckCodeBtn.backgroundColor=RGBA(70,174,214,1);
 //    [getCheckCodeBtn setBackgroundImage:[UIImage imageNamed:@"线路查询按钮.png"] forState:UIControlStateNormal];
     [getCheckCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
     [getCheckCodeBtn addTarget:self action:@selector(sendMessageToMobile:) forControlEvents:UIControlEventTouchUpInside];
@@ -131,9 +135,11 @@
     //重置密码
     UIButton *submitComfirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     submitComfirmBtn.frame = CGRectMake(kForgetPwdBtnMarginLeft, kForgetPwdBtnMarginTop, kForgetPwdBtnWidth, kForgetPwdBtnHeight);
-    submitComfirmBtn.backgroundColor=[UIColor blueColor];
+    submitComfirmBtn.backgroundColor=RGBA(70,174,214,1);
+    submitComfirmBtn.layer.cornerRadius=2;
+    submitComfirmBtn.clipsToBounds=YES;
     [submitComfirmBtn setTitle:@"提交" forState:UIControlStateNormal];
-    [submitComfirmBtn setTitleColor:RGBA(182, 182, 182, 1) forState:UIControlStateNormal];
+    [submitComfirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //    submitComfirmBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [submitComfirmBtn addTarget:self action:@selector(submitFindLostPassword) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:submitComfirmBtn];
@@ -283,7 +289,7 @@
     if (getCheckCodeBtn.tag<=0) {
         getCheckCodeBtn.userInteractionEnabled=YES;
         getCheckCodeBtn.selected=NO;
-        getCheckCodeBtn.backgroundColor=[UIColor redColor];
+        getCheckCodeBtn.backgroundColor=RGBA(70,174,214,1);
         [_timerCheck invalidate];
         _timerCheck=nil;
     }
@@ -326,7 +332,7 @@
         [self.delegate navToForgetVC];
     }
 }
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+-(void)touchesBegan:(UITouch  *)touches withEvent:(UIEvent *)event{
     [self endEditing:YES];
 }
 @end
