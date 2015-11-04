@@ -9,6 +9,8 @@
 #import "LoginViewController.h"
 #import "ZSAppServer.h"
 #import "RetrievePasswordVC.h"
+#import "SendProductVC.h"
+#import "PersonalCenterVC.h"
 @interface LoginViewController ()
 
 @end
@@ -164,6 +166,16 @@
         {
              if ([[result1 objectForKey:@"code"]isEqualToString:@"1"]) {//正确
                  
+                 
+                 if(self.loginType==LoginTypePersonalCenterVC){
+                     PersonalCenterVC *personVC=[[PersonalCenterVC alloc] init];
+                     [self.navigationController pushViewController:personVC animated:YES];
+                 }
+                 else if(self.loginType==LoginTypeSendProductVC)
+                 {
+                     SendProductVC * sendProVC = [[SendProductVC alloc] init];
+                     [self.navigationController pushViewController:sendProVC animated:YES];
+                 }
                  NSLog(@"密码正确进入个人中心页面");
                  if([DPUtil isNotNull:[result1 objectForKey:@"value"]]){
                      NSDictionary * userDic = [result1 objectForKey:@"value"];

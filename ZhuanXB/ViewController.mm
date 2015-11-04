@@ -18,7 +18,7 @@
 #import "LoginViewController.h"
 #import "SendProductVC.h"
 #import "ZSAppServer.h"
-
+#import "PersonalCenterVC.h"
 @interface ViewController ()
 
 @end
@@ -183,18 +183,22 @@
                 [self.navigationController pushViewController:sendProVC animated:YES];
             }else{
                 LoginViewController * loginVC = [[LoginViewController alloc]init];
+                loginVC.loginType=LoginTypeSendProductVC;
                 [self.navigationController pushViewController:loginVC animated:YES];
             }
         }
             break;
-            case 666:
+            case 666://个人中心
         {
             if([self judgeTimeIsTimeOut]&&[DPUtil isNotNull:[DPUtil getLoginToken]]){
                 NSLog(@"登录成功  进入个人中心");
-                LoginViewController * loginVC = [[LoginViewController alloc]init];
-                [self.navigationController pushViewController:loginVC animated:YES];
+                PersonalCenterVC *personVC=[[PersonalCenterVC alloc] init];
+                [self.navigationController pushViewController:personVC animated:YES];
+//                LoginViewController * loginVC = [[LoginViewController alloc]init];
+//                [self.navigationController pushViewController:loginVC animated:YES];
             }else{
                 LoginViewController * loginVC = [[LoginViewController alloc]init];
+                loginVC.loginType=LoginTypePersonalCenterVC;
                 [self.navigationController pushViewController:loginVC animated:YES];
             }
         }

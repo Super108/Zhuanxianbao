@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0494C0A61BE8FC1500DA91A4 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0494C0A51BE8FC1500DA91A4 /* libsqlite3.0.tbd */; };
 		04A617CD1BDD077000ACBB9D /* RetrievePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A617CC1BDD077000ACBB9D /* RetrievePasswordVC.m */; };
 		04A9671D1BE6211E000456C3 /* RetrievePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9671C1BE6211E000456C3 /* RetrievePasswordView.m */; };
-		04F5A3F91BE9000500B6424C /* PersonalCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5A3F81BE9000500B6424C /* PersonalCenterVC.m */; };
 		6221439E1B2D3D7A0068FEBB /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 6221439D1B2D3D7A0068FEBB /* NSString+MD5.m */; };
 		626F1F8E1B7225AE005A6BED /* -5.png in Resources */ = {isa = PBXBuildFile; fileRef = 626F1F851B7225AE005A6BED /* -5.png */; };
 		626F1F8F1B7225AE005A6BED /* 0灰.png in Resources */ = {isa = PBXBuildFile; fileRef = 626F1F861B7225AE005A6BED /* 0灰.png */; };
@@ -76,6 +74,7 @@
 		9846769C1BDA8C9D00F76D6D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9846769B1BDA8C9D00F76D6D /* LoginViewController.m */; };
 		984676A31BDA8D0A00F76D6D /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 984676A21BDA8D0A00F76D6D /* LoginView.m */; };
 		984E67A91BE7B91C0075E9BB /* SendProductVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 984E67A81BE7B91C0075E9BB /* SendProductVC.m */; };
+		988B157A1BD49EC1003745BD /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 988B15791BD49EC1003745BD /* libsqlite3.0.tbd */; };
 		9898CC1D1BD79CF500651732 /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC0A1BD79CF500651732 /* NSData+MKBase64.m */; };
 		9898CC1E1BD79CF500651732 /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC0C1BD79CF500651732 /* NSDate+RFC1123.m */; };
 		9898CC1F1BD79CF500651732 /* NSDictionary+RequestEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 9898CC0E1BD79CF500651732 /* NSDictionary+RequestEncoding.m */; };
@@ -147,13 +146,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0494C0A51BE8FC1500DA91A4 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		04A617CB1BDD077000ACBB9D /* RetrievePasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RetrievePasswordVC.h; sourceTree = "<group>"; };
 		04A617CC1BDD077000ACBB9D /* RetrievePasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetrievePasswordVC.m; sourceTree = "<group>"; };
 		04A9671B1BE6211E000456C3 /* RetrievePasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RetrievePasswordView.h; sourceTree = "<group>"; };
 		04A9671C1BE6211E000456C3 /* RetrievePasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetrievePasswordView.m; sourceTree = "<group>"; };
-		04F5A3F71BE9000500B6424C /* PersonalCenterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterVC.h; sourceTree = "<group>"; };
-		04F5A3F81BE9000500B6424C /* PersonalCenterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterVC.m; sourceTree = "<group>"; };
 		6221439C1B2D3D7A0068FEBB /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		6221439D1B2D3D7A0068FEBB /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		626F1F851B7225AE005A6BED /* -5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "-5.png"; sourceTree = "<group>"; };
@@ -223,6 +219,7 @@
 		984676A21BDA8D0A00F76D6D /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginView.m; path = User/LoginView.m; sourceTree = "<group>"; };
 		984E67A41BE7B8AA0075E9BB /* SendProductVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendProductVC.h; path = SendProduct/SendProductVC.h; sourceTree = "<group>"; };
 		984E67A81BE7B91C0075E9BB /* SendProductVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendProductVC.m; path = SendProduct/SendProductVC.m; sourceTree = "<group>"; };
+		988B15791BD49EC1003745BD /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		9898CC091BD79CF500651732 /* NSData+MKBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MKBase64.h"; sourceTree = "<group>"; };
 		9898CC0A1BD79CF500651732 /* NSData+MKBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MKBase64.m"; sourceTree = "<group>"; };
 		9898CC0B1BD79CF500651732 /* NSDate+RFC1123.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RFC1123.h"; sourceTree = "<group>"; };
@@ -336,7 +333,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0494C0A61BE8FC1500DA91A4 /* libsqlite3.0.tbd in Frameworks */,
+				988B157A1BD49EC1003745BD /* libsqlite3.0.tbd in Frameworks */,
 				EF47B84A1B282D9000045F0D /* Security.framework in Frameworks */,
 				EF47B8481B282D8600045F0D /* CoreGraphics.framework in Frameworks */,
 				EF47B8461B282D7C00045F0D /* SystemConfiguration.framework in Frameworks */,
@@ -486,8 +483,6 @@
 				9846769B1BDA8C9D00F76D6D /* LoginViewController.m */,
 				984676A11BDA8D0A00F76D6D /* LoginView.h */,
 				984676A21BDA8D0A00F76D6D /* LoginView.m */,
-				04F5A3F71BE9000500B6424C /* PersonalCenterVC.h */,
-				04F5A3F81BE9000500B6424C /* PersonalCenterVC.m */,
 			);
 			name = UserCenter;
 			sourceTree = "<group>";
@@ -560,7 +555,7 @@
 		EF47B80B1B28281B00045F0D = {
 			isa = PBXGroup;
 			children = (
-				0494C0A51BE8FC1500DA91A4 /* libsqlite3.0.tbd */,
+				988B15791BD49EC1003745BD /* libsqlite3.0.tbd */,
 				62F7A3911B464DAF00BC46C3 /* iamges */,
 				EF459F3B1B32B55900806EA1 /* zxb_area.db */,
 				EF6AD38C1B2E9F6A00847E22 /* FMDB */,
@@ -805,7 +800,6 @@
 				TargetAttributes = {
 					EF47B8131B28281B00045F0D = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = S265FZXSFD;
 					};
 					EF47B82C1B28281B00045F0D = {
 						CreatedOnToolsVersion = 6.3;
@@ -972,7 +966,6 @@
 				EF47B8861B29283700045F0D /* InquireViewController.m in Sources */,
 				9898CC221BD79CF500651732 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				EF47B8621B28357700045F0D /* MBProgressHUD.m in Sources */,
-				04F5A3F91BE9000500B6424C /* PersonalCenterVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1033,8 +1026,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: xing wen (VFNUGHVUZ9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xing wen (VFNUGHVUZ9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -1080,8 +1073,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: xing wen (VFNUGHVUZ9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xing wen (VFNUGHVUZ9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -1110,7 +1103,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jinping Yang (ZD9TDUSDT4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jinping Yang (ZD9TDUSDT4)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1133,7 +1126,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jinping Yang (ZD9TDUSDT4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jinping Yang (ZD9TDUSDT4)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

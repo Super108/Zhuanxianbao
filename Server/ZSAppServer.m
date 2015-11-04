@@ -26,6 +26,7 @@
                      withPassword:(NSString *)password
                  withValidateCode:(NSString *)code
                           success:(ServerResponseSuccessBlock)successBlock
+
                              fail:(ServerResponseFailBlock)failBlock
                             error:(MKNKErrorBlock)errorBlock
 {
