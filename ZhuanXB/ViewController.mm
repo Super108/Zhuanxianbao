@@ -129,14 +129,12 @@
     NSString * str = [formatter stringFromDate:[NSDate date]];
     
     NSString * serverTime = [DPUtil getExpireTime];
-    [serverTime stringByReplacingOccurrencesOfString:@"-" withString:@" "];
-    [serverTime stringByReplacingOccurrencesOfString:@":" withString:@" "];
-    [serverTime stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString * serverTimeLongValue = [[[serverTime stringByReplacingOccurrencesOfString:@"-" withString:@" "] stringByReplacingOccurrencesOfString:@":" withString:@" "] stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     NSLog(@"%@ >>>>   %lld",str,[str longLongValue]);
-    NSLog(@"%@ >>>>   %lld",serverTime,[serverTime longLongValue]);
+    NSLog(@"%@ >>>>   %lld",serverTime,[serverTimeLongValue longLongValue]);
     
-    if ([str longLongValue] > [serverTime longLongValue]) {
+    if ([str longLongValue] < [serverTimeLongValue longLongValue]) {
         return YES;
     }
     return NO;
