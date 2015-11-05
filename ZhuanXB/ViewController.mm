@@ -19,6 +19,7 @@
 #import "SendProductVC.h"
 #import "ZSAppServer.h"
 #import "PersonalCenterVC.h"
+#import "ValuationToolsVC.h"
 @interface ViewController ()
 
 @end
@@ -72,35 +73,35 @@
         scrollView.scrollEnabled = YES;
     }
     UIImageView *btnView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-22, 680/2)];
-    btnView.image = [UIImage imageNamed:@"首页按钮.png"];
+    btnView.image = [UIImage imageNamed:@"首页按钮iosNew.png"];
     btnView.userInteractionEnabled = YES;
     [scrollView addSubview:btnView];
     //线路运价
     UIButton *topBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
     topBtn1.backgroundColor =[UIColor clearColor];
     topBtn1.tag = 111;
-    topBtn1.frame = CGRectMake(0, 0, 298/2, 90);
+    topBtn1.frame = CGRectMake(0, 0, 298/2-2, 80+1);
     [topBtn1 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [btnView addSubview:topBtn1];
     // 运单查询
     UIButton *topBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
     topBtn2.backgroundColor =[UIColor clearColor];
     topBtn2.tag = 222;
-    topBtn2.frame = CGRectMake(topBtn1.frame.size.width+10/2-2, 0, 296/2, 150);
+    topBtn2.frame = CGRectMake(topBtn1.frame.size.width+10/2, 0, 296/2-2, 80+1);
     [topBtn2 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [btnView addSubview:topBtn2];
     //专线宝网点
     UIButton *topBtn3 = [UIButton buttonWithType:UIButtonTypeCustom];
     topBtn3.backgroundColor =[UIColor clearColor];
     topBtn3.tag = 333;
-    topBtn3.frame = CGRectMake(topBtn2.frame.origin.x, topBtn2.frame.size.height+13/2, topBtn1.frame.size.width, 90);
+    topBtn3.frame = CGRectMake(topBtn2.frame.origin.x, topBtn2.frame.size.height+13/2, topBtn1.frame.size.width, 81);
     [topBtn3 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [btnView addSubview:topBtn3];
     //        我要发货
     UIButton *sendProductBut = [UIButton buttonWithType:UIButtonTypeCustom];
     sendProductBut.backgroundColor =[UIColor clearColor];
     sendProductBut.tag = 555;
-    sendProductBut.frame = CGRectMake(topBtn1.frame.origin.x, topBtn1.frame.size.height+13/2, topBtn1.frame.size.width, 150);
+    sendProductBut.frame = CGRectMake(topBtn1.frame.origin.x, topBtn1.frame.size.height+13/2, topBtn1.frame.size.width, 150+15+2);
     [sendProductBut addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [btnView addSubview:sendProductBut];
     
@@ -108,7 +109,7 @@
     UIButton *topBtn4 = [UIButton buttonWithType:UIButtonTypeCustom];
     topBtn4.backgroundColor =[UIColor clearColor];
     topBtn4.tag = 444;
-    topBtn4.frame = CGRectMake(sendProductBut.frame.origin.x,sendProductBut.frame.origin.y + sendProductBut.frame.size.height + 6, topBtn1.frame.size.width, 90);
+    topBtn4.frame = CGRectMake(sendProductBut.frame.origin.x,sendProductBut.frame.origin.y + sendProductBut.frame.size.height + 5, topBtn1.frame.size.width, 81);
     [topBtn4 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [btnView addSubview:topBtn4];
     
@@ -116,10 +117,17 @@
     UIButton *topBtn5 = [UIButton buttonWithType:UIButtonTypeCustom];
     topBtn5.backgroundColor =[UIColor clearColor];
     topBtn5.tag = 666;
-    topBtn5.frame = CGRectMake(topBtn3.frame.origin.x-2, topBtn3.frame.origin.y + topBtn3.frame.size.height + 6, topBtn2.frame.size.width, 90);
+    topBtn5.frame = CGRectMake(topBtn3.frame.origin.x, topBtn3.frame.origin.y + topBtn3.frame.size.height + 5, topBtn2.frame.size.width, 81);
     [topBtn5 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [btnView addSubview:topBtn5];
     
+    //估价工具
+    UIButton *topBtn6 = [UIButton buttonWithType:UIButtonTypeCustom];
+    topBtn6.backgroundColor =[UIColor clearColor];
+    topBtn6.tag = 777;
+    topBtn6.frame = CGRectMake(topBtn3.frame.origin.x, topBtn5.frame.origin.y + topBtn5.frame.size.height + 5, topBtn2.frame.size.width, 81);
+    [topBtn6 addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [btnView addSubview:topBtn6];
 }
 -(BOOL)judgeTimeIsTimeOut
 {
@@ -203,6 +211,16 @@
             }
         }
 
+            break;
+        case 777://个人中心
+        {
+                            NSLog(@"估价工具");
+                ValuationToolsVC * valuationVC=[[ValuationToolsVC alloc] init];
+                [self.navigationController pushViewController:valuationVC animated:YES];
+                //                LoginViewController * loginVC = [[LoginViewController alloc]init];
+                //                [self.navigationController pushViewController:loginVC animated:YES];
+                   }
+            
             break;
             
         default:

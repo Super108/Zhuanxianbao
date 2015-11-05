@@ -11,6 +11,8 @@
 		04A617CD1BDD077000ACBB9D /* RetrievePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A617CC1BDD077000ACBB9D /* RetrievePasswordVC.m */; };
 		04A9671D1BE6211E000456C3 /* RetrievePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9671C1BE6211E000456C3 /* RetrievePasswordView.m */; };
 		04F5A3F91BE9000500B6424C /* PersonalCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5A3F81BE9000500B6424C /* PersonalCenterVC.m */; };
+		04F5A3FC1BEB569300B6424C /* ValuationToolsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5A3FB1BEB569300B6424C /* ValuationToolsVC.m */; settings = {ASSET_TAGS = (); }; };
+		04F5A3FE1BEB572400B6424C /* 首页按钮iosNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F5A3FD1BEB572400B6424C /* 首页按钮iosNew@2x.png */; settings = {ASSET_TAGS = (); }; };
 		6221439E1B2D3D7A0068FEBB /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 6221439D1B2D3D7A0068FEBB /* NSString+MD5.m */; };
 		626F1F8E1B7225AE005A6BED /* -5.png in Resources */ = {isa = PBXBuildFile; fileRef = 626F1F851B7225AE005A6BED /* -5.png */; };
 		626F1F8F1B7225AE005A6BED /* 0灰.png in Resources */ = {isa = PBXBuildFile; fileRef = 626F1F861B7225AE005A6BED /* 0灰.png */; };
@@ -154,6 +156,9 @@
 		04A9671C1BE6211E000456C3 /* RetrievePasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetrievePasswordView.m; sourceTree = "<group>"; };
 		04F5A3F71BE9000500B6424C /* PersonalCenterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterVC.h; sourceTree = "<group>"; };
 		04F5A3F81BE9000500B6424C /* PersonalCenterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterVC.m; sourceTree = "<group>"; };
+		04F5A3FA1BEB569300B6424C /* ValuationToolsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValuationToolsVC.h; sourceTree = "<group>"; };
+		04F5A3FB1BEB569300B6424C /* ValuationToolsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValuationToolsVC.m; sourceTree = "<group>"; };
+		04F5A3FD1BEB572400B6424C /* 首页按钮iosNew@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页按钮iosNew@2x.png"; sourceTree = "<group>"; };
 		6221439C1B2D3D7A0068FEBB /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		6221439D1B2D3D7A0068FEBB /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		626F1F851B7225AE005A6BED /* -5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "-5.png"; sourceTree = "<group>"; };
@@ -396,6 +401,7 @@
 		62F7A3911B464DAF00BC46C3 /* iamges */ = {
 			isa = PBXGroup;
 			children = (
+				04F5A3FD1BEB572400B6424C /* 首页按钮iosNew@2x.png */,
 				EF069A6C1BE8599200643EB7 /* 登录按钮.png */,
 				98FBBD721BE0C322001E9BC9 /* 扫描查单@2x.png */,
 				626F1F841B7225AE005A6BED /* 物流图标 */,
@@ -497,6 +503,8 @@
 			children = (
 				984E67A41BE7B8AA0075E9BB /* SendProductVC.h */,
 				984E67A81BE7B91C0075E9BB /* SendProductVC.m */,
+				04F5A3FA1BEB569300B6424C /* ValuationToolsVC.h */,
+				04F5A3FB1BEB569300B6424C /* ValuationToolsVC.m */,
 			);
 			name = SendProduct;
 			sourceTree = "<group>";
@@ -899,6 +907,7 @@
 				62F7A3D01B464DAF00BC46C3 /* Icon-76.png in Resources */,
 				62F7A3D41B464DAF00BC46C3 /* Icon-Small-40@3x.png in Resources */,
 				62F7A3CE1B464DAF00BC46C3 /* Icon-60@2x.png in Resources */,
+				04F5A3FE1BEB572400B6424C /* 首页按钮iosNew@2x.png in Resources */,
 				EF47B8731B29123B00045F0D /* HZAreaPickerView.xib in Resources */,
 				62F7A3DC1B464DAF00BC46C3 /* Default@2x.png in Resources */,
 				62F7A3F61B464DAF00BC46C3 /* 运单列表_无数据@2x.png in Resources */,
@@ -965,6 +974,7 @@
 				EF6AD39B1B2E9F6A00847E22 /* FMResultSet.m in Sources */,
 				04A617CD1BDD077000ACBB9D /* RetrievePasswordVC.m in Sources */,
 				9898CC1E1BD79CF500651732 /* NSDate+RFC1123.m in Sources */,
+				04F5A3FC1BEB569300B6424C /* ValuationToolsVC.m in Sources */,
 				EF47B8631B28357700045F0D /* NavCustom.m in Sources */,
 				EF82D9B91B30184B0016518D /* cityModel.m in Sources */,
 				EFF5BEF51B2AD8D800184D5C /* BtnTableViewCell.m in Sources */,
@@ -1058,7 +1068,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "f9c10694-f42a-4e18-b871-9a704e6a1143";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1099,7 +1109,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "f9c10694-f42a-4e18-b871-9a704e6a1143";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1110,8 +1120,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jinping Yang (ZD9TDUSDT4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: xing wen (VFNUGHVUZ9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xing wen (VFNUGHVUZ9)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1122,9 +1132,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ZhuanXB.wangkuo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiemi.jiemi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "90cf274e-355f-4e0c-b1e9-e422af9840ab";
+				PROVISIONING_PROFILE = "f9c10694-f42a-4e18-b871-9a704e6a1143";
 			};
 			name = Debug;
 		};
@@ -1133,8 +1143,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jinping Yang (ZD9TDUSDT4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: xing wen (VFNUGHVUZ9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xing wen (VFNUGHVUZ9)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1145,9 +1155,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ZhuanXB.wangkuo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiemi.jiemi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "90cf274e-355f-4e0c-b1e9-e422af9840ab";
+				PROVISIONING_PROFILE = "f9c10694-f42a-4e18-b871-9a704e6a1143";
 			};
 			name = Release;
 		};
