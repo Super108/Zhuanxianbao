@@ -8,7 +8,7 @@
 
 #import "SendProductVC.h"
 
-@interface SendProductVC ()
+@interface SendProductVC ()<UIWebViewDelegate>
 
 @end
 
@@ -19,14 +19,9 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.navigationController.navigationBarHidden=YES;
-    
     NSURL *cookieHost = [NSURL URLWithString:@"http://122.225.192.50:9100/ZXBMobileEx/web/trade/goods"];
-    
-#warning todo  自己设置的过期时间 会变成当天0点。
-    
 //    [DPUtil setExpireTime:@"2015-11-03 22:51:38 +0000"];
-    [DPUtil setExpireTime:@"2015-11-06 10:12:23"];
+//    [DPUtil setExpireTime:@"2015-11-06 10:12:23"];
 //    [DPUtil setLoginToken:@"YTYwYWQ1NWU0MWQ3N2U1OGI0ZTEzMmMzZGVhZDdhMzgwNTM1MzcyNGVkMzBjMWRkYWY5NDMzMWYyODU4MWViMGI3NjAzN2I1YmI3NWE0OWE"];
     
     // 设定 cookie
@@ -44,37 +39,24 @@
 
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:cookieHost];
     
-    UIWebView * sendProductWebView = [[UIWebView alloc]initWithFrame:self.view.frame];
+    UIWebView * sendProductWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64)];
+    sendProductWebView.delegate = self;
     [self.view addSubview:sendProductWebView];
     [sendProductWebView loadRequest:requestObj];
     
     NSHTTPCookieStorage *sharedHTTPCookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     
     NSArray *cookies= [sharedHTTPCookieStorage cookiesForURL:cookieHost];
-    NSLog(@">>>>   %@",cookies);
     NSEnumerator *enumerator = [cookies objectEnumerator];
-    NSHTTPCookie *cookie1;
     while (cookie = [enumerator nextObject]) {
         NSLog(@"COOKIE{name: %@, value: %@  %@}", [cookie name], [cookie value],cookie.expiresDate);
     }
-    
-    
-    
-    
-    
-    
-
-    UIButton * backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setFrame:CGRectMake(0, 20, 44, 44)];
-    [backButton setImage:[UIImage imageNamed:@"640返回"] forState:UIControlStateNormal];
-    [self.view addSubview:backButton];
-    [backButton addTarget:self action:@selector(backToHomeView) forControlEvents:UIControlEventTouchUpInside];
-
 }
 
--(void)backToHomeView
+- (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    NSString * tit = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    self.title  = tit;
 }
 
 - (void)didReceiveMemoryWarning {
