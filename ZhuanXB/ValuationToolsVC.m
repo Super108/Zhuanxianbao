@@ -1,29 +1,26 @@
 //
-//  PersonalCenterVC.m
+//  ValuationToolsVC.m
 //  ZhuanXB
 //
-//  Created by mac on 15/11/3.
+//  Created by mac on 15/11/5.
 //  Copyright © 2015年 kang_dong. All rights reserved.
 //
 
-#import "PersonalCenterVC.h"
-
-@interface PersonalCenterVC ()<UIWebViewDelegate>
-{
-    
-}
+#import "ValuationToolsVC.h"
+@interface ValuationToolsVC ()<UIWebViewDelegate>
 
 @end
 
-@implementation PersonalCenterVC
+@implementation ValuationToolsVC
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    NSURL *cookieHost = [NSURL URLWithString:@"http://122.225.192.50:9100/ZXBMobileEx/web/member"];
-        
+    
+    NSURL *cookieHost = [NSURL URLWithString:@"http://122.225.192.50:9100/ZXBMobileEx/web/evaluate"];
     //    [DPUtil setExpireTime:@"2015-11-03 22:51:38 +0000"];
-//    [DPUtil setExpireTime:@"2015-11-06 10:12:23"];
+    //    [DPUtil setExpireTime:@"2015-11-06 10:12:23"];
     //    [DPUtil setLoginToken:@"YTYwYWQ1NWU0MWQ3N2U1OGI0ZTEzMmMzZGVhZDdhMzgwNTM1MzcyNGVkMzBjMWRkYWY5NDMzMWYyODU4MWViMGI3NjAzN2I1YmI3NWE0OWE"];
     
     // 设定 cookie
@@ -41,11 +38,11 @@
     
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:cookieHost];
     
-    UIWebView * personalWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64)];
-    personalWebView.delegate = self;
-    [self.view addSubview:personalWebView];
-    [personalWebView loadRequest:requestObj];
- 
+    UIWebView * valuationToolsWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64)];
+    valuationToolsWebView.delegate = self;
+    [self.view addSubview:valuationToolsWebView];
+    [valuationToolsWebView loadRequest:requestObj];
+    
     NSHTTPCookieStorage *sharedHTTPCookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     
     NSArray *cookies= [sharedHTTPCookieStorage cookiesForURL:cookieHost];
@@ -60,5 +57,6 @@
     NSString * tit = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     self.title  = tit;
 }
+
 
 @end
