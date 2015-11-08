@@ -80,11 +80,11 @@ static NSString *selected_backImageName = @"640返回.png";
     if(SYSTEM_VERSION <7.0)
     {
         
-        self.navigationBar.tintColor = ZhuanXB_color(0xe52e2e);
+        self.navigationBar.tintColor = ZhuanXB_color(0xed6d00);
     }
     else
     {
-        self.navigationBar.barTintColor = ZhuanXB_color(0xe52e2e);;
+        self.navigationBar.barTintColor = ZhuanXB_color(0xed6d00);;
         [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
 
     }

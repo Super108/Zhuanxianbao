@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.view.backgroundColor = ZhuanXB_color(0xe6ebf0);
+    self.view.backgroundColor = ZhuanXB_color(0xe6ebf0);    
     
     //导航栏中间图片
     UIImageView *topImgeView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 233/2, 55/2)];
@@ -234,8 +234,8 @@
 //    ////请求接口  遍历防区
 //    //第一步，创建URL
 //    
-//    NSURL *aUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/user/activityList",ZhuanXB_address]];
-//    
+    NSURL *aUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/user/activityList",ZhuanXB_address]];
+//
 //    //第二步，创建请求
 //    
 //    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:aUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];

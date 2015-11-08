@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PriceVC/PriceViewController.m"
-            timestampString = "467473234.47033"
+            timestampString = "468684560.935804"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "494"
-            endingLineNumber = "494"
+            startingLineNumber = "509"
+            endingLineNumber = "509"
             landmarkName = "-inquireBtnClick"
             landmarkType = "5">
          </BreakpointContent>

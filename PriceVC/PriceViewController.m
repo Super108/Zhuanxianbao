@@ -105,21 +105,37 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [self initInquireHistoryView];
+}
+
 #pragma mark - InquireHistoryView
+- (void)removeHistoryViewSubviews
+{
+    UIView * HistoryView = [self.view viewWithTag:1];
+    for (UIView * subView in HistoryView.subviews) {
+        [subView removeFromSuperview];
+    }
+    [HistoryView removeFromSuperview];
+}
 
 -(void)initInquireHistoryView
 {
+    [self removeHistoryViewSubviews];
     UIView * inquireHistoryBackView = [[UIView alloc]initWithFrame:CGRectMake(kInquireHistoryBackViewMarginLeft, kInquireHistoryBackViewMarginTop, kInquireHistoryBackViewWidth, kInquireHistoryBackViewHeight)];
-    inquireHistoryBackView.backgroundColor = [UIColor whiteColor];
+    inquireHistoryBackView.tag = 1;
+    inquireHistoryBackView.backgroundColor = [UIColor clearColor];
     [_firstView addSubview:inquireHistoryBackView];
-    inquireHistoryBackView.layer.borderColor = [MAIN_COLOR_BORDERCOLOR CGColor];
-    inquireHistoryBackView.layer.borderWidth = 1;
+//    inquireHistoryBackView.layer.borderColor = [MAIN_COLOR_BORDERCOLOR CGColor];
+//    inquireHistoryBackView.layer.borderWidth = 1;
     
     UILabel * usedWaysLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kInquireHistoryBackViewWidth, 40)];
     usedWaysLabel.backgroundColor = [UIColor clearColor];
     usedWaysLabel.textAlignment = NSTextAlignmentLeft;
     [inquireHistoryBackView addSubview:usedWaysLabel];
-    usedWaysLabel.text = @"  常用路线：";
+    usedWaysLabel.text = @"  历史记录";
     usedWaysLabel.font = [UIFont systemFontOfSize:18];
     
     CALayer * lineLayer =   [CALayer layer];
@@ -129,7 +145,6 @@
     
     NSMutableArray * historyArr = [[NSUserDefaults standardUserDefaults] objectForKey:keyInquireHistory];
     for (int i = 0 ; i < historyArr.count; i ++) {
-        
         NSDictionary * historyDic = historyArr[i];
         
         UILabel * usedWaysLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 50 + 25 * i, kInquireHistoryBackViewWidth, 20)];
@@ -137,7 +152,7 @@
         usedWaysLabel.backgroundColor = [UIColor clearColor];
         usedWaysLabel.textAlignment = NSTextAlignmentLeft;
         [inquireHistoryBackView addSubview:usedWaysLabel];
-        usedWaysLabel.text = [NSString stringWithFormat:@"  %@→%@",[historyDic objectForKey:keyInquireHistory_Start],[historyDic objectForKey:keyInquireHistory_End]];
+        usedWaysLabel.text = [NSString stringWithFormat:@"  %@ - >%@",[historyDic objectForKey:keyInquireHistory_Start],[historyDic objectForKey:keyInquireHistory_End]];
     }
 }
 
