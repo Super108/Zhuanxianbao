@@ -1,24 +1,20 @@
 //
-//  RetrievePasswordVC.m
+//  RegisterViewController.m
 //  ZhuanXB
 //
-//  Created by mac on 15/10/25.
+//  Created by mac on 15/11/13.
 //  Copyright © 2015年 kang_dong. All rights reserved.
 //
 
-#import "RetrievePasswordVC.h"
-#import "ZSAppServer.h"
-@interface RetrievePasswordVC ()
+#import "ZXBRegisterViewController.h"
 
-@end
-
-@implementation RetrievePasswordVC
+@implementation ZXBRegisterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"找回密码";
+    self.title = @"注册帐号";
     
     [self initRightNavBarItem];
     
@@ -26,8 +22,8 @@
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [retrievePasswordView.timerCheck invalidate];
-    retrievePasswordView.timerCheck=nil;
+    [registerVi.registertimerCheck invalidate];
+    registerVi.registertimerCheck=nil;
 }
 -(void)initRightNavBarItem
 {
@@ -56,31 +52,31 @@
 
 -(void)initView
 {
-   retrievePasswordView = [[RetrievePasswordView alloc]initWithFrame:self.view.frame];
-    retrievePasswordView.delegate = self;
-    [self.view addSubview:retrievePasswordView];
+     registerVi = [[ZXBRegisterView alloc]initWithFrame:self.view.frame];
+    registerVi.delegate = self;
+    [self.view addSubview:registerVi];
 }
 
--(void)retrieveWithPhoneNumber:(NSString * )phoneNumber AndCheckCode : (NSString *)checkCode withPassword:(NSString *)password
+-(void)registerWithPhoneNumber:(NSString * )phoneNumber AndCheckCode : (NSString *)checkCode withPassword:(NSString *)password AndAcount:(NSString *)acount
 {
     NSLog(@">>>   %@   %@",phoneNumber,password);
     
-//    [ZSAppServer loginUserWithUserName:name
-//                          withPassword:password
-//                               success:^(NSString *successMsg, id data) {
-//                                   NSLog(@">>>>  %@",data);
-//                               } fail:^(NSString *errorMsg, NSString *errorCode) {
-//                                   [self setHub:@"登录失败，请稍后重试"];
-//                               } error:^(NSError *error) {
-//                                   [self setHub:@"登录失败，请稍后重试"];
-//                               }];
-//    [ZSAppServer findLostPasswordWithPhoneNumber:phoneNumber withNewPassword:password withCheckCode:checkCode success:^(NSString *successMsg, id data) {
-//        
-//    } fail:^(NSString *errorMsg, NSString *errorCode) {
-//        
-//    } error:^(NSError *error) {
-//        
-//    }];
+    //    [ZSAppServer loginUserWithUserName:name
+    //                          withPassword:password
+    //                               success:^(NSString *successMsg, id data) {
+    //                                   NSLog(@">>>>  %@",data);
+    //                               } fail:^(NSString *errorMsg, NSString *errorCode) {
+    //                                   [self setHub:@"登录失败，请稍后重试"];
+    //                               } error:^(NSError *error) {
+    //                                   [self setHub:@"登录失败，请稍后重试"];
+    //                               }];
+    //    [ZSAppServer findLostPasswordWithPhoneNumber:phoneNumber withNewPassword:password withCheckCode:checkCode success:^(NSString *successMsg, id data) {
+    //
+    //    } fail:^(NSString *errorMsg, NSString *errorCode) {
+    //
+    //    } error:^(NSError *error) {
+    //
+    //    }];
     
     //获取系统当前的时间戳
     NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
@@ -89,7 +85,7 @@
     NSLog(@"%@",timeString);
     
     
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:appID, @"appId",phoneNumber, @"mobile",password, @"password",checkCode, @"validateCode",timeString, @"time",nil];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:appID, @"appId",acount,@"accountName",phoneNumber, @"mobile",password, @"password",checkCode, @"validateCode",timeString, @"time",nil];
     NSLog(@"%@",dic);
     NSString * allStr= @"";
     
@@ -102,7 +98,7 @@
     
     //            NSLog(@"%@",keyArr);
     
-    for (int i=0; i<=4; i++)
+    for (int i=0; i<=5; i++)
     {
         NSString *str = [NSString stringWithFormat:@"%@",[keyArr objectAtIndex:i]];
         NSLog(@"%@",str);
@@ -124,8 +120,8 @@
     
     
     
-    NSString *param=[NSString stringWithFormat:@"appId=%@&mobile=%@&password=%@&validateCode=%@&time=%@&sign=%@",appID,phoneNumber,password,checkCode,timeString,sign];
-    NSURL *URL=[NSURL URLWithString:[NSString stringWithFormat:@"%@/shipper/password?%@",ZhuanXB_address,param]];//不需要传递参数
+    NSString *param=[NSString stringWithFormat:@"appId=%@&accountName=%@&mobile=%@&password=%@&validateCode=%@&time=%@&sign=%@",appID,acount,phoneNumber,password,checkCode,timeString,sign];
+    NSURL *URL=[NSURL URLWithString:[NSString stringWithFormat:@"%@/shipper/register?%@",ZhuanXB_address,param]];//不需要传递参数
     
     NSLog(@"%@",URL);
     
@@ -161,7 +157,7 @@
         {
             if ([[result1 objectForKey:@"code"]isEqualToString:@"1"]) {//正确
                 
-                [self setHub:@"重置密码成功"];
+                [self setHub:@"注册成功"];
                 [self.navigationController popViewControllerAnimated:YES];
                 
             }else if ([[result1 objectForKey:@"code"]isEqualToString:@"-1"])
@@ -184,7 +180,7 @@
         }
         
     }
-
+    
     
 }
 
@@ -211,15 +207,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

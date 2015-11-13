@@ -22,7 +22,9 @@
     NSMutableArray *_activityIdArray;
     NSMutableArray *_titleArray;
     NSString *_titleName;
-
+    UIScrollView *_bannerScrollView;
+    UIPageControl *_pageCtrl;
+    NSArray *bannerArray;
 }
 
 //@property (nonatomic,strong) JCTopic * Topic;

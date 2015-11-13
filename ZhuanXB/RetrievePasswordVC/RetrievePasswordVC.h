@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RetrievePasswordView.h"
 @interface RetrievePasswordVC : UIViewController<RetrievePasswordViewDelegate>
-
+{
+    RetrievePasswordView * retrievePasswordView;
+}
 @end

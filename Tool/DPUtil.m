@@ -36,6 +36,11 @@
    return [[NSUserDefaults standardUserDefaults] objectForKey:kLoginToken];
 }
 
++(void) removeToken
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kLoginToken];
+}
+
 //存入过期时间
 + (void)setExpireTime:(NSString *)time
 {
@@ -45,6 +50,11 @@
 + (NSString *)getExpireTime
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:kExpireTime];
+}
+
++(void)removeExpireTime
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kExpireTime];
 }
 
 @end

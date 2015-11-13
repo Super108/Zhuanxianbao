@@ -1,0 +1,20 @@
+<html>  
+    <head>  
+        <meta http-equiv="content-type"content="text/html;charset=utf-8">  
+            <title>js调用oc</title>  
+            <script type="text/javaScript">  
+                /* 调用本地带参数的方法 */  
+                function testFunction1(cmd,parameter1){  
+                    return document.location="objc://"+cmd+":/"+parameter1; //cmd代表objective-c中的的方法名，parameter1自然就是参数了  
+                }  
+                /* 调用本地不带参数的方法 */  
+                function testFunction2(cmd){  
+                    return document.location="objc://"+cmd; //cmd代表objective-c中的的方法名  
+                }  
+            </script>  
+            </head>  
+    <body>  
+        <p><button type="text" id="text1" value="点击这里1"onclick="testFunction1('printLog:','str')">调用本地带参数的方法</button></p>  
+        <p><button type="text" id="text2" value="点击这里2"onclick="testFunction2('testFunc')">调用本地不带参数的方法</button></p>  
+    </body>    
+</html>  

@@ -8,6 +8,8 @@
 
 #import "PersonalCenterVC.h"
 
+#import <JavaScriptCore/JavaScriptCore.h>
+
 @interface PersonalCenterVC ()<UIWebViewDelegate>
 {
     
@@ -43,8 +45,16 @@
     
     UIWebView * personalWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64)];
     personalWebView.delegate = self;
+    
+    
+//    NSString *htmlPath = [[NSBundle mainBundle] pathForResource:@"AB" ofType:@"html"];
+//    NSString *htmlString = [[NSString alloc] initWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
+//    [personalWebView loadHTMLString: htmlString baseURL:[NSURL URLWithString:htmlPath]];
+    
+    
     [self.view addSubview:personalWebView];
     [personalWebView loadRequest:requestObj];
+  
  
     NSHTTPCookieStorage *sharedHTTPCookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     
@@ -53,12 +63,65 @@
     while (cookie = [enumerator nextObject]) {
         NSLog(@"COOKIE{name: %@, value: %@  %@}", [cookie name], [cookie value],cookie.expiresDate);
     }
+    
+    
+    
+    
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     NSString * tit = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     self.title  = tit;
+    
+    NSArray *nCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];NSHTTPCookie *cookie;
+    for (id c in nCookies)
+    {
+        if ([c isKindOfClass:[NSHTTPCookie class]]){
+            cookie=(NSHTTPCookie *)c;
+            NSLog(@"%@: %@", cookie.name, cookie.value);}
+    }
+}
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString *urlString = [[request URL] absoluteString];
+    NSArray *urlComps = [urlString componentsSeparatedByString:@"://"];
+    
+//    NSLog(@"KKKK%@",urlComps);
+    
+    if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"objc"])
+    {
+        NSArray *arrFucnameAndParameter = [(NSString*)[urlComps objectAtIndex:1] componentsSeparatedByString:@":/"];
+        NSString *funcStr = [arrFucnameAndParameter objectAtIndex:0];
+        if (1 == [arrFucnameAndParameter count])
+        {
+            // 没有参数
+            if([funcStr isEqualToString:@"exit"])
+            {
+                /*调用本地函数*/
+                [self exit];
+            }
+        }
+
+        return NO;
+    };
+    return YES;
+}
+
+- (void)printLog:(NSString *)str
+{
+    NSLog(@"%@", str);
+}
+
+- (void)exit
+{
+    NSLog(@"js调用本地不带参数的方法成功！");
+    //删除cookie 返回到主页
+    
+    [DPUtil removeToken];
+    [DPUtil removeExpireTime];
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 @end

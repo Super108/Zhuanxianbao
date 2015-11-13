@@ -7,16 +7,16 @@
 //
 
 #import "WebsiteViewController.h"
-#import <BaiduMapAPI/BMapKit.h>
+//#import <BaiduMapAPI/BMapKit.h>
 #import "webDetail.h"
 
 #import "WebViewController.h"
 
 @interface WebsiteViewController ()
-<BMKMapViewDelegate>
+
 {
-    BMKMapView* _mapView;
-    BMKLocationService* _locService;
+//    BMKMapView* _mapView;
+//    BMKLocationService* _locService;
     UISlider *_faderSlider;
     int value;
     UIButton *plusBtn;
@@ -233,40 +233,40 @@
 //    [minusBtn removeFromSuperview];
 //}
 
-- (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
-{
-    if ([annotation isKindOfClass:[BMKPointAnnotation class]]) {
-        BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myAnnotation"];
-        newAnnotationView.pinColor = BMKPinAnnotationColorPurple;
-        newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
-        return newAnnotationView;
-    }
-    return nil;
-    
-//    // 生成重用标示identifier
-//    NSString *AnnotationViewID = @"xidanMark";
-//    
-//    // 检查是否有重用的缓存
-//    BMKAnnotationView* annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
-//    
-//    // 缓存没有命中，自己构造一个，一般首次添加annotation代码会运行到此处
-//    if (annotationView == nil) {
-//        annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
-//        ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorRed;
-//        // 设置重天上掉下的效果(annotation)
-//        ((BMKPinAnnotationView*)annotationView).animatesDrop = YES;
+//- (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
+//{
+//    if ([annotation isKindOfClass:[BMKPointAnnotation class]]) {
+//        BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myAnnotation"];
+//        newAnnotationView.pinColor = BMKPinAnnotationColorPurple;
+//        newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
+//        return newAnnotationView;
 //    }
+//    return nil;
 //    
-//    // 设置位置
-//    annotationView.centerOffset = CGPointMake(0, -(annotationView.frame.size.height * 0.5));
-//    annotationView.annotation = annotation;
-//    // 单击弹出泡泡，弹出泡泡前提annotation必须实现title属性
-//    annotationView.canShowCallout = YES;
-//    // 设置是否可以拖拽
-//    annotationView.draggable = NO;
-//    
-//     return annotationView;
-}
+////    // 生成重用标示identifier
+////    NSString *AnnotationViewID = @"xidanMark";
+////    
+////    // 检查是否有重用的缓存
+////    BMKAnnotationView* annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
+////    
+////    // 缓存没有命中，自己构造一个，一般首次添加annotation代码会运行到此处
+////    if (annotationView == nil) {
+////        annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
+////        ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorRed;
+////        // 设置重天上掉下的效果(annotation)
+////        ((BMKPinAnnotationView*)annotationView).animatesDrop = YES;
+////    }
+////    
+////    // 设置位置
+////    annotationView.centerOffset = CGPointMake(0, -(annotationView.frame.size.height * 0.5));
+////    annotationView.annotation = annotation;
+////    // 单击弹出泡泡，弹出泡泡前提annotation必须实现title属性
+////    annotationView.canShowCallout = YES;
+////    // 设置是否可以拖拽
+////    annotationView.draggable = NO;
+////    
+////     return annotationView;
+//}
 
 -(void)getInfoHttp
 {
@@ -427,40 +427,40 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MoveToMain" object:nil];
 }
 
--(void)plusBtnClick
-{
-   
-    if (value==19) {
-        //设置地图缩放级别
-        [_mapView setZoomLevel:19];
-    }else
-    {
-        value++;
-        NSLog(@"<><><><><><>%d",value);
-        _faderSlider.value = value;
-        
-        //设置地图缩放级别
-        [_mapView setZoomLevel:value];
-    }
-   
-    
-}
--(void)minusBtnClick
-{
-   
-    if (value==3) {
-        //设置地图缩放级别
-        [_mapView setZoomLevel:3];
-    }else
-    {
-        value--;
-        _faderSlider.value = value;
-        NSLog(@"<><><><><><>%d",value);
-        //设置地图缩放级别
-        [_mapView setZoomLevel:value];
-       
-    }
-}
+//-(void)plusBtnClick
+//{
+//   
+//    if (value==19) {
+//        //设置地图缩放级别
+//        [_mapView setZoomLevel:19];
+//    }else
+//    {
+//        value++;
+//        NSLog(@"<><><><><><>%d",value);
+//        _faderSlider.value = value;
+//        
+//        //设置地图缩放级别
+//        [_mapView setZoomLevel:value];
+//    }
+//   
+//    
+//}
+//-(void)minusBtnClick
+//{
+//   
+//    if (value==3) {
+//        //设置地图缩放级别
+//        [_mapView setZoomLevel:3];
+//    }else
+//    {
+//        value--;
+//        _faderSlider.value = value;
+//        NSLog(@"<><><><><><>%d",value);
+//        //设置地图缩放级别
+//        [_mapView setZoomLevel:value];
+//       
+//    }
+//}
 
 -(void)createNoView
 {
@@ -484,36 +484,36 @@
 #pragma mark -
 #pragma mark FaderSlider init and action listner
 
-- (void)faderSliderInit {
-    
-    //Init Fader slider UI, set listener method and Transform it to vertical
-    [_faderSlider addTarget:self action:@selector(faderSliderAction:) forControlEvents:UIControlEventValueChanged];
-    _faderSlider.backgroundColor = [UIColor clearColor];
-    UIImage *stetchTrack = [[UIImage imageNamed:@"faderTrack.png"]
-                            stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0];
-    [_faderSlider setThumbImage: [UIImage imageNamed:@"faderKey.png"] forState:UIControlStateNormal];
-    [_faderSlider setMinimumTrackImage:stetchTrack forState:UIControlStateNormal];
-    [_faderSlider setMaximumTrackImage:stetchTrack forState:UIControlStateNormal];
-    CGAffineTransform trans = CGAffineTransformMakeRotation(M_PI * -0.5);
-    _faderSlider.transform = trans;
-    
-}
-
-- (void)faderSliderAction:(id)sender
-{
-    // UISlider *slider = (UISlider *)sender;
-    
-    NSLog(@">>>>>%d",(int)[_faderSlider value]);
-    //设置地图缩放级别
-    [_mapView setZoomLevel:(int)[_faderSlider value]];
-    
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-}
-
+//- (void)faderSliderInit {
+//    
+//    //Init Fader slider UI, set listener method and Transform it to vertical
+//    [_faderSlider addTarget:self action:@selector(faderSliderAction:) forControlEvents:UIControlEventValueChanged];
+//    _faderSlider.backgroundColor = [UIColor clearColor];
+//    UIImage *stetchTrack = [[UIImage imageNamed:@"faderTrack.png"]
+//                            stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0];
+//    [_faderSlider setThumbImage: [UIImage imageNamed:@"faderKey.png"] forState:UIControlStateNormal];
+//    [_faderSlider setMinimumTrackImage:stetchTrack forState:UIControlStateNormal];
+//    [_faderSlider setMaximumTrackImage:stetchTrack forState:UIControlStateNormal];
+//    CGAffineTransform trans = CGAffineTransformMakeRotation(M_PI * -0.5);
+//    _faderSlider.transform = trans;
+//    
+//}
+//
+//- (void)faderSliderAction:(id)sender
+//{
+//    // UISlider *slider = (UISlider *)sender;
+//    
+//    NSLog(@">>>>>%d",(int)[_faderSlider value]);
+//    //设置地图缩放级别
+//    [_mapView setZoomLevel:(int)[_faderSlider value]];
+//    
+//}
+//
+//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+//{
+//    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+//}
+//
 
 
 - (void)didReceiveMemoryWarning {

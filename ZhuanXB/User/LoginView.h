@@ -14,6 +14,8 @@
 -(void)loginWithName:(NSString * )name withPassword:(NSString *)password;
 
 -(void)navToForgetVC;
+
+-(void)navToRegisterVC;
 @end
 
 @interface LoginView : UIView

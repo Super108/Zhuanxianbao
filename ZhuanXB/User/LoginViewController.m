@@ -11,6 +11,7 @@
 #import "RetrievePasswordVC.h"
 #import "SendProductVC.h"
 #import "PersonalCenterVC.h"
+#import "ZXBRegisterViewController.h"
 @interface LoginViewController ()
 
 @end
@@ -242,12 +243,15 @@
    RetrievePasswordVC *retrievePasswordVC= [[RetrievePasswordVC alloc] init];
     [self.navigationController pushViewController:retrievePasswordVC animated:YES];
 }
-
+-(void)navToRegisterVC{
+     NSLog(@"进入注册页面");
+    ZXBRegisterViewController *registerVC=[[ZXBRegisterViewController alloc] init];
+    [self.navigationController pushViewController:registerVC animated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 /*
 #pragma mark - Navigation
 

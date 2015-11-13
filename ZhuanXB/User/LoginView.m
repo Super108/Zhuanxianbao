@@ -87,13 +87,23 @@
     [loginBtn addTarget:self action:@selector(navToUserCenter) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:loginBtn];
     
+    UIButton *registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    registerBtn.frame = CGRectMake(kForgetPwdBtnMarginLeft, kForgetPwdBtnMarginTop, kForgetPwdBtnWidth, kForgetPwdBtnHeight);
+    [registerBtn setTitle:@"注册帐号" forState:UIControlStateNormal];
+    [registerBtn setTitleColor:RGBA(182, 182, 182, 1) forState:UIControlStateNormal];
+    registerBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [registerBtn addTarget:self action:@selector(navToRegisterVC) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:registerBtn];
+    
     UIButton *forgetPwdBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    forgetPwdBtn.frame = CGRectMake(kForgetPwdBtnMarginLeft, kForgetPwdBtnMarginTop, kForgetPwdBtnWidth, kForgetPwdBtnHeight);
-    [forgetPwdBtn setTitle:@"忘记密码？" forState:UIControlStateNormal];
+    forgetPwdBtn.frame = CGRectMake(self.frame.size.width-kForgetPwdBtnWidth-11, kForgetPwdBtnMarginTop, kForgetPwdBtnWidth, kForgetPwdBtnHeight);
+    [forgetPwdBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
     [forgetPwdBtn setTitleColor:RGBA(182, 182, 182, 1) forState:UIControlStateNormal];
     forgetPwdBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [forgetPwdBtn addTarget:self action:@selector(navToForgetVC) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:forgetPwdBtn];
+    
+    
     
 }
 
@@ -136,7 +146,12 @@
     }
 }
 
-
+-(void)navToRegisterVC
+{
+    if ([self.delegate respondsToSelector:@selector(navToRegisterVC)]) {
+        [self.delegate navToRegisterVC];
+    }
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

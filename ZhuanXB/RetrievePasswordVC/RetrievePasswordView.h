@@ -20,5 +20,5 @@
 @interface RetrievePasswordView : UIView
 
 @property (nonatomic,assign) id <RetrievePasswordViewDelegate> delegate;
-
+@property (nonatomic,assign) NSTimer *timerCheck;
 @end
