@@ -20,8 +20,10 @@
 + (void)setLoginToken:(NSString *)token;
 + (NSString *)getLoginToken;
 
++(void)removeToken;
+
 //存入过期时间
 + (void)setExpireTime:(NSString *)time;
 + (NSString *)getExpireTime;
-
++(void)removeExpireTime;
 @end

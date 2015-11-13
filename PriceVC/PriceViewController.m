@@ -397,7 +397,8 @@
         
         if (hasTheSameHistory == NO) {
             NSDictionary * dic = @{keyInquireHistory_Start:_cell1.areaLabel.text,
-                                   keyInquireHistory_End:_cell2.areaLabel.text};
+                                   keyInquireHistory_End:_cell2.areaLabel.text
+                                   };
             [inquireHistoryArr insertObject:dic atIndex:0];
 //            查询历史超过四个 删除最后一个 保持只有三个最近历史记录
             if (inquireHistoryArr.count == 4) {
