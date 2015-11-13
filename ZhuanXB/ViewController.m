@@ -22,7 +22,7 @@
 #import "ValuationToolsVC.h"
 
 #import "BannerVC.h"
-@interface ViewController ()
+@interface ViewController ()<UIScrollViewDelegate>
 
 @end
 
@@ -61,6 +61,10 @@
 //    adImageView.image = [UIImage imageNamed:@"banner.png"];
 //    [self.view addSubview:adImageView];
     _bannerScrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 288/2)];
+    _bannerScrollView.pagingEnabled = YES;
+    _bannerScrollView.delegate = self;
+    _bannerScrollView.showsHorizontalScrollIndicator = NO;
+    _bannerScrollView.showsVerticalScrollIndicator = NO;
     _bannerScrollView.contentSize=CGSizeMake(_bannerScrollView.bounds.size.width, _bannerScrollView.bounds.size.height);
     [self.view addSubview:_bannerScrollView];
     
@@ -140,35 +144,13 @@
     
     //banner请求
     [self bannerHttp];
-   [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(goGOGOGO) userInfo:nil repeats:YES];
 }
-static float contentOffX=0;
-static float spedX=1;
--(void)goGOGOGO{
 
-//    if (contentOffX<=0||contentOffX>bannerArray.count-1) {
-//        spedX=-spedX;
-//    }
-    
-    if (contentOffX<=0) {
-        spedX=1;
-    }
-    if (contentOffX>=bannerArray.count-1) {
-        spedX=-1;
-    }
-        contentOffX+=spedX;
-    
-    [UIView animateWithDuration:1 animations:^{
-        
-     [_pageCtrl setCurrentPage:contentOffX];
-        _bannerScrollView.contentOffset=CGPointMake(contentOffX*self.view.frame.size.width, 0);
-    }];
-    
-    
-    
- 
-    
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    _pageCtrl.currentPage = scrollView.contentOffset.x / self.view.frame.size.width;
 }
+
 -(void)bannerHttp
 {
     //获取系统当前的时间戳

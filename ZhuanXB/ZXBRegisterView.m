@@ -6,9 +6,6 @@
 //  Copyright © 2015年 kang_dong. All rights reserved.
 //
 
-#import "ZXBRegisterView.h"
-
-@interface ZXBRegisterView ()
 #define  kSpace 70
 
 #define kInputViewMarginLeft    11
@@ -26,8 +23,9 @@
 #define kForgetPwdBtnWidth         _viewFrame.size.width-22
 #define kForgetPwdBtnHeight        45
 
+#import "ZXBRegisterView.h"
 
-
+@interface ZXBRegisterView ()
 {
     CGRect _viewFrame;
     UITextField * _acountField;
@@ -159,7 +157,7 @@
     submitComfirmBtn.backgroundColor=RGBA(70,174,214,1);
     submitComfirmBtn.layer.cornerRadius=2;
     submitComfirmBtn.clipsToBounds=YES;
-    [submitComfirmBtn setTitle:@"注册按钮" forState:UIControlStateNormal];
+    [submitComfirmBtn setTitle:@"注册" forState:UIControlStateNormal];
     [submitComfirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     //    submitComfirmBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [submitComfirmBtn addTarget:self action:@selector(submitRegister) forControlEvents:UIControlEventTouchUpInside];
