@@ -18,7 +18,9 @@
 
 #define keyInquireHistory  @"keyInquireHistory"
 #define keyInquireHistory_Start  @"keyInquireHistory_Start"
+#define keyInquireHistory_Start_AreaCode  @"keyInquireHistory_Start_AreaCode"
 #define keyInquireHistory_End  @"keyInquireHistory_End"
+#define keyInquireHistory_End_AreaCode  @"keyInquireHistory_End_AreaCode"
 @interface PriceViewController ()
 
 {
@@ -147,15 +149,87 @@
     for (int i = 0 ; i < historyArr.count; i ++) {
         NSDictionary * historyDic = historyArr[i];
         
-        UILabel * usedWaysLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 50 + 25 * i, kInquireHistoryBackViewWidth, 20)];
-        usedWaysLabel.font = [UIFont systemFontOfSize:12];
-        usedWaysLabel.backgroundColor = [UIColor clearColor];
-        usedWaysLabel.textAlignment = NSTextAlignmentLeft;
-        [inquireHistoryBackView addSubview:usedWaysLabel];
-        usedWaysLabel.text = [NSString stringWithFormat:@"  %@ - >%@",[historyDic objectForKey:keyInquireHistory_Start],[historyDic objectForKey:keyInquireHistory_End]];
+        UIButton * usedWaysButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        usedWaysButton.frame = CGRectMake(0, 50 + 25 * i, kInquireHistoryBackViewWidth, 30);
+        usedWaysButton.titleLabel.font = [UIFont systemFontOfSize:12];
+        usedWaysButton.backgroundColor = [UIColor clearColor];
+        [usedWaysButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [inquireHistoryBackView addSubview:usedWaysButton];
+        [usedWaysButton setTitle:[NSString stringWithFormat:@"  %@ - >%@",[historyDic objectForKey:keyInquireHistory_Start],[historyDic objectForKey:keyInquireHistory_End]] forState:UIControlStateNormal];
+        usedWaysButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        usedWaysButton.tag = i;
+        [usedWaysButton addTarget:self action:@selector(historyBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
+-(void)historyBtnClick:(UIButton *)btn
+{
+    NSMutableArray * historyArr = [[NSUserDefaults standardUserDefaults] objectForKey:keyInquireHistory];
+    NSDictionary  * historyDic = historyArr[btn.tag];
+    
+    //获取系统当前的时间戳
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970]*1000;
+    NSString *timeString = [NSString stringWithFormat:@"%f", a];//转为字符型
+    
+    NSString * startCode = [historyDic objectForKey:keyInquireHistory_Start_AreaCode];
+    NSString * endCode = [historyDic objectForKey:keyInquireHistory_End_AreaCode];
+    
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:appID, @"appId",@"101", @"ver",startCode, @"startCountyCode",endCode, @"endCountyCode",timeString, @"time",nil];
+    
+//    NSDictionary * dic = @{@"appId":appID,
+//                           @"ver":@"101",
+//                           @"startCountyCode":startCode,
+//                           @"endCountyCode":endCode,
+//                           @"time":timeString};
+    NSLog(@"%@",dic);
+    NSString * allStr= @"";
+    
+    //排序key
+    NSArray* keyArr = [dic allKeys];
+    keyArr = [keyArr sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
+        NSComparisonResult result = [obj1 compare:obj2];
+        return result==NSOrderedDescending;
+    }];
+    
+    //            NSLog(@"%@",keyArr);
+    
+    for (int i=0; i<=4; i++)
+    {
+        NSString *str = [NSString stringWithFormat:@"%@",[keyArr objectAtIndex:i]];
+        NSLog(@"%@",str);
+        allStr = [NSString stringWithFormat:@"%@%@=%@",allStr,[keyArr objectAtIndex:i],[dic objectForKey:[keyArr objectAtIndex:i]]];
+    }
+    NSLog(@"%@",allStr);
+    
+    NSString *resultStr = [NSString stringWithFormat:@"%@%@",allStr,secretKey];
+    NSString *encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                                    NULL,
+                                                                                                    (CFStringRef)resultStr,
+                                                                                                    NULL,
+                                                                                                    (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                                    kCFStringEncodingUTF8 ));
+    
+    NSLog(@"%@",encodedString);
+    NSString *sign = [encodedString MD5];
+    
+    NSString *param=[NSString stringWithFormat:@"appId=%@&ver=%@&startCountyCode=%@&endCountyCode=%@&time=%@&sign=%@",appID,@"101",startCode,endCode,timeString,sign];
+    NSURL *URL=[NSURL URLWithString:[NSString stringWithFormat:@"%@/shipper/waybill/viewroute?%@",ZhuanXB_address,param]];//不需要传递参数
+    
+    NSLog(@"%@",URL);
+    
+    //直接用网页打开就行了
+    
+    
+    WebViewController *webView=[[WebViewController alloc] init];
+    //        NSLog(@"%@",_htmlArray);
+    
+    webView.url=[NSString stringWithFormat:@"%@/shipper/waybill/viewroute?%@",ZhuanXB_address,param];
+    webView.name = @"线路运价";
+    [self.navigationController pushViewController:webView animated:YES];
+
+
+}
 //查询后的view
 //-(void)createSecondView
 //{
@@ -362,8 +436,6 @@
     }
 }
 
-
-
 -(void)rightBtnClick
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MoveToMain" object:nil];
@@ -395,18 +467,6 @@
             }
         }
         
-        if (hasTheSameHistory == NO) {
-            NSDictionary * dic = @{keyInquireHistory_Start:_cell1.areaLabel.text,
-                                   keyInquireHistory_End:_cell2.areaLabel.text};
-            [inquireHistoryArr insertObject:dic atIndex:0];
-//            查询历史超过四个 删除最后一个 保持只有三个最近历史记录
-            if (inquireHistoryArr.count == 4) {
-                [inquireHistoryArr removeLastObject];
-            }
-            [[NSUserDefaults standardUserDefaults] setObject:inquireHistoryArr forKey:keyInquireHistory];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
-        
         
 //        [self createSecondView];
         
@@ -430,6 +490,20 @@
         }else
         {
             
+        }
+        if (hasTheSameHistory == NO) {
+            NSDictionary * dic = @{keyInquireHistory_Start:_cell1.areaLabel.text,
+                                   keyInquireHistory_Start_AreaCode:self.startAreaCodeString,
+                                   keyInquireHistory_End:_cell2.areaLabel.text,
+                                   keyInquireHistory_End_AreaCode:self.endAreaCodeString
+                                   };
+            [inquireHistoryArr insertObject:dic atIndex:0];
+            //            查询历史超过四个 删除最后一个 保持只有三个最近历史记录
+            if (inquireHistoryArr.count == 4) {
+                [inquireHistoryArr removeLastObject];
+            }
+            [[NSUserDefaults standardUserDefaults] setObject:inquireHistoryArr forKey:keyInquireHistory];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
 //        NSLog(@"%@",self.startAreaCodeString);
         

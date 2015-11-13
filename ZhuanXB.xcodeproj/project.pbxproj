@@ -10,10 +10,10 @@
 		0494C0A61BE8FC1500DA91A4 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0494C0A51BE8FC1500DA91A4 /* libsqlite3.0.tbd */; };
 		04A617CD1BDD077000ACBB9D /* RetrievePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A617CC1BDD077000ACBB9D /* RetrievePasswordVC.m */; };
 		04A9671D1BE6211E000456C3 /* RetrievePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9671C1BE6211E000456C3 /* RetrievePasswordView.m */; };
-		04C64DF71BF59178008BF36D /* BannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C64DF61BF59178008BF36D /* BannerVC.m */; settings = {ASSET_TAGS = (); }; };
-		04C64DFA1BF59A1C008BF36D /* ZXBRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C64DF91BF59A1C008BF36D /* ZXBRegisterViewController.m */; settings = {ASSET_TAGS = (); }; };
-		04C64DFD1BF59A3B008BF36D /* ZXBRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C64DFC1BF59A3B008BF36D /* ZXBRegisterView.m */; settings = {ASSET_TAGS = (); }; };
-		04C64DFF1BF5AB7B008BF36D /* 注册按钮@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C64DFE1BF5AB7B008BF36D /* 注册按钮@2x.png */; settings = {ASSET_TAGS = (); }; };
+		04C64DF71BF59178008BF36D /* BannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C64DF61BF59178008BF36D /* BannerVC.m */; };
+		04C64DFA1BF59A1C008BF36D /* ZXBRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C64DF91BF59A1C008BF36D /* ZXBRegisterViewController.m */; };
+		04C64DFD1BF59A3B008BF36D /* ZXBRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C64DFC1BF59A3B008BF36D /* ZXBRegisterView.m */; };
+		04C64DFF1BF5AB7B008BF36D /* 注册按钮@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C64DFE1BF5AB7B008BF36D /* 注册按钮@2x.png */; };
 		04F5A3F91BE9000500B6424C /* PersonalCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5A3F81BE9000500B6424C /* PersonalCenterVC.m */; };
 		04F5A3FC1BEB569300B6424C /* ValuationToolsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F5A3FB1BEB569300B6424C /* ValuationToolsVC.m */; };
 		04F5A3FE1BEB572400B6424C /* 首页按钮iosNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F5A3FD1BEB572400B6424C /* 首页按钮iosNew@2x.png */; };
@@ -137,7 +137,6 @@
 		EF82D9B91B30184B0016518D /* cityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF82D9B81B30184B0016518D /* cityModel.m */; };
 		EFB222861BF4341500F49910 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFB222851BF4341500F49910 /* JavaScriptCore.framework */; };
 		EFB2228C1BF45BDD00F49910 /* AB.html in Resources */ = {isa = PBXBuildFile; fileRef = EFB2228B1BF45BDD00F49910 /* AB.html */; };
-		EFB2229D1BF487EE00F49910 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFB2229C1BF487EE00F49910 /* UIKit.framework */; };
 		EFF5BEE51B2955F700184D5C /* TrackingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF5BEE41B2955F700184D5C /* TrackingViewController.m */; };
 		EFF5BEE81B295B8000184D5C /* InfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF5BEE71B295B8000184D5C /* InfoTableViewCell.m */; };
 		EFF5BEF51B2AD8D800184D5C /* BtnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF5BEF41B2AD8D800184D5C /* BtnTableViewCell.m */; };
@@ -340,7 +339,6 @@
 		EF97B9B31B3136770075EDC6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		EFB222851BF4341500F49910 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EFB2228B1BF45BDD00F49910 /* AB.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = AB.html; sourceTree = "<group>"; };
-		EFB2229C1BF487EE00F49910 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EFF5BEE31B2955F700184D5C /* TrackingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackingViewController.h; sourceTree = "<group>"; };
 		EFF5BEE41B2955F700184D5C /* TrackingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackingViewController.m; sourceTree = "<group>"; };
 		EFF5BEE61B295B8000184D5C /* InfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoTableViewCell.h; sourceTree = "<group>"; };
@@ -354,7 +352,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFB2229D1BF487EE00F49910 /* UIKit.framework in Frameworks */,
 				EFB222861BF4341500F49910 /* JavaScriptCore.framework in Frameworks */,
 				0494C0A61BE8FC1500DA91A4 /* libsqlite3.0.tbd in Frameworks */,
 				EF47B84A1B282D9000045F0D /* Security.framework in Frameworks */,
@@ -587,7 +584,6 @@
 		EF47B80B1B28281B00045F0D = {
 			isa = PBXGroup;
 			children = (
-				EFB2229C1BF487EE00F49910 /* UIKit.framework */,
 				EFB2228B1BF45BDD00F49910 /* AB.html */,
 				EFB222851BF4341500F49910 /* JavaScriptCore.framework */,
 				0494C0A51BE8FC1500DA91A4 /* libsqlite3.0.tbd */,
@@ -1145,8 +1141,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jinping Yang (ZD9TDUSDT4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jinping Yang (ZD9TDUSDT4)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1157,9 +1153,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jiemi.jiemi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZhuanXB.wangkuo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "90cf274e-355f-4e0c-b1e9-e422af9840ab";
 			};
 			name = Debug;
 		};
@@ -1168,8 +1164,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jinping Yang (ZD9TDUSDT4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jinping Yang (ZD9TDUSDT4)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1180,9 +1176,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jiemi.jiemi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZhuanXB.wangkuo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "90cf274e-355f-4e0c-b1e9-e422af9840ab";
 			};
 			name = Release;
 		};
